@@ -1,0 +1,50 @@
+name: Issue
+description: Create an issue to help us improve
+body:
+  - type: textarea
+    attributes:
+      label: More info
+      placeholder: "Screenshots, more info, expected behaviour"
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction steps
+      description: "How do you trigger this bug?"
+      value: |
+        1.
+        2.
+        3.
+        ...
+      render: bash
+  - type: dropdown
+    attributes:
+      label: Priority
+      description: "What priority should this bug take?"
+      options:
+        - "Low"
+        - "Medium"
+        - "High"
+        - "Urgent"
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Type
+      description: "What type of issue is this?"
+      options:
+        - "Task"
+        - "Bug"
+        - "Crash"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Spotted on version
+      description: "The version that this issue has been spotted on"
+  - type: textarea
+    attributes:
+      label: Logs
+      description: "Add some logs if any"
+      render: bash
