@@ -29,6 +29,16 @@ body:
         - "Urgent"
     validations:
       required: true
+  - type: dropdown
+    attributes:
+      label: Type
+      description: "What type of issue is this?"
+      options:
+        - "Task"
+        - "Bug"
+        - "Crash"
+    validations:
+      required: true
   - type: input
     attributes:
       label: Spotted on version
