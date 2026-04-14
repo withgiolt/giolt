@@ -1,0 +1,10 @@
+{
+	"name": "giolt",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"web:dev": "bun run -F web dev",
+		"web:build": "bun run -F web build"
+	},
+	"workspaces": ["packages/*"]
+}
