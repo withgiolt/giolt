@@ -10,10 +10,10 @@ pub fn main() -> Nil {
 	let secret_key_base = wisp.random_string(64)
 
 	let assert Ok(_) =
-	  wisp_mist.handler(handler.handle_request, secret_key_base)
-	  |> mist.new
-	  |> mist.port(3001)
-	  |> mist.start
+		wisp_mist.handler(handler.handle_request, secret_key_base)
+		|> mist.new
+		|> mist.port(3001)
+		|> mist.start
 
 	process.sleep_forever()
 }

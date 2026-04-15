@@ -2,14 +2,18 @@
 	"name": "giolt",
 	"private": true,
 	"scripts": {
+		"format": "bun run web:format && bun run api:format && bun run db:format",
+
 		"web:dev": "bun run -F web dev",
 		"web:build": "bun run -F web build",
 		"web:format": "bunx @biomejs/biome format --write packages/web",
+
 		"api:dev": "cd packages/api && gleam dev",
 		"api:format": "cd packages/api && gleam format && cd ../.. && bun run scripts/gleam_format.ts",
-		"format": "bun run web:format && bun run api:format",
+		
 		"migrate:local": "drizzle-kit migrate --config=db/drizzle.local.config.ts",
-		"studio:local": "drizzle-kit studio --config=db/drizzle.local.config.ts"
+		"studio:local": "drizzle-kit studio --config=db/drizzle.local.config.ts",
+		"db:format": "bunx @biomejs/biome format --write db/"
 	},
 	"type": "module",
 	"workspaces": ["packages/*"],
