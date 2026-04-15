@@ -31,12 +31,13 @@ body:
       required: true
   - type: dropdown
     attributes:
-      label: Type
-      description: "What type of issue is this?"
+      label: Component
+      description: "Which component is this issue related to?"
       options:
-        - "Task"
-        - "Bug"
-        - "Crash"
+        - "General"
+        - "Web"
+        - "API"
+        - "Database"
     validations:
       required: true
   - type: input
