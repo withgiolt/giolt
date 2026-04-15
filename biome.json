@@ -12,6 +12,12 @@
 			"!**/drizzle/**/*"
 		]
 	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true,
+			"cssModules": true
+		}
+	},
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
