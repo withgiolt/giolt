@@ -2,7 +2,8 @@
   "recommendations": [
     "astro-build.astro-vscode",
     "oven.bun-vscode",
-    "gleam.gleam"
+    "gleam.gleam",
+    "biomejs.biome"
   ],
   "unwantedRecommendations": []
 }
