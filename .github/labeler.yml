@@ -1,0 +1,8 @@
+priority:low: 
+- "### Priority\n\nLow"
+priority:medium: 
+- "### Priority\n\nMedium"
+priority:high: 
+- "### Priority\n\nHigh"
+priority:urgent: 
+- "### Priority\n\nUrgent"
