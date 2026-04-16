@@ -1,9 +1,9 @@
 // @ts-check
-import { defineConfig } from "astro/config";
-
-import tailwindcss from "@tailwindcss/vite";
-
 import preact from "@astrojs/preact";
+import tailwindcss from "@tailwindcss/vite";
+import { defineConfig, envField } from "astro/config";
+
+const _isDevMode = process.env.NODE_ENV === "development";
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,14 +17,35 @@ export default defineConfig({
 	},
 
 	integrations: [preact()],
-	
+
+	env: {
+		schema: {
+			BETTER_AUTH_SECRET: envField.string({
+				access: "secret",
+				context: "server",
+				optional: false,
+			}),
+			GITHUB_CLIENT_ID: envField.string({
+				access: "secret",
+				context: "server",
+				optional: false,
+			}),
+			GITHUB_CLIENT_SECRET: envField.string({
+				access: "secret",
+				context: "server",
+				optional: false,
+			}),
+		},
+		validateSecrets: true,
+	},
+
 	devToolbar: {
 		enabled: true,
-		placement: "bottom-right"
+		placement: "bottom-right",
 	},
-	
+
 	security: {
 		csp: true,
-		checkOrigin: true
-	}
+		checkOrigin: true,
+	},
 });

@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets";
+---
+
+<nav
+	class="fixed bg-base-100 w-full p-2"
+>
+	<div class="container flex flex-row gap-2 items-center">
+		<a
+			href="/"
+			class="btn btn-circle btn-ghost"
+		>
+			<Image
+				src={import("@/assets/logo-rounded.svg")}
+				alt="Giolt Logo"
+			/>
+		</a>
+	</div>
+</nav>
