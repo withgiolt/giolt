@@ -10,6 +10,7 @@
 		"build": "astro build"
 	},
 	"dependencies": {
+		"@astrojs/node": "^10.0.5",
 		"@astrojs/preact": "^5.1.1",
 		"@libsql/client": "^0.17.2",
 		"@lucide/astro": "^1.8.0",

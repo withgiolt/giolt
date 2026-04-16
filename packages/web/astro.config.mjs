@@ -3,6 +3,8 @@ import preact from "@astrojs/preact";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField, fontProviders } from "astro/config";
 
+import node from "@astrojs/node";
+
 const _isDevMode = process.env.NODE_ENV === "development";
 
 // https://astro.build/config
@@ -15,7 +17,7 @@ export default defineConfig({
 
 	server: {
 		port: 3000,
-		host: "127.0.0.1",
+		host: "0.0.0.0",
 	},
 
 	integrations: [preact()],
@@ -47,8 +49,8 @@ export default defineConfig({
 			name: "Bricolage Grotesque",
 			cssVariable: "--font-bricolage",
 			display: "auto",
-			weights: [200, 300, 400, 500, 600, 700, 800]
-		}
+			weights: [200, 300, 400, 500, 600, 700, 800],
+		},
 	],
 
 	devToolbar: {
@@ -60,4 +62,8 @@ export default defineConfig({
 		csp: true,
 		checkOrigin: true,
 	},
+
+	adapter: node({
+		mode: "standalone",
+	}),
 });
