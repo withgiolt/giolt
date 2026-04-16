@@ -17,5 +17,5 @@ We use the Functional Source License. This license converts to Apache 2.0 after 
 To see the latest Apache 2.0 converted license use the following command after cloning the repository:
 
 ```bash
-git checkout `git rev-list -n 1 --before="2 years ago" master`
+git checkout `git rev-list -n 1 --before="2 years ago" main`
 ```
