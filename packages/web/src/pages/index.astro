@@ -1,7 +1,64 @@
 ---
-import BaseLayout from "@/layouts/base-layout.astro";
+import { Image } from "astro:assets";
+import LandingLayout from "@/layouts/landing-layout.astro";
 ---
 
-<BaseLayout>
-	<h1>Welcome to Astro!</h1>
-</BaseLayout>
+<LandingLayout>
+	<div class="container flex flex-col justify-center items-center mt-32 gap-2">
+		<Image
+			src={import("@/assets/logo-rounded.svg")}
+			alt="Giolt Logo"
+			class="w-32 h-32"
+			loading="eager"
+		/>
+		<h1 class="text-4xl font-bold">
+			Giolt
+		</h1>
+		<p>
+			The European centered hosting provider.
+		</p>
+		<button
+			class="btn"
+			disabled
+			type="button"
+		>
+			Coming soon
+		</button>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+			<div class="card card-border bg-base-200 shadow">
+				<div class="card-body">
+					<h2 class="card-title">Choose your region</h2>
+					<p>With regions such as:</p>
+					<ul>
+						<li>&#x1f1e9;&#x1f1ea; Nuremberg, Germany</li>
+						<li>&#x1f1eb;&#x1f1ee; Helsinki, Finland</li>
+						...and more coming soon
+					</ul>
+				</div>
+			</div>
+			<div class="card card-border bg-base-200 shadow">
+				<div class="card-body">
+					<h2 class="card-title">Gleam centered</h2>
+					<p>The dedicated place for Gleam developers. Built with Gleam, for Gleam.</p>
+				</div>
+			</div>
+			<div class="card card-border bg-base-200 shadow">
+				<div class="card-body">
+					<h2 class="card-title">Fair open source</h2>
+					<p>
+						We believe the future of open source is fair. 
+						We appreciate frequent contributions via
+						discounts.
+					</p>
+				</div>
+			</div>
+			<div class="card card-border bg-base-200 shadow">
+				<div class="card-body">
+					<h2 class="card-title">European</h2>
+					<p>Based in Europe, we understand the importance of data sovereignty and compliance.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</LandingLayout>

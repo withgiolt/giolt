@@ -17,4 +17,14 @@ export default defineConfig({
 	},
 
 	integrations: [preact()],
+	
+	devToolbar: {
+		enabled: true,
+		placement: "bottom-right"
+	},
+	
+	security: {
+		csp: true,
+		checkOrigin: true
+	}
 });

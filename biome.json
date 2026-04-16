@@ -12,6 +12,9 @@
 			"!**/drizzle/**/*"
 		]
 	},
+	"html": {
+		"experimentalFullSupportEnabled": true
+	},
 	"css": {
 		"parser": {
 			"tailwindDirectives": true,

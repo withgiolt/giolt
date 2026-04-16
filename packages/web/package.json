@@ -11,10 +11,12 @@
 	},
 	"dependencies": {
 		"@astrojs/preact": "^5.1.1",
+		"@lucide/astro": "^1.8.0",
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.2.2",
 		"astro": "^6.1.6",
 		"daisyui": "^5.5.19",
+		"lucide-preact": "^1.8.0",
 		"preact": "^10.29.1",
 		"tailwindcss": "^4.2.2"
 	}
