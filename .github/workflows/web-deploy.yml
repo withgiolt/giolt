@@ -35,23 +35,19 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ghcr.io/withgiolt/web
           tags: |
-            # Tag with branch name
             type=ref,event=branch
-            # Tag with PR number
             type=ref,event=pr
-            # Tag with semver from git tag
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-            # Tag with short SHA
             type=sha,prefix=
 
       # Step 5: Build and push the Docker image
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: /packages/web
+          context: packages/web
           # Only push on main branch and tags, not PRs
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
@@ -59,3 +55,8 @@ jobs:
           # Enable build cache for faster builds
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+          secrets: |
+            BETTER_AUTH_SECRET=${{ secrets.BETTER_AUTH_SECRET }}
+            GITHUB_CLIENT_ID=${{ secrets.GITHUB_CLIENT_ID }}
+            GITHUB_CLIENT_SECRET=${{ secrets.GITHUB_CLIENT_SECRET }}
