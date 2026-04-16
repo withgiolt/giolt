@@ -1,12 +1,14 @@
 // @ts-check
 import preact from "@astrojs/preact";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField, fontProviders } from "astro/config";
 
 const _isDevMode = process.env.NODE_ENV === "development";
 
 // https://astro.build/config
 export default defineConfig({
+	output: "server",
+
 	vite: {
 		plugins: [tailwindcss()],
 	},
@@ -38,6 +40,16 @@ export default defineConfig({
 		},
 		validateSecrets: true,
 	},
+
+	fonts: [
+		{
+			provider: fontProviders.fontsource(),
+			name: "Bricolage Grotesque",
+			cssVariable: "--font-bricolage",
+			display: "auto",
+			weights: [200, 300, 400, 500, 600, 700, 800]
+		}
+	],
 
 	devToolbar: {
 		enabled: true,
