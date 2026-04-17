@@ -1,4 +1,5 @@
 # [Giolt](https://giolt.com)
+### [Project](https://github.com/orgs/withgiolt/projects/2) &middot; [Contributing](https://github.com/withgiolt/giolt/blob/main/CONTRIBUTING.md)
 
 > [!WARNING]
 > Giolt is still in very early stages of development.
