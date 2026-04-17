@@ -10,6 +10,7 @@
 		"build": "astro build"
 	},
 	"dependencies": {
+		"@astrojs/check": "^0.9.8",
 		"@astrojs/node": "^10.0.5",
 		"@astrojs/preact": "^5.1.1",
 		"@libsql/client": "^0.17.2",
@@ -22,6 +23,7 @@
 		"drizzle-orm": "^0.45.2",
 		"lucide-preact": "^1.8.0",
 		"preact": "^10.29.1",
-		"tailwindcss": "^4.2.2"
+		"tailwindcss": "^4.2.2",
+		"typescript": "^6.0.3"
 	}
 }
