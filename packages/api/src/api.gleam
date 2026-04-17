@@ -1,6 +1,6 @@
-import routes/health
 import gleam/erlang/process
 import mist
+import routes/health
 import wisp.{type Request, type Response}
 import wisp/wisp_mist
 
@@ -17,7 +17,6 @@ pub fn main() -> Nil {
 
 	process.sleep_forever()
 }
-
 
 pub fn handle_request(req: Request) -> Response {
 	case wisp.path_segments(req) {
