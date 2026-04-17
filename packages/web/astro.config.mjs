@@ -29,12 +29,12 @@ export default defineConfig({
 				context: "server",
 				optional: false,
 			}),
-			GITHUB_CLIENT_ID: envField.string({
+			GH_CLIENT_ID: envField.string({
 				access: "secret",
 				context: "server",
 				optional: false,
 			}),
-			GITHUB_CLIENT_SECRET: envField.string({
+			GH_CLIENT_SECRET: envField.string({
 				access: "secret",
 				context: "server",
 				optional: false,
