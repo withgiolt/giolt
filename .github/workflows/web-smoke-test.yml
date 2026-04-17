@@ -1,0 +1,47 @@
+name: "Web: Smoke Test"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/web/**"
+      
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "packages/web/**"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: packages/web
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build
+        run: bun run build
+        env:
+          BETTER_AUTH_SECRET: dummy
+          GH_CLIENT_ID: dummy
+          GH_CLIENT_SECRET: dummy
