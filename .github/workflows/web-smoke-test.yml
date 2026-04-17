@@ -13,6 +13,8 @@ on:
     paths:
       - "packages/web/**"
 
+permissions:
+  contents: read
 
 jobs:
   smoke-test:
