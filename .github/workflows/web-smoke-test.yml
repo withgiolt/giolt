@@ -16,7 +16,6 @@ on:
 
 jobs:
   smoke-test:
-    name: Build Docker Image
     runs-on: ubuntu-latest
 
     defaults:
