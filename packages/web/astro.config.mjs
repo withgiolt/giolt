@@ -55,7 +55,6 @@ export default defineConfig({
 
 	devToolbar: {
 		enabled: true,
-		placement: "bottom-right",
 	},
 
 	security: {

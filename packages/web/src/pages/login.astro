@@ -1,0 +1,14 @@
+---
+import { LoginBox } from "@/components/login-box";
+import DashboardLayout from "@/layouts/dashboard-layout.astro";
+
+if (Astro.locals.user) {
+	return Astro.redirect("/dashboard");
+}
+---
+
+<DashboardLayout>
+	<div class="container flex flex-col justify-center items-center my-32">
+		<LoginBox client:load/>
+	</div>
+</DashboardLayout>

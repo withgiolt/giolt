@@ -5,9 +5,7 @@ import { jwt } from "better-auth/plugins";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 
 export const auth = betterAuth({
-	plugins: [
-		jwt()
-	],
+	plugins: [jwt()],
 	database: drizzleAdapter(db, {
 		provider: "sqlite",
 	}),
