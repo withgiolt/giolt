@@ -11,7 +11,7 @@
 		"api:dev": "cd packages/api && gleam dev",
 		"api:format": "cd packages/api && gleam format && cd ../.. && bun run scripts/gleam_format.ts",
 		
-		"migrate:local": "drizzle-kit migrate --config=db/drizzle.local.config.ts",
+		"migrate:local": "drizzle-kit generate --config=db/drizzle.local.config.ts && drizzle-kit migrate --config=db/drizzle.local.config.ts",
 		"studio:local": "drizzle-kit studio --config=db/drizzle.local.config.ts",
 		"db:format": "bunx @biomejs/biome format --write db/"
 	},
