@@ -2,6 +2,7 @@
 	"name": "giolt",
 	"private": true,
 	"scripts": {
+		"dev": "bun run --parallel web:dev api:dev",
 		"format": "bun run web:format && bun run api:format && bun run db:format",
 
 		"web:dev": "bun run -F web dev",
