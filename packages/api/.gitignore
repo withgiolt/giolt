@@ -1,6 +1,0 @@
-*.beam
-*.ez
-/build
-/node_modules
-erl_crash.dump
-.env

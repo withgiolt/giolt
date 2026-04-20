@@ -1,3 +1,7 @@
 node_modules/
-
+build/
 local.db
+.env
+*.beam
+*.ez
+erl_crash.dump
