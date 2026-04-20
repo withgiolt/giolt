@@ -9,8 +9,8 @@
 		"web:build": "bun run -F web build",
 		"web:format": "bunx @biomejs/biome format --write packages/web",
 
-		"api:dev": "cd packages/api && gleam dev",
-		"api:format": "cd packages/api && gleam format && cd ../.. && bun run scripts/gleam_format.ts",
+		"api:dev": "bun run -F api dev",
+		"api:format": "bunx @biomejs/biome format --write packages/api && cd packages/api && gleam format && cd ../.. && bun run scripts/gleam_format.ts ",
 		
 		"migrate:local": "drizzle-kit generate --config=db/drizzle.local.config.ts && drizzle-kit migrate --config=db/drizzle.local.config.ts",
 		"migrate:remote": "drizzle-kit generate --config=db/drizzle.remote.config.ts && drizzle-kit migrate --config=db/drizzle.remote.config.ts",
