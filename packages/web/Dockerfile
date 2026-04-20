@@ -1,5 +1,7 @@
+ARG BUN_VERSION=1.3.13
+
 # Build stage
-FROM oven/bun:1 AS builder
+FROM oven/bun:${BUN_VERSION} AS builder
 
 WORKDIR /app
 
@@ -16,7 +18,7 @@ RUN --mount=type=secret,id=BETTER_AUTH_SECRET \
     bun run build
 
 # Runtime stage
-FROM oven/bun:1-slim
+FROM oven/bun:${BUN_VERSION}-slim
 
 WORKDIR /app
 
