@@ -10,7 +10,7 @@ pub fn view() -> Element(t) {
 			[
 				html.div([attribute.class("flex flex-row gap-1 mb-2")], [
 					html.span([attribute.class("badge badge-soft")], [
-						html.text(" Pre-Alpha "),
+						html.text("Pre-Alpha"),
 					]),
 				]),
 				html.h1([attribute.class("font-black text-4xl md:text-7xl mb-2")], [
@@ -46,6 +46,9 @@ pub fn view() -> Element(t) {
 						html.ul([], [
 							html.li([], [html.text("🇩🇪 Nuremberg, Germany")]),
 							html.li([], [html.text("🇫🇮 Helsinki, Finland")]),
+							html.li([], [html.text("🇫🇷 Gravelines, France")]),
+							html.li([], [html.text("🇨🇦 Beauharnois, Canada")]),
+							html.li([], [html.text("🇦🇺 Sydney, Australia")]),
 							html.text(" ...and more coming soon "),
 						]),
 					]),
@@ -120,7 +123,7 @@ pub fn view() -> Element(t) {
 										],
 										[
 											html.input([
-												attribute.checked(True),
+												attribute.checked(False),
 												attribute.name("faq-accordion"),
 												attribute.type_("radio"),
 											]),
@@ -249,7 +252,7 @@ pub fn view() -> Element(t) {
 											),
 											html.div([attribute.class("collapse-content text-sm")], [
 												html.text(
-													"While Giolt is currently focused on the Gleam ecosystem, we are considering support for other languages in the future 
+													"While Giolt is currently focused on the Gleam ecosystem, there will be support for other languages in the future 
 													such as: PHP, Elixir, Erlang and JavaScript (Node.js, Bun and Deno).",
 												),
 											]),

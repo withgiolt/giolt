@@ -1,4 +1,4 @@
 import gleam/javascript/promise.{type Promise}
 
-@external(javascript, "./external/execute", "execute")
+@external(javascript, "./external/fs", "execute")
 pub fn execute(command: String) -> Promise(String)

@@ -5,9 +5,7 @@ import lustre/element.{type Element}
 import lustre/element/html
 
 pub type LayoutAttrs {
-	LayoutAttrs(
-		title: String
-	)
+	LayoutAttrs(title: String)
 }
 
 pub fn view(attrs: LayoutAttrs, children: List(Element(t))) -> Element(t) {

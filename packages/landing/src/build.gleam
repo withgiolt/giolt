@@ -1,11 +1,12 @@
-import lustre/element/html
-import lustre/element
 import gleam/io
 import gleam/result
 import gleam/string
-import lib/execute
+import lib/fs
+import lustre/element
+import lustre/element/html
 import lustre/ssg
 
+import routes/code_of_conduct
 import routes/index
 
 pub fn main() {
@@ -13,14 +14,21 @@ pub fn main() {
     ssg.new("./dist")
     |> ssg.add_static_asset(
       "/index.html",
-      element.to_document_string(index.view())
+      element.to_document_string(index.view()),
     )
-    |> ssg.add_static_route("/404", html.html([], [html.script([], "window.location.replace('/');")]))
+    |> ssg.add_static_asset(
+      "/code-of-conduct.html",
+      element.to_document_string(code_of_conduct.view()),
+    )
+    |> ssg.add_static_route(
+      "/404",
+      html.html([], [html.script([], "window.location.replace('/');")]),
+    )
     |> ssg.add_static_dir("./static")
     |> ssg.build
     |> result.map_error(fn(e) { string.inspect(e) })
     |> result.try(fn(_) {
-      execute.execute(
+      fs.execute(
         "bunx @tailwindcss/cli -i ./src/assets/app.css -o ./dist/app.css",
       )
 

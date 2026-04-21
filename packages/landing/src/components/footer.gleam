@@ -71,17 +71,15 @@ pub fn view() -> Element(t) {
 								html.a(
 									[
 										attribute.target("_blank"),
-										attribute.href("https://github.com/withgiolt/giolt/blob/main/LICENCE.md")
-									], 
-									[html.text("Licence")]
+										attribute.href(
+											"https://github.com/withgiolt/giolt/blob/main/LICENCE.md",
+										),
+									],
+									[html.text("Licence")],
 								),
-								html.a(
-									[
-										attribute.target("_blank"),
-										attribute.href("https://github.com/withgiolt/giolt/blob/main/CODE_OF_CONDUCT.md")
-									], 
-									[html.text("Code of Conduct")]
-								),
+								html.a([attribute.href("/code-of-conduct")], [
+									html.text("Code of Conduct"),
+								]),
 							],
 						),
 					]),
@@ -114,14 +112,23 @@ pub fn view() -> Element(t) {
 						),
 					]),
 				]),
-				html.a([
-					attribute.href("https://gleam.run"),
-					attribute.target("_blank"),
-					attribute.class("ml-auto badge badge-soft border-pink-300")
-				], [
-					html.img([attribute.class("w-4 h-4"), attribute.src("/lucy.svg"), attribute.alt("Gleam logo")]),
-					html.text("Powered by Gleam")
-				])
+				html.a(
+					[
+						attribute.href("https://gleam.run"),
+						attribute.target("_blank"),
+						attribute.class(
+							"ml-auto mt-2 badge badge-soft border-pink-300 shadow-pink-300/25 shadow-lg",
+						),
+					],
+					[
+						html.img([
+							attribute.class("w-4 h-4"),
+							attribute.src("/lucy.svg"),
+							attribute.alt("Gleam logo"),
+						]),
+						html.text("Powered by Gleam"),
+					],
+				),
 			]),
 		]),
 	])
