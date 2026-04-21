@@ -35,21 +35,21 @@ pub fn view() -> Element(t) {
 				),
 				carbon_badge.view(),
 				html.div([attribute.class("grid grid-cols-2 md:grid-cols-4 gap-8")], [
-					html.div([], [
-						html.h3([attribute.class("mt-3 text-xl font-bold")], [
-							html.text(" About "),
-						]),
-						html.div(
-							[
-								attribute.class(
-									"text-muted-foreground *:hover:underline *:block",
-								),
-							],
-							[
-								html.a([attribute.href("/updates")], [html.text(" Updates ")]),
-							],
-						),
-					]),
+					// html.div([], [
+					// 	html.h3([attribute.class("mt-3 text-xl font-bold")], [
+					// 		html.text(" About "),
+					// 	]),
+					// 	html.div(
+					// 		[
+					// 			attribute.class(
+					// 				"text-muted-foreground *:hover:underline *:block",
+					// 			),
+					// 		],
+					// 		[
+					// 			html.a([attribute.href("/updates")], [html.text(" Updates ")]),
+					// 		],
+					// 	),
+					// ]),
 					html.div([], [
 						html.h3([attribute.class("mt-3 text-xl font-bold")], [
 							html.text(" Contribute "),
@@ -64,11 +64,24 @@ pub fn view() -> Element(t) {
 								html.a(
 									[
 										attribute.target("_blank"),
-										attribute.href("https://github.com/m4rocks/giolt"),
+										attribute.href("https://github.com/withgiolt/giolt"),
 									],
-									[html.text(" GitHub ")],
+									[html.text("GitHub")],
 								),
-								html.a([attribute.href("/licence")], [html.text(" Licence ")]),
+								html.a(
+									[
+										attribute.target("_blank"),
+										attribute.href("https://github.com/withgiolt/giolt/blob/main/LICENCE.md")
+									], 
+									[html.text("Licence")]
+								),
+								html.a(
+									[
+										attribute.target("_blank"),
+										attribute.href("https://github.com/withgiolt/giolt/blob/main/CODE_OF_CONDUCT.md")
+									], 
+									[html.text("Code of Conduct")]
+								),
 							],
 						),
 					]),
@@ -101,6 +114,14 @@ pub fn view() -> Element(t) {
 						),
 					]),
 				]),
+				html.a([
+					attribute.href("https://gleam.run"),
+					attribute.target("_blank"),
+					attribute.class("ml-auto badge badge-soft border-pink-300")
+				], [
+					html.img([attribute.class("w-4 h-4"), attribute.src("/lucy.svg"), attribute.alt("Gleam logo")]),
+					html.text("Powered by Gleam")
+				])
 			]),
 		]),
 	])
