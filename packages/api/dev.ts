@@ -1,14 +1,20 @@
-import { exec } from "node:child_process";
+import { spawn, exec } from "node:child_process";
 import { watch } from "node:fs";
 
 const createBunProcess = () => {
-	return exec("bun run index.ts", (_, stdout, stderr) => {
-		if (stdout) console.log(stdout);
-		if (stderr) console.error(stderr);
-	});
+	const process = spawn("bun run index.ts", { cwd: import.meta.dir, shell: true });
+
+	process.stdout.on("data", (data) => {
+		console.log(data.toString())
+	})
+	process.stderr.on("data", (data) => {
+		console.log(data.toString())
+	})
+
+	return process;
 };
 
-let bunProcess = await createBunProcess();
+let bunProcess = createBunProcess();
 
 if (Bun.env.DEV) {
 	watch(
