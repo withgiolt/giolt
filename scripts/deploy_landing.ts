@@ -1,13 +1,13 @@
 import { readdir } from "node:fs/promises";
 import * as storage from "@bunny.net/storage-sdk";
 
-if (!Bun.env.STORAGE_ZONE_NAME || !Bun.env.STORAGE_KEY) {
+if (!Bun.env.STORAGE_ZONE || !Bun.env.STORAGE_KEY) {
 	throw new Error("Environment variables for storage zone not set");
 }
 
 const storageZone = storage.zone.connect_with_accesskey(
 	storage.regions.StorageRegion.Falkenstein,
-	Bun.env.STORAGE_ZONE_NAME,
+	Bun.env.STORAGE_ZONE,
 	Bun.env.STORAGE_KEY
 )
 
