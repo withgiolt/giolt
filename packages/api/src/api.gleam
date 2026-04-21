@@ -1,27 +1,12 @@
-import gleam/erlang/process
-import mist
+import gleam/javascript/promise.{type Promise}
+import glen.{type Request, type Response}
+import glen/status
 import routes/health
-import wisp.{type Request, type Response}
-import wisp/wisp_mist
 
-pub fn main() -> Nil {
-	wisp.configure_logger()
-
-	let secret_key_base = wisp.random_string(64)
-
-	let assert Ok(_) =
-		wisp_mist.handler(handle_request, secret_key_base)
-		|> mist.new
-		|> mist.port(3001)
-		|> mist.start
-
-	process.sleep_forever()
-}
-
-pub fn handle_request(req: Request) -> Response {
-	case wisp.path_segments(req) {
+pub fn handle_request(req: Request) -> Promise(Response) {
+	case glen.path_segments(req) {
 		[] -> health.handle_request(req)
 		["health"] -> health.handle_request(req)
-		_ -> wisp.not_found()
+		_ -> glen.text("Not found", status.not_found) |> promise.resolve
 	}
 }

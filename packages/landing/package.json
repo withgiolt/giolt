@@ -1,0 +1,22 @@
+{
+	"name": "landing",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"dev": "gleam run -m build && bun dev.ts",
+		"build": "gleam run -m build"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@types/serve-handler": "^6.1.4"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@tailwindcss/typography": "^0.5.19",
+		"daisyui": "^5.5.19",
+		"serve-handler": "^6.1.7",
+		"tailwindcss": "^4.2.3"
+	}
+}

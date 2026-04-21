@@ -66,6 +66,16 @@ export const verification = sqliteTable("verification", {
 
 export type Verification = typeof verification.$inferSelect;
 
+export const jwks = sqliteTable("jwks", {
+	id: t.text("id").primaryKey(),
+	publicKey: t.text("public_key").notNull(),
+	privateKey: t.text("private_key").notNull(),
+	createdAt: t.integer("created_at", { mode: "timestamp_ms" }).notNull(),
+	expiresAt: t.integer("expires_at", { mode: "timestamp_ms" }),
+});
+
+export type JWKS = typeof jwks.$inferSelect;
+
 // Servers
 
 export const projects = sqliteTable("projects", {

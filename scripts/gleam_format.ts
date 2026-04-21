@@ -1,7 +1,7 @@
 import { Glob } from "bun";
 
 // Exclude build files
-const glob = new Glob("packages/api/**/*.gleam");
+const glob = new Glob("packages/**/*.gleam");
 
 for await (const file of glob.scan(".")) {
 	if (file.includes("build")) continue;
