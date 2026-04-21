@@ -1,11 +1,8 @@
-import { to_js_request, type JsResponse$ } from "@gleam/conversation/conversation.mjs";
+import { to_js_request } from "@gleam/conversation/conversation.mjs";
 import type { Request$ } from "@gleam/gleam_http/gleam/http/request.mjs";
-import { Response$Response, type Response$ } from "@gleam/gleam_http/gleam/http/response.mjs";
-import { type List, List$Empty, List$NonEmpty } from "@gleam/prelude.mjs";
-import { type Auth, betterAuth } from "better-auth";
-import type { ResponseBody$ } from "@gleam/glen/glen.mjs";
+import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { jwt } from "better-auth/plugins";
+import { jwt, openAPI } from "better-auth/plugins";
 import { db } from "./db";
 
 // Check GitHub secrets
@@ -13,8 +10,12 @@ if (!Bun.env.GH_CLIENT_ID || !Bun.env.GH_CLIENT_SECRET) {
 	throw new Error("Missing GitHub client credentials");
 }
 
+type BetterAuth = typeof auth
+
 const auth = betterAuth({
-	plugins: [jwt()],
+	plugins: [jwt(), openAPI({
+		disableDefaultReference: true,
+	})],
 	basePath: "/auth",
 	baseURL:
 		Bun.env.DEV === "production"
@@ -35,15 +36,11 @@ export function get_auth() {
 	return auth;
 }
 
-export async function handle_requests<T>(auth: Auth, request: Request$<T>): Promise<Response> {
+export async function handle_requests<T>(auth: BetterAuth, request: Request$<T>): Promise<Response> {
 	const jsReq: Request = to_js_request(request)
 	return await auth.handler(jsReq);
 }
 
-function arrayToList<T>(array: Array<T>): List<T> {
-  let list = List$Empty<T>();
-  for (const element of array) {
-    list = List$NonEmpty<T>(element, list);
-  }
-  return list;
+export async function generate_openapi_schema(auth: BetterAuth): Promise<string> {
+	return JSON.stringify(await auth.api.generateOpenAPISchema());
 }
