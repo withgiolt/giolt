@@ -20,10 +20,5 @@ runtime = "bun"
 [dependencies]
 gleam_stdlib = ">= 0.44.0 and < 2.0.0"
 lustre = ">= 5.6.0 and < 6.0.0"
-jot = ">= 11.0.0 and < 12.0.0"
 lustre_ssg = { git = "https://github.com/withgiolt/lustre_ssg", ref = "73d2632" }
-tom = ">= 1.1.1 and < 2.0.0"
 gleam_javascript = ">= 1.0.0 and < 2.0.0"
-
-[dev_dependencies]
-lustre_dev_tools = ">= 2.3.6 and < 3.0.0"
