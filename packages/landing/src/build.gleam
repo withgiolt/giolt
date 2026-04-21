@@ -15,7 +15,7 @@ pub fn main() {
       "/index.html",
       element.to_document_string(index.view())
     )
-    |> ssg.add_static_route("/404", html.html([], []))
+    |> ssg.add_static_route("/404", html.html([], [html.script([], "window.location.replace('/');")]))
     |> ssg.add_static_dir("./static")
     |> ssg.build
     |> result.map_error(fn(e) { string.inspect(e) })
