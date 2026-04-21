@@ -35,11 +35,9 @@ export function get_auth() {
 	return auth;
 }
 
-export async function handle_requests<T>(auth: Auth, request: Request$<T>): Promise<Response$<ResponseBody$>> {
+export async function handle_requests<T>(auth: Auth, request: Request$<T>): Promise<Response> {
 	const jsReq: Request = to_js_request(request)
-	const jsRes: JsResponse$ = await auth.handler(jsReq);
-	const headers = [...jsRes.headers].reverse();
-	return Response$Response(jsRes.status, arrayToList(headers), jsRes)
+	return await auth.handler(jsReq);
 }
 
 function arrayToList<T>(array: Array<T>): List<T> {
