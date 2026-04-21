@@ -24,7 +24,7 @@
         "typescript": "^5",
       },
     },
-    "packages/web": {
+    "packages/web-old": {
       "name": "web",
       "version": "0.0.1",
       "dependencies": {
@@ -1156,7 +1156,7 @@
 
     "vscode-uri": ["vscode-uri@3.1.0", "", {}, "sha512-/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ=="],
 
-    "web": ["web@workspace:packages/web"],
+    "web": ["web@workspace:packages/web-old"],
 
     "web-namespaces": ["web-namespaces@2.0.1", "", {}, "sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ=="],
 

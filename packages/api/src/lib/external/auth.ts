@@ -10,7 +10,10 @@ if (!Bun.env.GH_CLIENT_ID || !Bun.env.GH_CLIENT_SECRET) {
 
 const auth = betterAuth({
 	plugins: [jwt()],
-	baseURL: Bun.env.DEV === "production" ? "https://api.giolt.com" : "http://localhost:3001",
+	baseURL:
+		Bun.env.DEV === "production"
+			? "https://api.giolt.com"
+			: "http://localhost:3001",
 	database: drizzleAdapter(db, {
 		provider: "sqlite",
 	}),
