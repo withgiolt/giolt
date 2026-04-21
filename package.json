@@ -5,12 +5,12 @@
 		"dev": "bun run --parallel web:dev api:dev",
 		"format": "bun run web:format && bun run api:format && bun run db:format",
 
-		"web:dev": "bun run -F web dev",
-		"web:build": "bun run -F web build",
-		"web:format": "bunx @biomejs/biome format --write packages/web",
+		"landing:dev": "bun run -F landing dev",
+		"landing:build": "bun run -F landing build",
+		"landing:format": "bunx @biomejs/biome format --write packages/landing && cd packages/landing && gleam format && cd ../.. && bun run scripts/gleam_format.ts",
 
 		"api:dev": "bun run -F api dev",
-		"api:format": "bunx @biomejs/biome format --write packages/api && cd packages/api && gleam format && cd ../.. && bun run scripts/gleam_format.ts ",
+		"api:format": "bunx @biomejs/biome format --write packages/api && cd packages/api && gleam format && cd ../.. && bun run scripts/gleam_format.ts",
 		
 		"migrate:local": "drizzle-kit generate --config=db/drizzle.local.config.ts && drizzle-kit migrate --config=db/drizzle.local.config.ts",
 		"migrate:remote": "drizzle-kit generate --config=db/drizzle.remote.config.ts && drizzle-kit migrate --config=db/drizzle.remote.config.ts",

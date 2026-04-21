@@ -24,7 +24,6 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"astro-build.astro-vscode",
 				"oven.bun-vscode",
 				"gleam.gleam",
 				"biomejs.biome"
