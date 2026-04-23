@@ -39,7 +39,7 @@
 	--noise: 1;
 }
 
-@plugin "daisyui/theme" {
+/* @plugin "daisyui/theme" {
 	name: "giolt-dark";
 	default: false;
 	prefersdark: true;
@@ -74,7 +74,7 @@
 	--noise: 1;
 	--glass-opacity: 0.1;
 	--glass-reflect-opacity: 0.01;
-}
+} */
 
 html,
 body {
