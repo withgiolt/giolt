@@ -6,15 +6,15 @@ import mork
 import simplifile
 
 pub fn view() -> Element(t) {
-	let assert Ok(markdown) = simplifile.read("../../CODE_OF_CONDUCT.md")
-	let html =
-		markdown
-		|> mork.parse
-		|> mork.to_html
+  let assert Ok(markdown) = simplifile.read("../../CODE_OF_CONDUCT.md")
+  let html =
+    markdown
+    |> mork.parse
+    |> mork.to_html
 
-	default_layout.view(default_layout.LayoutAttrs("Code of Conduct"), [
-		html.div([attribute.class("container")], [
-			element.unsafe_raw_html("", "div", [attribute.class("prose")], html),
-		]),
-	])
+  default_layout.view(default_layout.LayoutAttrs("Code of Conduct"), [
+    html.div([attribute.class("container")], [
+      element.unsafe_raw_html("", "div", [attribute.class("prose")], html),
+    ]),
+  ])
 }

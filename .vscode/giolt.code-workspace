@@ -1,12 +1,16 @@
 {
   "folders": [
     {
-      "name": "Web",
-      "path": "../packages/web"
+      "name": "Landing",
+      "path": "../packages/landing"
     },
     {
       "name": "API",
       "path": "../packages/api"
+    },
+    {
+      "name": "Utils",
+      "path": "../packages/utils"
     },
     {
       "name": "Root",

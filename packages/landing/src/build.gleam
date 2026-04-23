@@ -6,8 +6,8 @@ import lustre/element
 import lustre/element/html
 import lustre/ssg
 
-import routes/code_of_conduct
 import routes/index
+import routes/code_of_conduct
 
 pub fn main() {
   let build =
