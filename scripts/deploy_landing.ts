@@ -26,6 +26,7 @@ for (const file of files) {
 }
 
 console.log(await fetch(`https://api.bunny.net/pullzone/${Bun.env.LANDING_PULLZONE_ID}/purgeCache`, {
+	method: "POST",
 	headers: {
 		"AccessKey": Bun.env.BUNNY_API_KEY
 	}
