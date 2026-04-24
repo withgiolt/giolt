@@ -1,13 +1,14 @@
+import dev/fs
 import gleam/io
 import gleam/result
 import gleam/string
-import dev/fs
 import lustre/element
 import lustre/element/html
 import lustre/ssg
 
-import routes/index
 import routes/code_of_conduct
+import routes/index
+import routes/updates
 
 pub fn main() {
   let build =
@@ -15,6 +16,10 @@ pub fn main() {
     |> ssg.add_static_asset(
       "/index.html",
       element.to_document_string(index.view()),
+    )
+    |> ssg.add_static_asset(
+      "/updates.html",
+      element.to_document_string(updates.view()),
     )
     |> ssg.add_static_asset(
       "/code-of-conduct.html",
@@ -28,9 +33,7 @@ pub fn main() {
     |> ssg.build
     |> result.map_error(fn(e) { string.inspect(e) })
     |> result.try(fn(_) {
-      fs.execute(
-        "bun compile:css",
-      )
+      fs.execute("bun compile:css")
 
       Ok(Nil)
     })

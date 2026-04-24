@@ -7,7 +7,7 @@ const server = Bun.serve({
 		const req = glen.convert_request(request);
 		const response = await handle_request(req);
 		if (response instanceof Response) {
-			return response
+			return response;
 		}
 		const res = glen.convert_response(response);
 

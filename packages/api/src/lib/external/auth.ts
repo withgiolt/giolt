@@ -10,12 +10,15 @@ if (!Bun.env.GH_CLIENT_ID || !Bun.env.GH_CLIENT_SECRET) {
 	throw new Error("Missing GitHub client credentials");
 }
 
-type BetterAuth = typeof auth
+type BetterAuth = typeof auth;
 
 const auth = betterAuth({
-	plugins: [jwt(), openAPI({
-		disableDefaultReference: true,
-	})],
+	plugins: [
+		jwt(),
+		openAPI({
+			disableDefaultReference: true,
+		}),
+	],
 	basePath: "/auth",
 	baseURL:
 		Bun.env.DEV === "production"
@@ -36,11 +39,16 @@ export function get_auth() {
 	return auth;
 }
 
-export async function handle_requests<T>(auth: BetterAuth, request: Request$<T>): Promise<Response> {
-	const jsReq: Request = to_js_request(request)
+export async function handle_requests<T>(
+	auth: BetterAuth,
+	request: Request$<T>,
+): Promise<Response> {
+	const jsReq: Request = to_js_request(request);
 	return await auth.handler(jsReq);
 }
 
-export async function generate_openapi_schema(auth: BetterAuth): Promise<string> {
+export async function generate_openapi_schema(
+	auth: BetterAuth,
+): Promise<string> {
 	return JSON.stringify(await auth.api.generateOpenAPISchema());
 }

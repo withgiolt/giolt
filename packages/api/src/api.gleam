@@ -1,10 +1,10 @@
-import lib/auth
 import gleam/javascript/promise.{type Promise}
 import glen.{type Request, type Response}
 import glen/status
+import lib/auth
 
-import routes/health
 import routes/auth_reference
+import routes/health
 
 pub fn handle_request(req: Request) -> Promise(Response) {
 	case glen.path_segments(req) {

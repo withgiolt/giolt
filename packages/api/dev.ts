@@ -2,14 +2,17 @@ import { spawn, exec } from "node:child_process";
 import { watch } from "node:fs";
 
 const createBunProcess = () => {
-	const process = spawn("bun run index.ts", { cwd: import.meta.dir, shell: true });
+	const process = spawn("bun run index.ts", {
+		cwd: import.meta.dir,
+		shell: true,
+	});
 
 	process.stdout.on("data", (data) => {
-		console.log(data.toString())
-	})
+		console.log(data.toString());
+	});
 	process.stderr.on("data", (data) => {
-		console.log(data.toString())
-	})
+		console.log(data.toString());
+	});
 
 	return process;
 };
