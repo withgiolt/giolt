@@ -24,6 +24,10 @@ pub fn view() -> Element(t) {
 							],
 							[dynamic_logo.view()],
 						),
+						html.a(
+							[attribute.class("btn btn-ghost"), attribute.href("/updates")],
+							[html.text("Updates")],
+						),
 					],
 				),
 			],

@@ -1,4 +1,5 @@
 import layouts/default_layout
+import lucide_lustre
 import lustre/attribute
 import lustre/element.{type Element}
 import lustre/element/html
@@ -6,36 +7,52 @@ import lustre/element/html
 pub fn view() -> Element(t) {
 	default_layout.view(default_layout.LayoutAttrs(title: "Giolt"), [
 		html.div(
-			[attribute.class("container min-h-128 flex flex-col justify-center")],
 			[
-				html.div([attribute.class("flex flex-row gap-1 mb-2")], [
-					html.span([attribute.class("badge badge-soft")], [
-						html.text("Pre-Alpha"),
-					]),
-				]),
-				html.h1([attribute.class("font-black text-4xl md:text-7xl mb-2")], [
-					html.text(" The "),
-					html.span([attribute.class("highlight")], [html.text("fair")]),
-					html.text(" web hosting provider. "),
-				]),
-				html.p([attribute.class("text-base-content/50 mb-4")], [
-					html.text(
-						" The privacy-focused, fair priced and performant alternative to traditional web hosting providers. ",
+				attribute.styles([
+					#("background-size", "40px 40px"),
+					#(
+						"background-image",
+						"radial-gradient(circle, var(--color-base-content) 1px, rgba(0, 0, 0, 0) 1px)",
 					),
 				]),
-				html.div([attribute.class("flex flex-row items-center gap-2")], [
-					html.button(
-						[
-							attribute.class("btn"),
-							attribute.disabled(True),
-							attribute.type_("button"),
-						],
-						[html.text("Coming soon")],
-					),
-					html.a([attribute.class("btn btn-outline"), attribute.href("/updates")], [
-						html.text("Updates"),
-					]),
-				]),
+			],
+			[
+				html.div(
+					[attribute.class("container min-h-128 flex flex-col justify-center")],
+					[
+						html.div([attribute.class("flex flex-row gap-1 mb-2")], [
+							html.span([attribute.class("badge badge-soft")], [
+								html.text("Pre-Alpha"),
+							]),
+						]),
+						html.h1([attribute.class("font-black text-4xl md:text-7xl mb-2")], [
+							html.text(" The "),
+							html.span([attribute.class("highlight")], [html.text("fair")]),
+							html.text(" web hosting provider. "),
+						]),
+						html.p([attribute.class("text-base-content/50 mb-4")], [
+							html.text(
+								" The privacy-focused, fair priced and performant alternative to traditional web hosting providers. ",
+							),
+						]),
+						html.div([attribute.class("flex flex-row items-center gap-2")], [
+							html.button(
+								[
+									attribute.class("btn"),
+									attribute.disabled(True),
+									attribute.type_("button"),
+								],
+								[html.text("Coming soon")],
+							),
+							html.a(
+								[attribute.class("btn btn-outline"), attribute.href("/updates")],
+								[
+									html.text("Updates"),
+								],
+							),
+						]),
+					],
+				),
 			],
 		),
 		html.img([
@@ -62,44 +79,86 @@ pub fn view() -> Element(t) {
 						),
 					],
 					[
-						html.div([attribute.class("card card-border glass text-primary-content shadow")], [
-							html.div([attribute.class("card-body items-center text-center")], [
-								html.span([attribute.class("text-4xl")], [html.text("🚀")]),
-								html.h2([attribute.class("card-title")], [
-									html.text("Global CDN"),
-								]),
-								html.p([], [html.text("Ship fast. Everywhere.")]),
-							]),
-						]),
-						html.div([attribute.class("card card-border glass text-primary-content shadow")], [
-							html.div([attribute.class("card-body items-center text-center")], [
-								html.span([attribute.class("text-4xl")], [html.text("💰")]),
-								html.h2([attribute.class("card-title")], [
-									html.text("Predictable Pricing"),
-								]),
-								html.p([], [html.text("No surprises. Just honest pricing.")]),
-							]),
-						]),
-						html.div([attribute.class("card card-border glass text-primary-content shadow")], [
-							html.div([attribute.class("card-body items-center text-center")], [
-								html.span([attribute.class("text-4xl")], [html.text("⚡")]),
-								html.h2([attribute.class("card-title")], [
-									html.text("Gleam Centered"),
-								]),
-								html.p([], [html.text("Built with Gleam. For Gleam.")]),
-							]),
-						]),
-						html.div([attribute.class("card card-border glass text-primary-content shadow")], [
-							html.div([attribute.class("card-body items-center text-center")], [
-								html.span([attribute.class("text-4xl")], [html.text("🔥")]),
-								html.h2([attribute.class("card-title")], [
-									html.text("Performance"),
-								]),
-								html.p([], [
-									html.text("Lightning fast response times. Do more with less."),
-								]),
-							]),
-						]),
+						html.div(
+							[
+								attribute.class(
+									"card card-border glass text-primary-content shadow",
+								),
+							],
+							[
+								html.div(
+									[attribute.class("card-body items-center text-center")],
+									[
+										lucide_lustre.rocket_icon([attribute.class("size-12")]),
+										html.h2([attribute.class("card-title")], [
+											html.text("Global CDN"),
+										]),
+										html.p([], [html.text("Ship fast. Everywhere.")]),
+									],
+								),
+							],
+						),
+						html.div(
+							[
+								attribute.class(
+									"card card-border glass text-primary-content shadow",
+								),
+							],
+							[
+								html.div(
+									[attribute.class("card-body items-center text-center")],
+									[
+										lucide_lustre.piggy_bank_icon([attribute.class("size-12")]),
+										html.h2([attribute.class("card-title")], [
+											html.text("Predictable Pricing"),
+										]),
+										html.p([], [html.text("No surprises. Just honest pricing.")]),
+									],
+								),
+							],
+						),
+						html.div(
+							[
+								attribute.class(
+									"card card-border glass text-primary-content shadow",
+								),
+							],
+							[
+								html.div(
+									[attribute.class("card-body items-center text-center")],
+									[
+										lucide_lustre.zap_icon([attribute.class("size-12")]),
+										html.h2([attribute.class("card-title")], [
+											html.text("Gleam Centered"),
+										]),
+										html.p([], [html.text("Built with Gleam. For Gleam.")]),
+									],
+								),
+							],
+						),
+						html.div(
+							[
+								attribute.class(
+									"card card-border glass text-primary-content shadow",
+								),
+							],
+							[
+								html.div(
+									[attribute.class("card-body items-center text-center")],
+									[
+										lucide_lustre.flame_icon([attribute.class("size-12")]),
+										html.h2([attribute.class("card-title")], [
+											html.text("Performance"),
+										]),
+										html.p([], [
+											html.text(
+												"Lightning fast response times. Do more with less.",
+											),
+										]),
+									],
+								),
+							],
+						),
 					],
 				),
 				html.div(
@@ -117,58 +176,104 @@ pub fn view() -> Element(t) {
 						),
 					],
 					[
-						html.div([attribute.class("card card-border glass text-primary-content shadow")], [
-							html.div([attribute.class("card-body items-center text-center")], [
-								html.span([attribute.class("badge badge-warning mb-2")], [
-									html.text("Coming Soon"),
-								]),
-								html.span([attribute.class("text-4xl")], [html.text("🌍")]),
-								html.h2([attribute.class("card-title")], [
-									html.text("Regional Hosting"),
-								]),
-								html.p([], [
-									html.text("Your users deserve a server around the corner."),
-								]),
-							]),
-						]),
-						html.div([attribute.class("card card-border glass text-primary-content shadow")], [
-							html.div([attribute.class("card-body items-center text-center")], [
-								html.span([attribute.class("badge badge-warning mb-2")], [
-									html.text("Coming Soon"),
-								]),
-								html.span([attribute.class("text-4xl")], [html.text("🔧")]),
-								html.h2([attribute.class("card-title")], [
-									html.text("API Hosting"),
-								]),
-								html.p([], [html.text("Run your Gleam backends. Full stop.")]),
-							]),
-						]),
-						html.div([attribute.class("card card-border glass text-primary-content shadow")], [
-							html.div([attribute.class("card-body items-center text-center")], [
-								html.span([attribute.class("badge badge-warning mb-2")], [
-									html.text("Coming Soon"),
-								]),
-								html.span([attribute.class("text-4xl")], [html.text("🔄")]),
-								html.h2([attribute.class("card-title")], [
-									html.text("SSR Lustre"),
-								]),
-								html.p([], [
-									html.text("Interactivity meets SEO. The best of both worlds."),
-								]),
-							]),
-						]),
-						html.div([attribute.class("card card-border glass text-primary-content shadow")], [
-							html.div([attribute.class("card-body items-center text-center")], [
-								html.span([attribute.class("badge badge-warning mb-2")], [
-									html.text("Coming Soon"),
-								]),
-								html.span([attribute.class("text-4xl")], [html.text("📄")]),
-								html.h2([attribute.class("card-title")], [
-									html.text("SPA Prerendering"),
-								]),
-								html.p([], [html.text("Ship instantly. Rank higher.")]),
-							]),
-						]),
+						html.div(
+							[
+								attribute.class(
+									"card card-border glass text-primary-content shadow",
+								),
+							],
+							[
+								html.div(
+									[attribute.class("card-body items-center text-center")],
+									[
+										lucide_lustre.earth_icon([attribute.class("size-12")]),
+										html.h2([attribute.class("card-title")], [
+											html.text("Regional Hosting"),
+										]),
+										html.p([], [
+											html.text(
+												"Your users deserve a server around the corner.",
+											),
+										]),
+										html.span([attribute.class("badge badge-warning mb-2")], [
+											html.text("Coming Soon"),
+										]),
+									],
+								),
+							],
+						),
+						html.div(
+							[
+								attribute.class(
+									"card card-border glass text-primary-content shadow",
+								),
+							],
+							[
+								html.div(
+									[attribute.class("card-body items-center text-center")],
+									[
+										lucide_lustre.wrench_icon([attribute.class("size-12")]),
+										html.h2([attribute.class("card-title")], [
+											html.text("API Hosting"),
+										]),
+										html.p([], [
+											html.text("Run your Gleam backends. Full stop."),
+										]),
+										html.span([attribute.class("badge badge-warning mb-2")], [
+											html.text("Coming Soon"),
+										]),
+									],
+								),
+							],
+						),
+						html.div(
+							[
+								attribute.class(
+									"card card-border glass text-primary-content shadow",
+								),
+							],
+							[
+								html.div(
+									[attribute.class("card-body items-center text-center")],
+									[
+										lucide_lustre.refresh_ccw_icon([attribute.class("size-12")]),
+										html.h2([attribute.class("card-title")], [
+											html.text("SSR Lustre"),
+										]),
+										html.p([], [
+											html.text(
+												"Interactivity meets SEO. The best of both worlds.",
+											),
+										]),
+										html.span([attribute.class("badge badge-warning mb-2")], [
+											html.text("Coming Soon"),
+										]),
+									],
+								),
+							],
+						),
+						html.div(
+							[
+								attribute.class(
+									"card card-border glass text-primary-content shadow",
+								),
+							],
+							[
+								html.div(
+									[attribute.class("card-body items-center text-center")],
+									[
+										lucide_lustre.sticky_note_icon([attribute.class("size-12")]),
+										html.h2([attribute.class("card-title")], [
+											html.text("SPA Prerendering"),
+										]),
+										html.p([], [html.text("Ship instantly. Rank higher.")]),
+										html.span([attribute.class("badge badge-warning mb-2")], [
+											html.text("Coming Soon"),
+										]),
+									],
+								),
+							],
+						),
 					],
 				),
 			]),
