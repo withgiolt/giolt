@@ -1,7 +1,7 @@
 import gleam/io
 import gleam/result
 import gleam/string
-import lib/fs
+import dev/fs
 import lustre/element
 import lustre/element/html
 import lustre/ssg
@@ -29,7 +29,7 @@ pub fn main() {
     |> result.map_error(fn(e) { string.inspect(e) })
     |> result.try(fn(_) {
       fs.execute(
-        "bunx @tailwindcss/cli -i ./src/assets/app.css -o ./dist/app.css",
+        "bun compile:css",
       )
 
       Ok(Nil)

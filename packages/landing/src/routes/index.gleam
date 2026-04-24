@@ -37,65 +37,86 @@ pub fn view() -> Element(t) {
     ),
     html.img([attribute.src("/wave.svg"), attribute.alt(""), attribute.class("w-full")]),
     html.div([attribute.class("bg-primary")], [
-      html.div([attribute.class("container")], [
-        html.div([attribute.class("grid grid-cols-1 md:grid-cols-2 gap-2")], [
-          html.div([attribute.class("card glass bg-base-200 shadow")], [
-            html.div([attribute.class("card-body")], [
-              html.h2([attribute.class("card-title")], [
-                html.text("Choose your region"),
-              ]),
-              html.p([], [html.text("With regions such as:")]),
-              html.ul([], [
-                html.li([], [html.text("🇩🇪 Nuremberg, Germany")]),
-                html.li([], [html.text("🇫🇮 Helsinki, Finland")]),
-                html.li([], [html.text("🇫🇷 Gravelines, France")]),
-                html.li([], [html.text("🇨🇦 Beauharnois, Canada")]),
-                html.li([], [html.text("🇦🇺 Sydney, Australia")]),
-                html.text(" ...and more coming soon "),
-              ]),
+      html.div([attribute.class("container py-16")], [
+        html.h2([attribute.class("text-4xl font-bold mb-8 text-center")], [
+          html.text("Why Giolt?"),
+        ]),
+        html.div([attribute.class("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4")], [
+          html.div([attribute.class("card bg-base-200 shadow")], [
+            html.div([attribute.class("card-body items-center text-center")], [
+              html.span([attribute.class("text-4xl")], [html.text("🚀")]),
+              html.h2([attribute.class("card-title")], [html.text("Global CDN")]),
+              html.p([], [html.text("Ship fast. Everywhere.")]),
             ]),
           ]),
-          html.div([attribute.class("card glass bg-base-200 shadow")], [
-            html.div([attribute.class("card-body")], [
-              html.h2([attribute.class("card-title")], [
-                html.text("Gleam centered"),
-              ]),
-              html.p([], [
-                html.text(
-                  "The dedicated place for Gleam developers. Built with Gleam, for Gleam.",
-                ),
-              ]),
+          html.div([attribute.class("card bg-base-200 shadow")], [
+            html.div([attribute.class("card-body items-center text-center")], [
+              html.span([attribute.class("text-4xl")], [html.text("💰")]),
+              html.h2([attribute.class("card-title")], [html.text("Predictable Pricing")]),
+              html.p([], [html.text("No surprises. Just honest pricing.")]),
             ]),
           ]),
-          html.div([attribute.class("card glass bg-base-200 shadow")], [
-            html.div([attribute.class("card-body")], [
-              html.h2([attribute.class("card-title")], [
-                html.text("Fair open source"),
-              ]),
-              html.p([], [
-                html.text(
-                  " We believe the future of open source is fair. 
-                We appreciate frequent contributions via
-                discounts. ",
-                ),
-              ]),
+          html.div([attribute.class("card bg-base-200 shadow")], [
+            html.div([attribute.class("card-body items-center text-center")], [
+              html.span([attribute.class("text-4xl")], [html.text("⚡")]),
+              html.h2([attribute.class("card-title")], [html.text("Gleam Centered")]),
+              html.p([], [html.text("Built with Gleam. For Gleam.")]),
             ]),
           ]),
-          html.div([attribute.class("card glass bg-base-200 shadow")], [
-            html.div([attribute.class("card-body")], [
-              html.h2([attribute.class("card-title")], [html.text("European")]),
-              html.p([], [
-                html.text(
-                  "Based in Europe, we understand the importance of data sovereignty and compliance.",
-                ),
-              ]),
+          html.div([attribute.class("card bg-base-200 shadow")], [
+            html.div([attribute.class("card-body items-center text-center")], [
+              html.span([attribute.class("text-4xl")], [html.text("🔥")]),
+              html.h2([attribute.class("card-title")], [html.text("Performance")]),
+              html.p([], [html.text("Lightning fast response times. Do more with less.")]),
             ]),
           ]),
         ]),
-      ])
+        html.div(
+          [
+            attribute.class(
+              "divider before:bg-primary-content after:bg-primary-content text-primary-content my-8",
+            ),
+          ],
+          [html.text("Coming Soon")],
+        ),
+        html.div([attribute.class("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4")], [
+          html.div([attribute.class("card bg-base-200 shadow")], [
+            html.div([attribute.class("card-body items-center text-center")], [
+              html.span([attribute.class("badge badge-warning mb-2")], [html.text("Coming Soon")]),
+              html.span([attribute.class("text-4xl")], [html.text("🌍")]),
+              html.h2([attribute.class("card-title")], [html.text("Regional Hosting")]),
+              html.p([], [html.text("Your users deserve a server around the corner.")]),
+            ]),
+          ]),
+          html.div([attribute.class("card bg-base-200 shadow")], [
+            html.div([attribute.class("card-body items-center text-center")], [
+              html.span([attribute.class("badge badge-warning mb-2")], [html.text("Coming Soon")]),
+              html.span([attribute.class("text-4xl")], [html.text("🔧")]),
+              html.h2([attribute.class("card-title")], [html.text("API Hosting")]),
+              html.p([], [html.text("Run your Gleam backends. Full stop.")]),
+            ]),
+          ]),
+          html.div([attribute.class("card bg-base-200 shadow")], [
+            html.div([attribute.class("card-body items-center text-center")], [
+              html.span([attribute.class("badge badge-warning mb-2")], [html.text("Coming Soon")]),
+              html.span([attribute.class("text-4xl")], [html.text("🔄")]),
+              html.h2([attribute.class("card-title")], [html.text("SSR Lustre")]),
+              html.p([], [html.text("Interactivity meets SEO. The best of both worlds.")]),
+            ]),
+          ]),
+          html.div([attribute.class("card bg-base-200 shadow")], [
+            html.div([attribute.class("card-body items-center text-center")], [
+              html.span([attribute.class("badge badge-warning mb-2")], [html.text("Coming Soon")]),
+              html.span([attribute.class("text-4xl")], [html.text("📄")]),
+              html.h2([attribute.class("card-title")], [html.text("SPA Prerendering")]),
+              html.p([], [html.text("Ship instantly. Rank higher.")]),
+            ]),
+          ]),
+        ]),
+      ]),
     ]),
     html.img([attribute.src("/wave.svg"), attribute.alt(""), attribute.class("w-full rotate-180")]),
-    html.div([attribute.id("faq"), attribute.class("container my-16")], [
+    html.div([attribute.class("container my-16")], [
       html.div(
         [attribute.class("grid grid-cols-1 md:grid-cols-2 gap-6 items-start")],
         [
@@ -207,8 +228,8 @@ pub fn view() -> Element(t) {
                       ),
                       html.div([attribute.class("collapse-content text-sm")], [
                         html.text(
-                          "We know that pricing is an important consideration for our users. We are working on a transparent pricing model that will be announced soon.
-													Using various cost efficient methods, we will strive to offer competitive rates for a very decent price to performance ratio.",
+                          "We strive to offer competitive rates for a very decent price to performance ratio. Our pricing model is transparent and designed
+                          to provide value to our users while keeping surprises out.",
                         ),
                       ]),
                     ],
@@ -297,7 +318,7 @@ pub fn view() -> Element(t) {
         html.text("Pricing")
       ]),
       html.p([], [
-        html.text("Simple and straightforward pricing. No surprises.")
+        html.text("Simple and straightforward pricing. No alarms and no surprises.")
       ]),
       html.div([attribute.class("grid grid-cols-1 md:grid-cols-4 gap-4 mt-2")], [
         html.div([attribute.class("card card-border glass md:col-span-2")], [
@@ -305,7 +326,7 @@ pub fn view() -> Element(t) {
             html.p([attribute.class("text-2xl text-bold")], [html.text("5€/month")]),
             html.p([attribute.class("text-lg")], [html.text("Base plan")]),
             html.ul([attribute.class("list-disc list-inside")], [
-              html.li([], [html.text("Up to 50 static sites")]),
+              html.li([], [html.text("Up to 20 static sites")]),
               html.li([], [html.text("1 service")]),
               html.li([], [html.text("Unlimited requests")]),
               html.li([], [html.text("100GB shared bandwidth")]),

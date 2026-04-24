@@ -2,5 +2,11 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports.biome": "never",
     "source.fixAll.biome": "never"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/*.code-search": true,
+    "**/dist": true,
+    "**/build": true
   }
 }

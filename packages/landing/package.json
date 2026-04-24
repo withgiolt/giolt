@@ -4,9 +4,11 @@
 	"private": true,
 	"scripts": {
 		"dev": "gleam run -m build && bun dev.ts",
-		"build": "gleam run -m build"
+		"build": "gleam run -m build",
+		"compile:css": "bunx @tailwindcss/cli -i ./src/assets/app.css -o ./dist/app.css"
 	},
 	"devDependencies": {
+		"@tailwindcss/cli": "^4.2.4",
 		"@types/bun": "latest",
 		"@types/serve-handler": "^6.1.4"
 	},
