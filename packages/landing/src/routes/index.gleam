@@ -35,62 +35,66 @@ pub fn view() -> Element(t) {
         ]),
       ],
     ),
-    html.div([attribute.class("container")], [
-      html.div([attribute.class("grid grid-cols-1 md:grid-cols-2 gap-2")], [
-        html.div([attribute.class("card glass bg-base-200 shadow")], [
-          html.div([attribute.class("card-body")], [
-            html.h2([attribute.class("card-title")], [
-              html.text("Choose your region"),
+    html.img([attribute.src("/wave.svg"), attribute.alt(""), attribute.class("w-full")]),
+    html.div([attribute.class("bg-primary")], [
+      html.div([attribute.class("container")], [
+        html.div([attribute.class("grid grid-cols-1 md:grid-cols-2 gap-2")], [
+          html.div([attribute.class("card glass bg-base-200 shadow")], [
+            html.div([attribute.class("card-body")], [
+              html.h2([attribute.class("card-title")], [
+                html.text("Choose your region"),
+              ]),
+              html.p([], [html.text("With regions such as:")]),
+              html.ul([], [
+                html.li([], [html.text("🇩🇪 Nuremberg, Germany")]),
+                html.li([], [html.text("🇫🇮 Helsinki, Finland")]),
+                html.li([], [html.text("🇫🇷 Gravelines, France")]),
+                html.li([], [html.text("🇨🇦 Beauharnois, Canada")]),
+                html.li([], [html.text("🇦🇺 Sydney, Australia")]),
+                html.text(" ...and more coming soon "),
+              ]),
             ]),
-            html.p([], [html.text("With regions such as:")]),
-            html.ul([], [
-              html.li([], [html.text("🇩🇪 Nuremberg, Germany")]),
-              html.li([], [html.text("🇫🇮 Helsinki, Finland")]),
-              html.li([], [html.text("🇫🇷 Gravelines, France")]),
-              html.li([], [html.text("🇨🇦 Beauharnois, Canada")]),
-              html.li([], [html.text("🇦🇺 Sydney, Australia")]),
-              html.text(" ...and more coming soon "),
+          ]),
+          html.div([attribute.class("card glass bg-base-200 shadow")], [
+            html.div([attribute.class("card-body")], [
+              html.h2([attribute.class("card-title")], [
+                html.text("Gleam centered"),
+              ]),
+              html.p([], [
+                html.text(
+                  "The dedicated place for Gleam developers. Built with Gleam, for Gleam.",
+                ),
+              ]),
+            ]),
+          ]),
+          html.div([attribute.class("card glass bg-base-200 shadow")], [
+            html.div([attribute.class("card-body")], [
+              html.h2([attribute.class("card-title")], [
+                html.text("Fair open source"),
+              ]),
+              html.p([], [
+                html.text(
+                  " We believe the future of open source is fair. 
+                We appreciate frequent contributions via
+                discounts. ",
+                ),
+              ]),
+            ]),
+          ]),
+          html.div([attribute.class("card glass bg-base-200 shadow")], [
+            html.div([attribute.class("card-body")], [
+              html.h2([attribute.class("card-title")], [html.text("European")]),
+              html.p([], [
+                html.text(
+                  "Based in Europe, we understand the importance of data sovereignty and compliance.",
+                ),
+              ]),
             ]),
           ]),
         ]),
-        html.div([attribute.class("card glass bg-base-200 shadow")], [
-          html.div([attribute.class("card-body")], [
-            html.h2([attribute.class("card-title")], [
-              html.text("Gleam centered"),
-            ]),
-            html.p([], [
-              html.text(
-                "The dedicated place for Gleam developers. Built with Gleam, for Gleam.",
-              ),
-            ]),
-          ]),
-        ]),
-        html.div([attribute.class("card glass bg-base-200 shadow")], [
-          html.div([attribute.class("card-body")], [
-            html.h2([attribute.class("card-title")], [
-              html.text("Fair open source"),
-            ]),
-            html.p([], [
-              html.text(
-                " We believe the future of open source is fair. 
-							We appreciate frequent contributions via
-							discounts. ",
-              ),
-            ]),
-          ]),
-        ]),
-        html.div([attribute.class("card glass bg-base-200 shadow")], [
-          html.div([attribute.class("card-body")], [
-            html.h2([attribute.class("card-title")], [html.text("European")]),
-            html.p([], [
-              html.text(
-                "Based in Europe, we understand the importance of data sovereignty and compliance.",
-              ),
-            ]),
-          ]),
-        ]),
-      ]),
+      ])
     ]),
+    html.img([attribute.src("/wave.svg"), attribute.alt(""), attribute.class("w-full rotate-180")]),
     html.div([attribute.id("faq"), attribute.class("container my-16")], [
       html.div(
         [attribute.class("grid grid-cols-1 md:grid-cols-2 gap-6 items-start")],
@@ -288,5 +292,41 @@ pub fn view() -> Element(t) {
         ],
       ),
     ]),
+    html.div([attribute.class("container")], [
+      html.h2([attribute.class("text-4xl font-bold")], [
+        html.text("Pricing")
+      ]),
+      html.p([], [
+        html.text("Simple and straightforward pricing. No surprises.")
+      ]),
+      html.div([attribute.class("grid grid-cols-1 md:grid-cols-4 gap-4 mt-2")], [
+        html.div([attribute.class("card card-border glass md:col-span-2")], [
+          html.div([attribute.class("card-body")], [
+            html.p([attribute.class("text-2xl text-bold")], [html.text("5€/month")]),
+            html.p([attribute.class("text-lg")], [html.text("Base plan")]),
+            html.ul([attribute.class("list-disc list-inside")], [
+              html.li([], [html.text("Up to 50 static sites")]),
+              html.li([], [html.text("1 service")]),
+              html.li([], [html.text("Unlimited requests")]),
+              html.li([], [html.text("100GB shared bandwidth")]),
+            ])
+          ]),
+        ]),
+        html.div([attribute.class("card card-border glass")], [
+          html.div([attribute.class("card-body")], [
+            html.p([attribute.class("text-2xl text-bold")], [html.text("+2€/month")]),
+            html.p([attribute.class("text-lg")], [html.text("Bandwidth Addon")]),
+            html.p([], [html.text("Adds an additional 100GB shared bandwidth")])
+          ])
+        ]),
+        html.div([attribute.class("card card-border glass")], [
+          html.div([attribute.class("card-body")], [
+            html.p([attribute.class("text-2xl text-bold")], [html.text("+3€/month")]),
+            html.p([attribute.class("text-lg")], [html.text("Service Addon")]),
+            html.p([], [html.text("Adds an additional 1 service")])
+          ])
+        ])
+      ])
+    ])
   ])
 }

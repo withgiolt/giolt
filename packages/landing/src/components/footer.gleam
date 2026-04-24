@@ -117,7 +117,7 @@ pub fn view() -> Element(t) {
             attribute.href("https://gleam.run"),
             attribute.target("_blank"),
             attribute.class(
-              "ml-auto mt-2 badge badge-soft border-pink-300 shadow-pink-300/25 shadow-lg",
+              "ml-auto mt-2 badge badge-outline border-pink-300 shadow-pink-300/25 shadow-lg",
             ),
           ],
           [
