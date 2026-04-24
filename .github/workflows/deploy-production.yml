@@ -109,3 +109,5 @@ jobs:
         env:
           STORAGE_ZONE: ${{ vars.STORAGE_ZONE }}
           STORAGE_KEY: ${{ secrets.STORAGE_KEY }}
+          LANDING_PULLZONE_ID: ${{ vars.LANDING_PULLZONE_ID }}
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
