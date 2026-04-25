@@ -14,15 +14,15 @@ pub fn main() {
   let build =
     ssg.new("./dist")
     |> ssg.add_static_asset(
-      "/index.html",
+      "/index/index.html",
       element.to_document_string(index.view()),
     )
     |> ssg.add_static_asset(
-      "/updates.html",
+      "/updates/index.html",
       element.to_document_string(updates.view()),
     )
     |> ssg.add_static_asset(
-      "/code-of-conduct.html",
+      "/code-of-conduct/index.html",
       element.to_document_string(code_of_conduct.view()),
     )
     |> ssg.add_static_route(
