@@ -1,6 +1,10 @@
 {
   "folders": [
     {
+      "name": "Dash",
+      "path": "../packages/dash"
+    },
+    {
       "name": "Landing",
       "path": "../packages/landing"
     },
