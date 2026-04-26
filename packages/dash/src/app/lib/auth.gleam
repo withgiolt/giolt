@@ -6,5 +6,5 @@ pub type User {
 	User(id: String, email: String)
 }
 
-@external(javascript, "./auth_ffi.mjs", "validate_session")
+@external(javascript, "./auth.ffi.mjs", "validate_session")
 pub fn validate_session() -> Promise(User)

@@ -5,10 +5,10 @@ import glen
 
 pub type BetterAuth
 
-@external(javascript, "./auth_ffi.ts", "get_auth")
+@external(javascript, "./auth.ffi.ts", "get_auth")
 pub fn get_auth() -> BetterAuth
 
-@external(javascript, "./auth_ffi.ts", "handle_requests")
+@external(javascript, "./auth.ffi.ts", "handle_requests")
 pub fn handle_requests(
 	auth: BetterAuth,
 	request: Request(glen.RequestBody),

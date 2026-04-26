@@ -3,7 +3,7 @@ import type { Request$ } from "@gleam/gleam_http/gleam/http/request.mjs";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { jwt, openAPI } from "better-auth/plugins";
-import { db } from "./db_ffi";
+import { db } from "./db.ffi";
 
 // Check GitHub secrets
 if (!Bun.env.GH_CLIENT_ID || !Bun.env.GH_CLIENT_SECRET) {
