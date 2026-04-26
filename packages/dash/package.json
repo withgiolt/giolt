@@ -9,7 +9,8 @@
 	},
 	"private": true,
 	"scripts": {
-		"dev": "gleam run -m lustre/dev start --port=3000"
+		"dev": "gleam run -m lustre/dev start --port=3000",
+		"build": "gleam run -m lustre/dev build"
 	},
 	"type": "module"
 }

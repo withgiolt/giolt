@@ -1,4 +1,4 @@
-import lustre/element
+import app/views/auth/login
 import app/lib/auth
 import app/model.{type Model}
 import lustre/element/html
@@ -14,6 +14,6 @@ pub fn view(model: Model) {
 				auth.NotLoaded -> "Loading"
 			}
 		),
-		element.element("hanko-profile", [], [])
+		login.view([])
 	])
 }

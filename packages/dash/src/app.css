@@ -105,3 +105,16 @@ a {
 ::selection {
 	@apply bg-primary text-primary-content;
 }
+
+#app {
+	@apply h-svh;
+}
+
+/* Hanko Elements */
+hanko-auth,
+hanko-profile {
+	--background-color: var(--color-base-100);
+	--color: var(--color-base-content);
+	--border-radius: var(--border-radius);
+
+}
