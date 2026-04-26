@@ -5,6 +5,6 @@ export const db = drizzle({
 	schema,
 	connection: {
 		// I don't even want to hear it...
-		url: `file:${new URL("../../../../../../../../local.db", import.meta.url).pathname}`,
+		url: `file:${new URL("../../../../../../../local.db", import.meta.url).pathname}`,
 	},
 });
