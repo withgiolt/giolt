@@ -2,7 +2,7 @@
 	"name": "giolt",
 	"private": true,
 	"scripts": {
-		"format": "bun run landing:format && bun run api:format && bun run db:format",
+		"format": "bun landing:format && bun api:format && bun db:format && bun dash:format",
 		"landing:dev": "bun run -F landing dev",
 		"landing:build": "bun run -F landing build",
 		"landing:format": "bunx @biomejs/biome format --write packages/landing && cd packages/landing && gleam format && cd ../.. && bun run scripts/gleam_format.ts",

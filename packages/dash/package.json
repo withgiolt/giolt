@@ -1,15 +1,15 @@
 {
-  "name": "dash",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "dev": "gleam run -m lustre/dev start",
-    "build": "gleam run -m lustre/dev build --minify --outdir=./dist"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  }
+	"name": "dash",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"dev": "gleam run -m lustre/dev start",
+		"build": "gleam run -m lustre/dev build --minify --outdir=./dist"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	}
 }
