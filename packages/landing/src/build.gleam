@@ -1,4 +1,4 @@
-import dev/fs
+import app/dev/fs
 import gleam/io
 import gleam/result
 import gleam/string
@@ -6,9 +6,9 @@ import lustre/element
 import lustre/element/html
 import lustre/ssg
 
-import routes/code_of_conduct
-import routes/index
-import routes/updates
+import app/routes/code_of_conduct
+import app/routes/index
+import app/routes/updates
 
 pub fn main() {
   let build =

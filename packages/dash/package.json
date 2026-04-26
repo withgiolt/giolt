@@ -1,0 +1,15 @@
+{
+	"name": "dash",
+	"dependencies": {
+		"@teamhanko/hanko-elements": "^2.6.0",
+		"daisyui": "^5.5.19"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"private": true,
+	"scripts": {
+		"dev": "gleam run -m lustre/dev start --port=3000"
+	},
+	"type": "module"
+}
