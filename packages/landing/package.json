@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "gleam run -m build && bun dev.ts",
 		"build": "gleam run -m build",
-		"compile:css": "bunx @tailwindcss/cli -i ./src/assets/app.css -o ./dist/app.css"
+		"compile:css": "bunx @tailwindcss/cli -i ./src/app.css -o ./dist/app.css"
 	},
 	"devDependencies": {
 		"@tailwindcss/cli": "^4.2.4",
