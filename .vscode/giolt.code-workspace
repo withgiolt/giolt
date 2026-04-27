@@ -13,10 +13,6 @@
       "path": "../packages/api"
     },
     {
-      "name": "Utils",
-      "path": "../packages/utils"
-    },
-    {
       "name": "Root",
       "path": ".."
     }

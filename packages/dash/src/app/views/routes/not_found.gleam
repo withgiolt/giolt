@@ -1,5 +1,4 @@
 import app/model.{type Model}
-import app/views/components/auth/login
 import lustre/attribute
 import lustre/element/html
 

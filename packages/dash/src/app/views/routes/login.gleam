@@ -14,8 +14,13 @@ pub fn view(_model: Model) {
 		[
 			html.div([], [
 				html.img([
-					attribute.class("object-cover w-full h-full"),
-					attribute.src("/login-shapes.jpg"),
+					attribute.class("hidden dark:inline object-cover object-right w-full h-full"),
+					attribute.src("/layered-steps-dark.svg"),
+					attribute.loading("eager")
+				]),
+				html.img([
+					attribute.class("inline dark:hidden object-cover object-right w-full h-full"),
+					attribute.src("/layered-steps-light.svg"),
 					attribute.loading("eager")
 				]),
 			]),
