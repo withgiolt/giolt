@@ -9,7 +9,6 @@ const HANKO_API = "https://auth.giolt.com";
 const hanko = new Hanko(HANKO_API);
 await register(HANKO_API);
 
-
 export function create_auth_listener(fun: (arg0: User$) => void) {
 	hanko.onAfterStateChange((det) => {
 		if (det.state.name === "success") {
@@ -32,11 +31,14 @@ export function create_auth_listener(fun: (arg0: User$) => void) {
 }
 
 export async function validate_session() {
-	const session = await hanko.validateSession()
-		.catch((err) => {
-			console.error(err);
-			return { is_valid: false, claims: { email: { address: "" } }, user_id: "" }
-		});
+	const session = await hanko.validateSession().catch((err) => {
+		console.error(err);
+		return {
+			is_valid: false,
+			claims: { email: { address: "" } },
+			user_id: "",
+		};
+	});
 
 	if (session.is_valid && session.claims?.email && session.user_id) {
 		return User$User(session.user_id, session.claims.email.address);
@@ -45,7 +47,6 @@ export async function validate_session() {
 	}
 }
 
-
 export function logout() {
-	hanko.logout()
+	hanko.logout();
 }

@@ -60,12 +60,12 @@ fn update(model: Model, msg: Message) -> #(Model, Effect(Message)) {
 		OnUserChanged(user) -> model.Model(..model, user:) |> route_guard([])
 		OnRouteChange(route) -> model.Model(..model, route:) |> route_guard([])
 		UserClickLogout -> {
-			model 
+			model
 			|> route_guard([
 				effect.from(fn(dispatch) {
 					auth.logout()
 					dispatch(OnUserChanged(auth.NoUser))
-				})
+				}),
 			])
 		}
 	}

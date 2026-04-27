@@ -5,7 +5,10 @@ import gleam/option
 import lustre/effect.{type Effect}
 import modem
 
-pub fn route_guard(model: Model, effects: List(Effect(msg))) -> #(Model, Effect(msg)) {
+pub fn route_guard(
+	model: Model,
+	effects: List(Effect(msg)),
+) -> #(Model, Effect(msg)) {
 	case model.user {
 		auth.User(..) -> {
 			case model.route {
@@ -21,7 +24,10 @@ pub fn route_guard(model: Model, effects: List(Effect(msg))) -> #(Model, Effect(
 				routing.Login -> #(model, effect.none())
 				_ -> #(
 					model.Model(..model, route: routing.Login),
-					effect.batch([modem.replace("/login", option.None, option.None), ..effects]),
+					effect.batch([
+						modem.replace("/login", option.None, option.None),
+						..effects
+					]),
 				)
 			}
 		_ -> #(model, effect.batch([effect.none(), ..effects]))

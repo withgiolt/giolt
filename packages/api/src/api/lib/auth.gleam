@@ -1,18 +1,57 @@
-import gleam/http/request.{type Request}
-import gleam/http/response.{type Response}
+import api/lib/utils
+import envie
+import gleam/dynamic/decode
+import gleam/fetch
+import gleam/http
+import gleam/http/request
 import gleam/javascript/promise.{type Promise}
-import glen
+import gleam/json
+import gleam/result
 
-pub type BetterAuth
+pub type SessionStatus {
+	SessionStatus(is_valid: Bool, claims: SessionStatusClaims)
+}
 
-@external(javascript, "./auth.ffi.ts", "get_auth")
-pub fn get_auth() -> BetterAuth
+pub type SessionStatusClaims {
+	SessionStatusClaims(subject: String)
+}
 
-@external(javascript, "./auth.ffi.ts", "handle_requests")
-pub fn handle_requests(
-	auth: BetterAuth,
-	request: Request(glen.RequestBody),
-) -> Promise(Response(glen.ResponseBody))
+fn session_status_decoder() -> decode.Decoder(SessionStatus) {
+	use is_valid <- decode.field("is_valid", decode.bool)
+	use claims <- decode.field("claims", {
+		use subject <- decode.field("subject", decode.string)
+		decode.success(SessionStatusClaims(subject:))
+	})
+	decode.success(SessionStatus(is_valid:, claims:))
+}
 
-@external(javascript, "./external/auth.ts", "generate_openapi_schema")
-pub fn generate_openapi_schema(auth: BetterAuth) -> Promise(String)
+pub fn validate_session(
+	session_token: String,
+) -> Promise(Result(SessionStatus, String)) {
+	let api_url = envie.get_string("API_URL", "")
+
+	let req_body =
+		json.object([
+			#("session_token", json.string(session_token)),
+		])
+
+	let assert Ok(req) = request.to(api_url <> "/sessions/validate")
+
+	let req =
+		req
+		|> request.set_method(http.Post)
+		|> request.set_header("Content-Type", "application/json")
+		|> request.set_body(json.to_string(req_body))
+
+	use res <- promise.try_await(
+		fetch.send(req) |> utils.promise_error("Failed to fetch"),
+	)
+	use res <- promise.try_await(
+		fetch.read_json_body(res) |> utils.promise_error("Failed to read JSON body"),
+	)
+	let session_status =
+		decode.run(res.body, session_status_decoder())
+		|> result.replace_error("Failed to decode")
+
+	promise.resolve(session_status)
+}

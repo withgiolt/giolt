@@ -1,19 +1,16 @@
 {
 	"name": "api",
-	"type": "module",
+	"module": "index.ts",
 	"private": true,
 	"scripts": {
 		"dev": "gleam build && DEV=1 bun run dev.ts",
 		"export": "gleam build && bun build --compile --minify --bytecode index.ts --outfile build/giolt-api-bin"
 	},
+	"type": "module",
 	"devDependencies": {
 		"@types/bun": "latest"
 	},
 	"peerDependencies": {
 		"typescript": "^5"
-	},
-	"dependencies": {
-		"better-auth": "^1.6.5"
-	},
-	"module": "index.ts"
+	}
 }

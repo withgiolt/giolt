@@ -51,7 +51,10 @@ pub fn view(
 								html.a(
 									[
 										routing.href(item.2),
-										attribute.attribute("onclick", "document.getElementById(\"main-drawer\").checked = false"),
+										attribute.attribute(
+											"onclick",
+											"document.getElementById(\"main-drawer\").checked = false",
+										),
 										attribute.classes([#("menu-active", model.route == item.2)]),
 									],
 									[
