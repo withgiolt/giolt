@@ -6,9 +6,9 @@ import lustre/element
 import lustre/element/html
 import lustre/ssg
 
-import app/routes/code_of_conduct
-import app/routes/index
-import app/routes/updates
+import app/views/routes/code_of_conduct
+import app/views/routes/index
+import app/views/routes/updates
 
 pub fn main() {
   let build =

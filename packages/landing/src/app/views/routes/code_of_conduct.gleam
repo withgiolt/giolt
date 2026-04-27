@@ -1,4 +1,4 @@
-import app/layouts/default_layout
+import app/views/layouts/default_layout
 import lustre/attribute
 import lustre/element.{type Element}
 import lustre/element/html

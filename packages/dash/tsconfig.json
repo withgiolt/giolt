@@ -24,7 +24,7 @@
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
 		"noPropertyAccessFromIndexSignature": false,
-		
+
 		"paths": {
 			"@gleam/*": ["./build/dev/javascript/*"]
 		}

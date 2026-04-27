@@ -1,7 +1,7 @@
+import api/lib/auth
 import gleam/javascript/promise.{type Promise}
 import glen.{type Request, type Response}
 import glen/status
-import api/lib/auth
 
 import api/routes/auth_reference
 import api/routes/health
