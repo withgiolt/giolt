@@ -14,7 +14,7 @@ pub fn main() {
   let build =
     ssg.new("./dist")
     |> ssg.add_static_asset(
-      "/index/index.html",
+      "/index.html",
       element.to_document_string(index.view()),
     )
     |> ssg.add_static_asset(
@@ -29,7 +29,7 @@ pub fn main() {
       "/404",
       html.html([], [html.script([], "window.location.replace('/');")]),
     )
-    |> ssg.add_static_dir("./static")
+    |> ssg.add_static_dir("./assets")
     |> ssg.build
     |> result.map_error(fn(e) { string.inspect(e) })
     |> result.try(fn(_) {

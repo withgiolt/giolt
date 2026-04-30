@@ -7,11 +7,11 @@ import mork
 import simplifile
 
 pub fn view() -> Element(t) {
-	let assert Ok(files_paths) = simplifile.read_directory("./src/content")
+	let assert Ok(files_paths) = simplifile.read_directory("./src/app/content")
 
 	let files =
 		list.map(files_paths, fn(path) {
-			let assert Ok(file) = simplifile.read("./src/content/" <> path)
+			let assert Ok(file) = simplifile.read("./src/app/content/" <> path)
 			file
 		})
 

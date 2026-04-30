@@ -481,72 +481,28 @@ pub fn view() -> Element(t) {
 			),
 		]),
 		html.div([attribute.class("container py-16")], [
-			html.div([attribute.class("bg-primary rounded-3xl p-8 md:p-12")], [
+			html.div([attribute.class("bg-primary rounded-3xl p-8 md:p-12 text-primary-content")], [
 				html.h2(
 					[
 						attribute.class(
-							"text-4xl font-bold text-center mb-2 text-primary-content",
+							"text-4xl font-bold mb-2",
 						),
 					],
 					[html.text("Pricing")],
 				),
-				html.p([attribute.class("text-center text-primary-content/70 mb-12")], [
+				html.p([attribute.class("text-primary-content/70 mb-4")], [
 					html.text(
 						"Simple and straightforward pricing. No alarms and no surprises.",
 					),
 				]),
-				html.div([attribute.class("grid grid-cols-1 md:grid-cols-4 gap-4")], [
-					html.div(
-						[
-							attribute.class(
-								"card md:col-span-2 border-2! border-primary-content! glass text-primary-content shadow-xl",
-							),
-						],
-						[
-							html.div([attribute.class("card-body")], [
-								html.p([attribute.class("text-2xl text-bold")], [
-									html.text("5€/month"),
-								]),
-								html.p([attribute.class("text-lg")], [html.text("Base plan")]),
-								html.ul([attribute.class("list-inside")], [
-									html.li([], [html.text("✓ Up to 20 static sites")]),
-									html.li([], [html.text("✓ 1 service")]),
-									html.li([], [html.text("✓ Unlimited requests")]),
-									html.li([], [html.text("✓ 100GB shared bandwidth")]),
-								]),
-							]),
-						],
-					),
-					html.div(
-						[attribute.class("card glass text-primary-content shadow-lg")],
-						[
-							html.div([attribute.class("card-body")], [
-								html.p([attribute.class("text-2xl text-bold")], [
-									html.text("+2€/month"),
-								]),
-								html.p([attribute.class("text-lg")], [
-									html.text("Bandwidth Addon"),
-								]),
-								html.p([], [
-									html.text("✓ Adds an additional 100GB shared bandwidth"),
-								]),
-							]),
-						],
-					),
-					html.div(
-						[attribute.class("card glass text-primary-content shadow-lg")],
-						[
-							html.div([attribute.class("card-body")], [
-								html.p([attribute.class("text-2xl text-bold")], [
-									html.text("+3€/month"),
-								]),
-								html.p([attribute.class("text-lg")], [
-									html.text("Service Addon"),
-								]),
-								html.p([], [html.text("✓ Adds an additional 1 service")]),
-							]),
-						],
-					),
+				html.p([attribute.class("text-4xl text-bold")], [
+					html.text("10€/month"),
+				]),
+				html.ul([attribute.class("list-inside")], [
+					html.li([], [html.text("✓ Up to 20 static sites")]),
+					html.li([], [html.text("✓ 1 service (+3€/service)")]),
+					html.li([], [html.text("✓ Unlimited requests")]),
+					html.li([], [html.text("✓ 50GB shared bandwidth (+0.07€/GB)")]),
 				]),
 				html.div([attribute.class("flex justify-center mt-8")], [
 					html.button(
