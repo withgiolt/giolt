@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "gleam build && DEV=1 bun run dev.ts",
-		"export": "gleam build && bun build --compile --minify --bytecode index.ts --outfile build/giolt-api-bin"
+		"export": "gleam build && bun build --compile --minify --bytecode index.ts --outfile build/giolt-api-bin",
+		"test": "gleam test"
 	},
 	"type": "module",
 	"devDependencies": {
