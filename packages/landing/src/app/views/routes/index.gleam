@@ -481,40 +481,45 @@ pub fn view() -> Element(t) {
 			),
 		]),
 		html.div([attribute.class("container py-16")], [
-			html.div([attribute.class("bg-primary rounded-3xl p-8 md:p-12 text-primary-content")], [
-				html.h2(
-					[
-						attribute.class(
-							"text-4xl font-bold mb-2",
-						),
-					],
-					[html.text("Pricing")],
-				),
-				html.p([attribute.class("text-primary-content/70 mb-4")], [
-					html.text(
-						"Simple and straightforward pricing. No alarms and no surprises.",
+			html.div(
+				[
+					attribute.class(
+						"bg-primary rounded-3xl p-8 md:p-12 text-primary-content",
 					),
-				]),
-				html.p([attribute.class("text-4xl text-bold")], [
-					html.text("10€/month"),
-				]),
-				html.ul([attribute.class("list-inside")], [
-					html.li([], [html.text("✓ Up to 20 static sites")]),
-					html.li([], [html.text("✓ 1 service (+3€/service)")]),
-					html.li([], [html.text("✓ Unlimited requests")]),
-					html.li([], [html.text("✓ 50GB shared bandwidth (+0.07€/GB)")]),
-				]),
-				html.div([attribute.class("flex justify-center mt-8")], [
-					html.button(
+				],
+				[
+					html.h2(
 						[
-							attribute.class("btn btn-outline"),
-							attribute.disabled(True),
-							attribute.type_("button"),
+							attribute.class("text-4xl font-bold mb-2"),
 						],
-						[html.text(" Coming Soon ")],
+						[html.text("Pricing")],
 					),
-				]),
-			]),
+					html.p([attribute.class("text-primary-content/70 mb-4")], [
+						html.text(
+							"Simple and straightforward pricing. No alarms and no surprises.",
+						),
+					]),
+					html.p([attribute.class("text-4xl text-bold")], [
+						html.text("10€/month"),
+					]),
+					html.ul([attribute.class("list-inside")], [
+						html.li([], [html.text("✓ Up to 20 static sites")]),
+						html.li([], [html.text("✓ 1 service (+3€/service)")]),
+						html.li([], [html.text("✓ Unlimited requests")]),
+						html.li([], [html.text("✓ 50GB shared bandwidth (+0.07€/GB)")]),
+					]),
+					html.div([attribute.class("flex justify-center mt-8")], [
+						html.button(
+							[
+								attribute.class("btn btn-outline"),
+								attribute.disabled(True),
+								attribute.type_("button"),
+							],
+							[html.text(" Coming Soon ")],
+						),
+					]),
+				],
+			),
 		]),
 	])
 }

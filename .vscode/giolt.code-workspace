@@ -13,6 +13,10 @@
       "path": "../packages/api"
     },
     {
+      "name": "CLI",
+      "path": "../packages/cli"
+    },
+    {
       "name": "Root",
       "path": ".."
     }
