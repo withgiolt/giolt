@@ -25,11 +25,11 @@ pub type ProjectType {
 }
 
 fn project_decoder() -> decode.Decoder(Project) {
-	use id <- decode.field("id", decode.string)
-	use slug <- decode.field("slug", decode.string)
-	use pull_zone_id <- decode.field("pull_zone_id", decode.string)
-	use owner_id <- decode.field("owner_id", decode.string)
-	use type_ <- decode.field("type", {
+	use id <- decode.optional_field("id", "0", decode.string)
+	use slug <- decode.optional_field("slug", "0", decode.string)
+	use pull_zone_id <- decode.optional_field("pull_zone_id", "0", decode.string)
+	use owner_id <- decode.optional_field("owner_id", "0", decode.string)
+	use type_ <- decode.optional_field("type", Static, {
 		use variant <- decode.then(decode.string)
 		case variant {
 			"static" -> decode.success(Static)
@@ -37,7 +37,7 @@ fn project_decoder() -> decode.Decoder(Project) {
 			_ -> decode.failure(Static, "ProjectType")
 		}
 	})
-	use server_id <- decode.field("server_id", decode.string)
+	use server_id <- decode.optional_field("server_id", "0", decode.string)
 	decode.success(Project(
 		id:,
 		slug:,
@@ -53,14 +53,19 @@ pub type Server {
 }
 
 fn server_decoder() -> decode.Decoder(Server) {
-	use id <- decode.field("id", decode.int)
-	use region <- decode.field("region", decode.string)
-	use capacity <- decode.field("capacity", decode.int)
+	use id <- decode.optional_field("id", 0, decode.int)
+	use region <- decode.optional_field("region", "0", decode.string)
+	use capacity <- decode.optional_field("capacity", 0, decode.int)
 	decode.success(Server(id:, region:, capacity:))
 }
 
 pub type User {
-	User(id: String, billing_status: UserBillingStatus, billing_date: Int)
+	User(
+		id: String, 
+		billing_status: UserBillingStatus, 
+		billing_date: Int,
+		cli_token: String
+	)
 }
 
 pub type UserBillingStatus {
@@ -69,8 +74,8 @@ pub type UserBillingStatus {
 }
 
 fn user_decoder() -> decode.Decoder(User) {
-	use id <- decode.field("id", decode.string)
-	use billing_status <- decode.field("billing_status", {
+	use id <- decode.optional_field("id", "0", decode.string)
+	use billing_status <- decode.optional_field("billing_status", Inactive, {
 		use variant <- decode.then(decode.string)
 		case variant {
 			"active" -> decode.success(Active)
@@ -78,8 +83,9 @@ fn user_decoder() -> decode.Decoder(User) {
 			_ -> decode.failure(Active, "UserBillingStatus")
 		}
 	})
-	use billing_date <- decode.field("billing_date", decode.int)
-	decode.success(User(id:, billing_status:, billing_date:))
+	use cli_token <- decode.optional_field("cli_token", "0", decode.string)
+	use billing_date <- decode.optional_field("billing_date", 0, decode.int)
+	decode.success(User(id:, billing_status:, billing_date:, cli_token:))
 }
 
 @external(javascript, "./db.ffi.ts", "get_db")

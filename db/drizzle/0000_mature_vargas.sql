@@ -22,7 +22,9 @@ CREATE UNIQUE INDEX `servers_id_unique` ON `servers` (`id`);--> statement-breakp
 CREATE TABLE `users` (
 	`id` text PRIMARY KEY NOT NULL,
 	`billing_status` text DEFAULT 'inactive' NOT NULL,
+	`cli_token` text DEFAULT (hex(randomblob(24))) NOT NULL,
 	`billing_date` integer
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `users_id_unique` ON `users` (`id`);
+CREATE UNIQUE INDEX `users_id_unique` ON `users` (`id`);--> statement-breakpoint
+CREATE UNIQUE INDEX `users_cli_token_unique` ON `users` (`cli_token`);

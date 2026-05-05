@@ -13,5 +13,8 @@
 	},
 	"peerDependencies": {
 		"typescript": "^5"
+	},
+	"dependencies": {
+		"kill-port-bun": "^0.0.3"
 	}
 }

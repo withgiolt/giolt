@@ -1,4 +1,5 @@
 import { spawn, exec } from "node:child_process";
+import { kill } from "kill-port-bun";
 import { watch } from "node:fs";
 
 const createBunProcess = () => {
@@ -17,20 +18,21 @@ const createBunProcess = () => {
 	return process;
 };
 
-let bunProcess = createBunProcess();
+createBunProcess();
 
 if (Bun.env.DEV) {
 	watch(
 		new URL("./src", `file://${import.meta.path}`),
 		{ recursive: true },
 		async () => {
-			exec("gleam build", (_, stdout, stderr) => {
+			exec("gleam build", async (_, stdout, stderr) => {
 				console.warn("Change detected! Reloading");
 				if (stdout) console.log(stdout);
 				if (stderr) console.error(stderr);
-
-				bunProcess.kill();
-				bunProcess = createBunProcess();
+				
+				// TODO: Use normal kill after oven-sh/bun#20319 is fixed
+				kill(3001)
+				createBunProcess();
 			});
 		},
 	);

@@ -15,6 +15,9 @@
     },
     "packages/api": {
       "name": "api",
+      "dependencies": {
+        "kill-port-bun": "^0.0.3",
+      },
       "devDependencies": {
         "@types/bun": "latest",
       },
@@ -319,6 +322,8 @@
     "jiti": ["jiti@2.6.1", "", { "bin": { "jiti": "lib/jiti-cli.mjs" } }, "sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ=="],
 
     "js-base64": ["js-base64@3.7.8", "", {}, "sha512-hNngCeKxIUQiEUN3GPJOkz4wF/YvdUdbNL9hsBcMQTkKzboD7T/q3OYOuuPZLUE6dBxSGpwhk5mwuDud7JVAow=="],
+
+    "kill-port-bun": ["kill-port-bun@0.0.3", "", { "peerDependencies": { "typescript": "^5.0.0" }, "bin": { "kp": "dist/cli.js" } }, "sha512-yzXbA8O34l3SM+WCtR3sqd6RrHON2lS647p0ZgTzZRFFFnE1dBSa+MeSBNj/fj6XgTRLrEpaWXi/wpPuViXA/Q=="],
 
     "kysely": ["kysely@0.28.16", "", {}, "sha512-3i5pmOiZvMDj00qhrIVbH0AnioVTx22DMP7Vn5At4yJO46iy+FM8Y/g61ltenLVSo3fiO8h8Q3QOFgf/gQ72ww=="],
 

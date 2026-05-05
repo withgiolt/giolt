@@ -8,7 +8,6 @@ import {
 	type Result,
 } from "@gleam/prelude.mjs";
 import { to_list } from "@gleam/gleam_javascript/gleam/javascript/array.mjs";
-import type { Dynamic$ } from "@gleam/gleam_stdlib/gleam/dynamic.mjs";
 
 export function get_db() {
 	return drizzle({
@@ -38,10 +37,10 @@ export async function get_db_test() {
 	return db;
 }
 
-export async function execute(
+export async function execute<T>(
 	db: ReturnType<typeof get_db>,
 	statement: string,
-): Promise<Result<List<Dynamic$>, string>> {
+): Promise<Result<List<T>, string>> {
 	try {
 		const res = (await db.run(statement).execute()).rows;
 		return Result$Ok(to_list(res));

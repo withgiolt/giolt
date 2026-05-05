@@ -1,3 +1,5 @@
+import gleam/list
+import glen
 import api/lib/utils
 import envie
 import gleam/dynamic/decode
@@ -25,10 +27,23 @@ fn session_status_decoder() -> decode.Decoder(SessionStatus) {
 	decode.success(SessionStatus(is_valid:, claims:))
 }
 
+pub fn get_session_token(req: glen.Request) -> Result(String, String) {
+	let res = list.find(req.headers, fn (header) {
+		header.0 == "authorization"
+	}) |> result.replace_error("No Authorization header found")
+
+	use res <- result.try(res)
+
+	case res.1 {
+		"Bearer " <> token -> Ok(token)
+		_ -> Error("Wrong formatted Authorization header")
+	}
+}
+
 pub fn validate_session(
 	session_token: String,
 ) -> Promise(Result(SessionStatus, String)) {
-	let api_url = envie.get_string("API_URL", "")
+	let api_url = envie.get_string("AUTH_URL", "")
 
 	let req_body =
 		json.object([

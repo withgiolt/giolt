@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "33b7e7a2-b452-4329-8858-47267840a032",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "42fa7215-dc0a-40f3-b80a-f8efd7e4613b",
+  "prevId": "22fefbbd-21aa-4dbd-8c62-8a1798b56412",
   "tables": {
     "projects": {
       "name": "projects",
@@ -176,8 +176,9 @@
           "name": "billing_date",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
         }
       },
       "indexes": {
