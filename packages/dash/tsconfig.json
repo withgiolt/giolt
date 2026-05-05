@@ -26,6 +26,7 @@
 		"noPropertyAccessFromIndexSignature": false,
 
 		"paths": {
+			"@/*": ["./src/*"],
 			"@gleam/*": ["./build/dev/javascript/*"]
 		}
 	}

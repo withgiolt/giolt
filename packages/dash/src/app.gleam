@@ -1,8 +1,10 @@
+import app/lib/env
 import app/lib/auth
 import gleam/javascript/promise
 import lustre
 import lustre/effect.{type Effect}
 import modem
+import rsvp
 
 import app/model.{type Model}
 
@@ -22,6 +24,8 @@ pub fn main() {
 type Message {
 	OnRouteChange(routing.Route)
 	OnUserChanged(auth.User)
+	UserRequestedCliToken
+	OnApiReturnedCliToken(Result(String, rsvp.Error(String)))
 	UserClickLogout
 }
 
@@ -31,7 +35,7 @@ fn init(_) -> promise.Promise(#(Model, Effect(Message))) {
 		Error(_) -> routing.Index
 	}
 
-	let model = model.Model(user: auth.NotLoaded, route:)
+	let model = model.Model(user: auth.NotLoaded, route:, user_cli_token: "")
 
 	let effect =
 		effect.batch([
@@ -68,6 +72,9 @@ fn update(model: Model, msg: Message) -> #(Model, Effect(Message)) {
 				}),
 			])
 		}
+
+		OnApiReturnedCliToken(Ok(user_cli_token)) -> #(model.Model(..model, user_cli_token:), effect.none())
+		OnApiReturnedCliToken(Error(_)) -> #(model, effect.none())
 	}
 }
 

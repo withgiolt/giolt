@@ -3,6 +3,7 @@ import {
 	User$User,
 	type User$,
 } from "@gleam/app/app/lib/auth.mjs";
+import { Result$Error, Result$Ok, type Result } from "@gleam/prelude.mjs";
 import { Hanko, register } from "@teamhanko/hanko-elements";
 
 const HANKO_API = "https://auth.giolt.com";
@@ -49,4 +50,19 @@ export async function validate_session() {
 
 export function logout() {
 	hanko.logout();
+}
+
+export function get_session_token(): Result<string, string> {
+	try {
+		const token = hanko.getSessionToken()
+
+		if (token) {
+			return Result$Ok(token)
+		} else {
+			return Result$Error("No session token")
+		}
+	} catch(_) {
+		return Result$Error("Failed to get session token")
+	}
+	
 }

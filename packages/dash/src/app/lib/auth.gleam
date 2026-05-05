@@ -6,6 +6,9 @@ pub type User {
 	User(id: String, email: String)
 }
 
+@external(javascript, "./auth.ffi.ts", "get_session_token")
+pub fn get_session_token() -> Result(String, String)
+
 @external(javascript, "./auth.ffi.ts", "validate_session")
 pub fn validate_session() -> Promise(User)
 

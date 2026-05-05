@@ -24,7 +24,7 @@ pub type ProjectType {
 	Service
 }
 
-fn project_decoder() -> decode.Decoder(Project) {
+pub fn project_decoder() -> decode.Decoder(Project) {
 	use id <- decode.optional_field("id", "0", decode.string)
 	use slug <- decode.optional_field("slug", "0", decode.string)
 	use pull_zone_id <- decode.optional_field("pull_zone_id", "0", decode.string)
@@ -52,7 +52,7 @@ pub type Server {
 	Server(id: Int, region: String, capacity: Int)
 }
 
-fn server_decoder() -> decode.Decoder(Server) {
+pub fn server_decoder() -> decode.Decoder(Server) {
 	use id <- decode.optional_field("id", 0, decode.int)
 	use region <- decode.optional_field("region", "0", decode.string)
 	use capacity <- decode.optional_field("capacity", 0, decode.int)
@@ -73,7 +73,7 @@ pub type UserBillingStatus {
 	Inactive
 }
 
-fn user_decoder() -> decode.Decoder(User) {
+pub fn user_decoder() -> decode.Decoder(User) {
 	use id <- decode.optional_field("id", "0", decode.string)
 	use billing_status <- decode.optional_field("billing_status", Inactive, {
 		use variant <- decode.then(decode.string)
