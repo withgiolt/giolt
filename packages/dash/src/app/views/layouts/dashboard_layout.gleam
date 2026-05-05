@@ -14,6 +14,7 @@ pub fn view(
 ) -> Element(msg) {
 	let menu_items = [
 		#(lucide_lustre.grid_2x2, "Projects", routing.Index),
+		#(lucide_lustre.square_terminal, "CLI", routing.Cli),
 		#(lucide_lustre.circle_user, "Account", routing.Account),
 	]
 

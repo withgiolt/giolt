@@ -75,6 +75,7 @@ fn view(model: Model) {
 	case model.route {
 		routing.Index -> routes.index_page(model)
 		routing.Account -> routes.account_page(model, UserClickLogout)
+		routing.Cli -> routes.cli_page(model)
 		routing.Login -> routes.login_page(model)
 		routing.NotFound -> routes.not_found_page(model)
 	}

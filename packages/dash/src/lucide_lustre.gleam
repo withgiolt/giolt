@@ -85,3 +85,31 @@ pub fn grid_2x2(attributes: List(Attribute(a))) {
 		],
 	)
 }
+
+pub fn square_terminal(attributes: List(Attribute(a))) {
+	svg.svg(
+		[
+			attribute("stroke-linejoin", "round"),
+			attribute("stroke-linecap", "round"),
+			attribute("stroke-width", "2"),
+			attribute("stroke", "currentColor"),
+			attribute("fill", "none"),
+			attribute("viewBox", "0 0 24 24"),
+			attribute("height", "24"),
+			attribute("width", "24"),
+			..attributes
+		],
+		[
+			svg.path([attribute("d", "m7 11 2-2-2-2")]),
+			svg.path([attribute("d", "M11 13h4")]),
+			svg.rect([
+				attribute("ry", "2"),
+				attribute("rx", "2"),
+				attribute("y", "3"),
+				attribute("x", "3"),
+				attribute("height", "18"),
+				attribute("width", "18"),
+			]),
+		],
+	)
+}

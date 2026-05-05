@@ -5,6 +5,7 @@ pub type Route {
 	Index
 	Login
 	Account
+	Cli
 	NotFound
 }
 
@@ -12,6 +13,7 @@ pub fn parse_route(uri: Uri) -> Route {
 	case uri.path_segments(uri.path) {
 		[] | [""] -> Index
 		["account"] -> Account
+		["cli"] -> Cli
 		["login"] -> Login
 		_ -> Index
 	}
@@ -22,6 +24,7 @@ pub fn href(route: Route) -> attribute.Attribute(t) {
 		Index -> attribute.href("/")
 		Account -> attribute.href("/account")
 		Login -> panic as "Not allowed to go to Login"
+		Cli -> attribute.href("/cli")
 		NotFound -> panic as "Not allowed to go to NotFound"
 	}
 }
