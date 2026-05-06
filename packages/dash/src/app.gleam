@@ -81,7 +81,7 @@ fn update(model: Model, msg: Message) -> #(Model, Effect(Message)) {
 			])
 		}
 
-		OnApiReturnedUserData(Ok(user_data)) -> #(model.Model(..model, user_data:), effect.none())
+		OnApiReturnedUserData(Ok(user_data)) ->	model.Model(..model, user_data:) |> route_guard([])
 		OnApiReturnedUserData(Error(_)) -> #(model.Model(..model, error: option.Some("Failed to get user data")), effect.none())
 	}
 }
@@ -92,6 +92,7 @@ fn view(model: Model) {
 		option.None -> case model.route {
 			routing.Index -> routes.index_page(model)
 			routing.Account -> routes.account_page(model, UserLogout)
+			routing.Onboard -> routes.onboard_page(model)
 			routing.Cli -> routes.cli_page(model)
 			routing.Login -> routes.login_page(model)
 			routing.NotFound -> routes.not_found_page(model)
