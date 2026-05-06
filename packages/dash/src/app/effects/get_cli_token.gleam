@@ -17,14 +17,14 @@ fn cli_token_response_decoder() -> decode.Decoder(String) {
 }
 
 pub fn get_cli_token(
-	on_response handle_response: fn(Result(String, rsvp.Error(String))) -> message
+	on_response handle_response: fn(Result(String, rsvp.Error(String))) -> message,
+	token token: String
 ) -> effect.Effect(message) {
-	let api_url = env.get_or("API_URL", "http://localhost:3001")
-	let req = request.new()
+	let api_url = env.get_or("API_URL", "http://localhost:3000")
+	let assert Ok(req) = request.to(api_url <> "/api/user/get-cli-token")
+	let req = req
 	|> request.set_method(http.Get)
-	|> request.set_header("authorization", "Bearer " <> todo)
-	|> request.set_host(api_url)
-	|> request.set_path("/user/get-cli-token")
+	|> request.set_header("authorization", "Bearer " <> token)
 	
 	let handler = rsvp.expect_json(cli_token_response_decoder(), handle_response)
 

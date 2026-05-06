@@ -4,9 +4,9 @@
     "source.fixAll.biome": "never"
   },
   "search.exclude": {
-    "**/node_modules": true,
+    "**/node_modules/**": true,
     "**/*.code-search": true,
-    "**/dist": true,
-    "**/build": true
+    "**/dist/**": true,
+    "**/build/**": true
   }
 }
