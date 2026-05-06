@@ -1,3 +1,4 @@
+import gleam/option
 import app/lib/auth
 import gleam/javascript/promise
 import lustre
@@ -10,8 +11,8 @@ import app/effects/get_user_data.{get_user_data}
 
 // Routing
 import app/lib/routing
-import app/lib/routing/route_guard.{route_guard}
-import app/lib/routing/routes
+import app/lib/route_guard.{route_guard}
+import app/routes
 
 pub fn main() {
 	use init <- promise.await(init(Nil))
@@ -34,7 +35,7 @@ fn init(_) -> promise.Promise(#(Model, Effect(Message))) {
 		Error(_) -> routing.Index
 	}
 
-	let model = model.Model(user: auth.NotLoaded, user_data: auth.UserDataNotLoaded, route:)
+	let model = model.Model(user: auth.NotLoaded, user_data: auth.UserDataNotLoaded, route:, error: option.None)
 
 	let effect =
 		effect.batch([
@@ -81,16 +82,20 @@ fn update(model: Model, msg: Message) -> #(Model, Effect(Message)) {
 		}
 
 		OnApiReturnedUserData(Ok(user_data)) -> #(model.Model(..model, user_data:), effect.none())
-		OnApiReturnedUserData(Error(_)) -> #(model, effect.none())
+		OnApiReturnedUserData(Error(_)) -> #(model.Model(..model, error: option.Some("Failed to get user data")), effect.none())
 	}
 }
 
 fn view(model: Model) {
-	case model.route {
-		routing.Index -> routes.index_page(model)
-		routing.Account -> routes.account_page(model, UserLogout)
-		routing.Cli -> routes.cli_page(model)
-		routing.Login -> routes.login_page(model)
-		routing.NotFound -> routes.not_found_page(model)
+	case model.error {
+		option.Some(reason) -> routes.error_page(model, reason)
+		option.None -> case model.route {
+			routing.Index -> routes.index_page(model)
+			routing.Account -> routes.account_page(model, UserLogout)
+			routing.Cli -> routes.cli_page(model)
+			routing.Login -> routes.login_page(model)
+			routing.NotFound -> routes.not_found_page(model)
+		}
 	}
+
 }

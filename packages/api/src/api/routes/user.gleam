@@ -16,19 +16,19 @@ pub fn handle_request(req: glen.Request) -> Promise(glen.Response) {
 
 fn get(req: glen.Request) -> Promise(glen.Response) {
 	let res = {
-		use token <- promise.try_await(promise.resolve(auth.get_session_token(req) |> result.replace_error(#("Couldn't get session token", 401))))
-		use session <- promise.try_await(auth.validate_session(token) |> utils.promise_error(#("Couldn't validate session", 401)))
+		use token <- promise.try_await(promise.resolve(auth.get_session_token(req) |> result.replace_error(#("user_data_not_loaded", 401))))
+		use session <- promise.try_await(auth.validate_session(token) |> utils.promise_error(#("user_data_not_loaded", 401)))
 
 		let db_res = db.get_db()
 		|> db.execute("SELECT * FROM users WHERE users.id = '" <> session.claims.subject <> "';")
 
-		use db_res <- promise.try_await(db_res |> utils.promise_error(#("Couldn't fetch database", 500)))
+		use db_res <- promise.try_await(db_res |> utils.promise_error(#("user_data_not_loaded", 500)))
 		let db_res = db_res
 		|> db.as_user
 
 		case db_res {
 			[user, ..] -> promise.resolve(Ok(user))
-			[] -> promise.resolve(Error(#("User does not exist", 404)))
+			[] -> promise.resolve(Error(#("user_data_not_onboarded", 404)))
 		}
 	}
 
@@ -42,7 +42,7 @@ fn get(req: glen.Request) -> Promise(glen.Response) {
 		}
 		Error(e) -> {
 			promise.resolve(glen.json(json.object([
-				#("error", json.string(e.0))
+				#("type", json.string(e.0))
 			]) |> json.to_string, e.1))
 		}
 	}

@@ -12,6 +12,7 @@ pub type UserData {
 		cli_token: String
 	)
 	UserDataNotLoaded
+  UserDataNotOnboarded
 	UserDataNoUser
 }
 
@@ -24,6 +25,7 @@ pub fn user_data_decoder() -> decode.Decoder(UserData) {
     }
     "user_data_not_loaded" -> decode.success(UserDataNotLoaded)
     "user_data_no_user" -> decode.success(UserDataNoUser)
+    "user_data_not_onboarded" -> decode.success(UserDataNotOnboarded)
     _ -> decode.failure(UserDataNotLoaded, "UserData")
   }
 }
