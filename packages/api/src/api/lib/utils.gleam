@@ -1,7 +1,7 @@
 import gleam/javascript/promise.{type Promise}
 import gleam/result
 
-pub fn promise_error(prom: Promise(Result(a, b)), error_string: String) {
+pub fn promise_error(prom: Promise(Result(a, b)), error: f) -> Promise(Result(a, f)) {
 	use prom <- promise.map(prom)
-	result.replace_error(prom, error_string)
+	result.replace_error(prom, error)
 }

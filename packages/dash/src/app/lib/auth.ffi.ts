@@ -16,13 +16,16 @@ export function create_auth_listener(fun: (arg0: User$) => void) {
 			if (
 				det.state.payload?.user.user_id &&
 				det.state.payload.claims.email?.address
-			)
+			) {
+				const token = hanko.getSessionToken()
 				fun(
 					User$User(
 						det.state.payload?.user.user_id,
 						det.state.payload.claims.email.address,
+						token
 					),
 				);
+			}
 		}
 	});
 
@@ -40,9 +43,10 @@ export async function validate_session() {
 			user_id: "",
 		};
 	});
+	const token = hanko.getSessionToken();
 
 	if (session.is_valid && session.claims?.email && session.user_id) {
-		return User$User(session.user_id, session.claims.email.address);
+		return User$User(session.user_id, session.claims.email.address, token);
 	} else {
 		return User$NoUser();
 	}
