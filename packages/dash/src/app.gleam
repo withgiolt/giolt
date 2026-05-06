@@ -87,15 +87,18 @@ fn update(model: Model, msg: Message) -> #(Model, Effect(Message)) {
 }
 
 fn view(model: Model) {
-	case model.error {
-		option.Some(reason) -> routes.error_page(model, reason)
-		option.None -> case model.route {
-			routing.Index -> routes.index_page(model)
-			routing.Account -> routes.account_page(model, UserLogout)
-			routing.Onboard -> routes.onboard_page(model)
-			routing.Cli -> routes.cli_page(model)
-			routing.Login -> routes.login_page(model)
-			routing.NotFound -> routes.not_found_page(model)
+	case model.user, model.user_data {
+		auth.NotLoaded, auth.UserDataNotLoaded -> routes.loading_page()
+		_, _ -> case model.error {
+			option.Some(reason) -> routes.error_page(model, reason)
+			option.None -> case model.route {
+				routing.Index -> routes.index_page(model)
+				routing.Account -> routes.account_page(model, UserLogout)
+				routing.Onboard -> routes.onboard_page(model)
+				routing.Cli -> routes.cli_page(model)
+				routing.Login -> routes.login_page(model)
+				routing.NotFound -> routes.not_found_page(model)
+			}
 		}
 	}
 
