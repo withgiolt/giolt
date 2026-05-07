@@ -10,7 +10,8 @@
 		"ignoreUnknown": false,
 		"includes": [
 			"**",
-			"!**/drizzle/**/*"
+			"!**/drizzle/**/*",
+			"!**/priv/**/*"
 		]
 	},
 	"html": {

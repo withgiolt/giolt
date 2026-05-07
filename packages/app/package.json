@@ -9,6 +9,7 @@
     "compile:css": "tailwindcss --cwd ./src -i ./app/app.css -o ../priv/app.css --minify"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.2.4",
     "@types/bun": "latest"
   },
   "peerDependencies": {

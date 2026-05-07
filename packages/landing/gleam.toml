@@ -23,7 +23,7 @@ mork = ">= 1.11.1 and < 2.0.0"
 gleamyshell = ">= 2.0.2 and < 3.0.0"
 mist = ">= 6.0.3 and < 7.0.0"
 wisp = ">= 2.2.2 and < 3.0.0"
-mist_reload = ">= 1.0.1 and < 2.0.0"
+mist_reload = { git = "https://github.com/withgiolt/mist_reload", ref = "0e3f429" }
 gleam_erlang = ">= 1.3.0 and < 2.0.0"
 filespy = ">= 0.7.0 and < 1.0.0"
 
