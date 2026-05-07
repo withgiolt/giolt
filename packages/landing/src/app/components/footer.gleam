@@ -1,4 +1,4 @@
-import app/views/components/carbon_badge
+import app/components/carbon_badge
 import gleam/int
 import lustre/attribute
 import lustre/element.{type Element}

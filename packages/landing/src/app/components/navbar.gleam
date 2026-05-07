@@ -1,4 +1,4 @@
-import app/views/components/dynamic_logo
+import app/components/dynamic_logo
 import lustre/attribute
 import lustre/element.{type Element}
 import lustre/element/html

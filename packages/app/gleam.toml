@@ -22,8 +22,8 @@ gleam_erlang = ">= 1.3.0 and < 2.0.0"
 wisp = ">= 2.2.2 and < 3.0.0"
 mist = ">= 6.0.3 and < 7.0.0"
 envie = ">= 1.2.0 and < 2.0.0"
-shellout = ">= 1.8.0 and < 2.0.0"
 mist_reload = ">= 1.0.1 and < 2.0.0"
+gleamyshell = ">= 2.0.2 and < 3.0.0"
 
 [dev_dependencies]
 gleeunit = ">= 1.0.0 and < 2.0.0"

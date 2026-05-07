@@ -1,8 +1,6 @@
 import gleam/erlang/process
 import mist/reload
-import gleam/io
-import gleam/result
-import shellout
+import gleamyshell
 import app
 
 pub fn main() {
@@ -12,19 +10,10 @@ pub fn main() {
 }
 
 fn compile_css(dev dev: Bool) {
-	let dev_params = case dev {
-		True -> ["--watch"]
-		False -> ["--minify"]
+	let _ = case dev {
+		True -> gleamyshell.execute("bun", ".", ["dev:compile:css"])
+		False -> gleamyshell.execute("bun", ".", ["compile:css"])
 	}
-	let _ = shellout.command("bunx", ["@tailwindcss/cli", "--cwd", "./src", "-i", "./app/app.css", "-o", "../priv/app.css", ..dev_params], ".", [])
-	|> result.map(with: fn(_) {
-		io.println("Compiled Tailwind CSS")
-		0
-	})
-	|> result.map_error(with: fn(output) {
-		io.print_error(output.1)
-		0
-	})
 
 	Nil
 }

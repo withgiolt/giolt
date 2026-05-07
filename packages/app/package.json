@@ -1,8 +1,13 @@
 {
   "name": "app",
-  "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "build": "gleam run -m build",
+    "dev": "gleam dev",
+    "dev:compile:css": "tailwindcss --cwd ./src -i ./app/app.css -o ../priv/app.css --watch",
+    "compile:css": "tailwindcss --cwd ./src -i ./app/app.css -o ../priv/app.css --minify"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

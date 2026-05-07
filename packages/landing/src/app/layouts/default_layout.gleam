@@ -1,5 +1,5 @@
-import app/views/components/footer
-import app/views/components/navbar
+import app/components/footer
+import app/components/navbar
 import lustre/attribute
 import lustre/element.{type Element}
 import lustre/element/html

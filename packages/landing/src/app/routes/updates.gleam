@@ -1,4 +1,4 @@
-import app/views/layouts/default_layout
+import app/layouts/default_layout
 import gleam/list
 import lustre/attribute
 import lustre/element.{type Element}
