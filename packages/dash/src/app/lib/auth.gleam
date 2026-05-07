@@ -12,22 +12,22 @@ pub type UserData {
 		cli_token: String
 	)
 	UserDataNotLoaded
-  UserDataNotOnboarded
+	UserDataNotOnboarded
 	UserDataNoUser
 }
 
 pub fn user_data_decoder() -> decode.Decoder(UserData) {
-  use variant <- decode.field("type", decode.string)
-  case variant {
-    "user_data" -> {
-      use cli_token <- decode.field("cli_token", decode.string)
-      decode.success(UserData(cli_token:))
-    }
-    "user_data_not_loaded" -> decode.success(UserDataNotLoaded)
-    "user_data_no_user" -> decode.success(UserDataNoUser)
-    "user_data_not_onboarded" -> decode.success(UserDataNotOnboarded)
-    _ -> decode.failure(UserDataNotLoaded, "UserData")
-  }
+	use variant <- decode.field("type", decode.string)
+	case variant {
+		"user_data" -> {
+			use cli_token <- decode.field("cli_token", decode.string)
+			decode.success(UserData(cli_token:))
+		}
+		"user_data_not_loaded" -> decode.success(UserDataNotLoaded)
+		"user_data_no_user" -> decode.success(UserDataNoUser)
+		"user_data_not_onboarded" -> decode.success(UserDataNotOnboarded)
+		_ -> decode.failure(UserDataNotLoaded, "UserData")
+	}
 }
 
 @external(javascript, "./auth.ffi.ts", "get_session_token")

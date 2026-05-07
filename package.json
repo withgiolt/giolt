@@ -10,6 +10,7 @@
 		"dash:dev": "bun run -F dash dev",
 		"dash:build": "bun run -F dash build",
 		"dash:format": "bunx @biomejs/biome format --write packages/dash && cd packages/dash && gleam format && cd ../.. && bun run scripts/gleam_format.ts",
+		"app:format": "bunx @biomejs/biome format --write packages/app && cd packages/app && gleam format && cd ../.. && bun run scripts/gleam_format.ts",
 		"api:dev": "bun run -F api dev",
 		"api:format": "bunx @biomejs/biome format --write packages/api && cd packages/api && gleam format && cd ../.. && bun run scripts/gleam_format.ts",
 		"cli:dev": "bun run -F api dev",

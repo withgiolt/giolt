@@ -1,0 +1,14 @@
+import app/layouts/base_layout
+import app/lib/makeshift
+import lustre/element/html as h
+import lustre/attribute as a
+
+pub fn view(ctx: makeshift.RouteContext) -> makeshift.RouteResponse {
+	let el =
+	base_layout.view([], [
+		h.p([], [h.text("We are working in Gleam! Completely server-side. No javascript.")]),
+		h.button([a.class("btn btn-primary")], [h.text("Hello world!")]),
+	])
+
+	makeshift.return(el, ctx)
+}
