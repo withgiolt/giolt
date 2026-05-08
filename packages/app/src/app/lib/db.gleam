@@ -3,12 +3,8 @@ import gleam/result
 import gleam/option
 import gleam/httpc
 import envie
-import gleam/dynamic/decode
 import gleam/list
 import httplibsql
-
-pub type SQLStatement =
-	String
 
 pub type Project {
 	Project(
@@ -46,12 +42,13 @@ pub type UserBillingStatus {
 
 
 pub fn execute(statement: String) {
-	let host = envie.get_string("DB_API_HOST", "localhost:3100")
-	let token = envie.get_string("DB_AUTH_TOKEN", "")
+	let url = envie.get_string("DB_URL", "http://localhost:3100/v2/pipeline")
+	let token = envie.get_string("DB_TOKEN", "")
 	let base_request = httplibsql.new_request()
-	|> httplibsql.with_organization("")
-	|> httplibsql.with_host(host)
+	|> httplibsql.with_url(url)
 	|> httplibsql.with_token(token)
+
+  echo "break"
 
 	let req = base_request
 	|> httplibsql.with_statement(httplibsql.ExecuteStatement(
@@ -60,12 +57,19 @@ pub fn execute(statement: String) {
 	))
 	|> httplibsql.with_statement(httplibsql.CloseStatement)
 	|> httplibsql.build
+	let assert Ok(req) = req
 
-	let assert Ok(req) = req as "Invalid request"
+  echo req
 
 	use res <- result.try(httpc.send(req) |> result.replace_error("Couldn't reach database"))
+
+  echo res
+
 	use decoded_res <- result.try(httplibsql.decode_response(res.body) |> result.replace_error("Failed to decode response"))
 	
+  echo "break"
+
+
 	case decoded_res.results {
 		[res, ..] -> {
 			case res {

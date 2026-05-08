@@ -1,3 +1,4 @@
+import app/lib/auth
 import lustre/attribute
 import gleam/http/response
 import wisp
@@ -18,12 +19,13 @@ pub type RouteResponse {
 pub type RouteContext{
 	RouteContext(
 		request: wisp.Request,
-		response: wisp.Response
+		response: wisp.Response,
+		session: auth.Session
 	)
 }
 
 pub fn return(el: Element, ctx: RouteContext) {
-	RouteResponse(el, ctx.response)
+	Ok(RouteResponse(el, ctx.response))
 }
 
 pub fn set_status(ctx: RouteContext, status: Int) {
@@ -31,11 +33,7 @@ pub fn set_status(ctx: RouteContext, status: Int) {
 	|> response.set_body(ctx.response.body)
 	|> bulk_set_header(ctx.response.headers)
 
-
-	RouteContext(
-		..ctx,
-		response: new_res
-	)
+	RouteContext(..ctx, response: new_res)
 }
 
 pub fn set_header(ctx: RouteContext, key: String, value: String) {
@@ -53,10 +51,7 @@ pub fn set_cookie(ctx: RouteContext, name: String, value: String) {
 		max_age: 60 * 60
 	)
 
-	RouteContext(
-		..ctx,
-		response: new_res
-	)
+	RouteContext(..ctx, response: new_res)
 }
 
 pub fn redirect_to(ctx: RouteContext, url: String) {

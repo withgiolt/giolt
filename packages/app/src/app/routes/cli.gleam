@@ -1,9 +1,23 @@
+import gleam/result
+import gleam/list
+import app/lib/auth
+import app/lib/db
 import app/lib/makeshift
 import app/layouts/dashboard_layout
 import lustre/attribute as a
 import lustre/element/html as h
 
 pub fn view(ctx: makeshift.RouteContext) {
+	let assert auth.Authenticated(id) = ctx.session 
+	use result <- result.try(db.execute("SELECT * FROM users WHERE users.id == '" <> id <> "';"))
+
+	let user = result
+	|> db.as_user
+	|> list.first
+	let assert Ok(user) = user
+
+	echo user
+
 	let el =
 	dashboard_layout.view(ctx, [], [
 		h.div([a.class("container")], [
@@ -12,6 +26,7 @@ pub fn view(ctx: makeshift.RouteContext) {
 					a.readonly(True),
 					a.placeholder("CLI Token hidden"),
 					a.class("input w-full join-item"),
+					// a.value(user.cli_token)
 				]),
 				h.button([
 					a.class("btn btn-primary join-item"),
