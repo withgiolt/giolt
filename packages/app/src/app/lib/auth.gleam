@@ -26,16 +26,9 @@ fn session_status_decoder() -> decode.Decoder(SessionStatus) {
 }
 
 pub fn get_session_token(ctx: makeshift.RouteContext) -> Result(String, String) {
-	let res = list.find(ctx.request.headers, fn (header) {
-		header.0 == "authorization"
-	}) |> result.replace_error("No Authorization header found")
-
-	use res <- result.try(res)
-
-	case res.1 {
-		"Bearer " <> token -> Ok(token)
-		_ -> Error("Wrong formatted Authorization header")
-	}
+	let cookies = request.get_cookies(ctx.request)
+	
+	list.key_find(cookies, "hanko") |> result.replace_error("User does not have auth cookie")
 }
 
 pub fn validate_session(
@@ -48,7 +41,7 @@ pub fn validate_session(
 			#("session_token", json.string(session_token)),
 		])
 
-	let assert Ok(req) = request.to(api_url <> "/sessions/validate")
+	let assert Ok(req) = request.to(api_url <> "/sessions/validate") as "AUTH_URL may not be valid"
 
 	let req =
 		req

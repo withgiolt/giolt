@@ -6,6 +6,7 @@ import wisp/wisp_mist
 import app/lib/router
 
 pub fn main() {
+	let assert Ok(Nil) = envie.load()
 	let assert Ok(_) = start_server(fn(h) { h })
 	process.sleep_forever()
 }

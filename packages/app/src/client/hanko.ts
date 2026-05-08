@@ -1,5 +1,16 @@
-import { Hanko, register } from "@teamhanko/hanko-elements";
+import { register } from "@teamhanko/hanko-elements";
 
 const HANKO_API = "https://auth.giolt.com";
-const _hanko = new Hanko(HANKO_API);
-await register(HANKO_API);
+const { hanko } = await register(HANKO_API);
+
+hanko.onSessionCreated(() => {
+	window.location.href = "/"
+})
+
+hanko.onUserLoggedOut(() => {
+	window.location.href = "/login"
+})
+
+document.getElementById("hanko-logout")?.addEventListener("click", () => {
+	hanko.logout()
+})

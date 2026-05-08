@@ -38,6 +38,11 @@ pub fn set_status(ctx: RouteContext, status: Int) {
 	)
 }
 
+pub fn set_header(ctx: RouteContext, key: String, value: String) {
+	let new_res = wisp.set_header(ctx.response, key, value)
+	RouteContext(..ctx, response: new_res)
+}
+
 pub fn set_cookie(ctx: RouteContext, name: String, value: String) {
 	let new_res = wisp.set_cookie(
 		request: ctx.request,
@@ -52,6 +57,12 @@ pub fn set_cookie(ctx: RouteContext, name: String, value: String) {
 		..ctx,
 		response: new_res
 	)
+}
+
+pub fn redirect_to(ctx: RouteContext, url: String) {
+	ctx 
+	|> set_status(307)
+	|> set_header("location", url)
 }
 
 fn bulk_set_header(res: wisp.Response, headers: List(#(String, String))) -> wisp.Response {

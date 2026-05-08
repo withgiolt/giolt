@@ -3,6 +3,8 @@
 	"private": true,
 	"scripts": {
 		"format": "bun landing:format && bun api:format && bun db:format && bun dash:format && bun cli:format",
+		"app:dev:only": "bun run -F app dev",
+		"app:dev": "bun run --parallel app:dev:only db:dev",
 		"dash:api": "bun run --parallel dash:dev api:dev",
 		"landing:dev": "bun run -F landing dev",
 		"landing:build": "bun run -F landing build",
@@ -18,6 +20,7 @@
 		"migrate:local": "drizzle-kit generate --config=db/drizzle.local.config.ts && drizzle-kit migrate --config=db/drizzle.local.config.ts",
 		"migrate:remote": "drizzle-kit generate --config=db/drizzle.remote.config.ts && drizzle-kit migrate --config=db/drizzle.remote.config.ts",
 		"studio:local": "drizzle-kit studio --config=db/drizzle.local.config.ts",
+		"db:dev": "turso dev --db-file local.db -p 3100",
 		"db:format": "bunx @biomejs/biome format --write db/"
 	},
 	"type": "module",

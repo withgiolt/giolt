@@ -2,7 +2,7 @@ node_modules/
 build/
 dist/
 .lustre/
-local.db
+local.db*
 .env
 *.beam
 *.ez
