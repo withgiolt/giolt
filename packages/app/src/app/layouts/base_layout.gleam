@@ -2,7 +2,7 @@ import app/lib/makeshift
 import lustre/element/html as h
 import lustre/attribute as a
 
-pub fn view(_attr: makeshift.Attributes, children: makeshift.Children) -> makeshift.Element {
+pub fn view(_, attributes: makeshift.Attributes, children: makeshift.Children) -> makeshift.Element {
 	h.html([a.lang("en")], [
 		h.head([], [
 			h.title([], "Giolt"),
@@ -10,7 +10,8 @@ pub fn view(_attr: makeshift.Attributes, children: makeshift.Children) -> makesh
 			h.link([a.href("/app.css"), a.rel("stylesheet")]),
 			h.link([a.rel("preconnect"), a.href("https://fonts.googleapis.com")]),
 			h.link([a.rel("stylesheet"), a.href("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap")]),
+			h.script([a.src("/js/hanko.js"), a.type_("module")], "")
 		]),
-		h.body([], children)
+		h.body(attributes, children)
 	])
 }

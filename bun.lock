@@ -29,6 +29,7 @@
       "name": "app",
       "dependencies": {
         "@tailwindcss/typography": "^0.5.19",
+        "@teamhanko/hanko-elements": "^2.6.0",
         "daisyui": "^5.5.19",
         "tailwindcss": "^4.2.4",
       },

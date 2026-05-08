@@ -1,6 +1,5 @@
 import gleam/list
 import build
-import filespy
 import gleam/erlang/process
 import gleamyshell
 import lustre/element
@@ -12,14 +11,7 @@ import wisp/wisp_mist
 
 
 pub fn main() {
-	build.build()
-
 	process.spawn(fn() { gleamyshell.execute("bun", ".", ["dev:compile:css"]) })
-	let _ =
-		filespy.new()
-		|> filespy.add_dir("./src")
-		|> filespy.set_handler(fn(_, _) { build.build() })
-		|> filespy.start()
 
 	let secret_key_base = wisp.random_string(32)
 	let assert Ok(_) =

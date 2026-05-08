@@ -1,19 +1,24 @@
 import app/lib/makeshift
 import app/lib/renderer
-import gleam/list
 import wisp
 
 import app/routes/index
+import app/routes/cli
+import app/routes/account
+import app/routes/login
 import app/routes/not_found
-
-const routes = [
-	#([], index.view)
-]
 
 pub fn handler(req: wisp.Request) {
 	let assert Ok(priv) = wisp.priv_directory("app")
 	use <- wisp.serve_static(req, "/", priv)
-	let route = list.key_find(routes, wisp.path_segments(req))
+
+	let route = case wisp.path_segments(req) {
+		[] -> Ok(index.view)
+		["cli"] -> Ok(cli.view)
+		["account"] -> Ok(account.view)
+		["login"] -> Ok(login.view)
+		_ -> Error(not_found.view)
+	}
 
 	let route_res = case route {
 		Ok(route) -> {
@@ -25,14 +30,14 @@ pub fn handler(req: wisp.Request) {
 
 			route(context)
 		} 
-		Error(_) -> {
+		Error(route) -> {
 			let context = makeshift.RouteContext(
 				request: req,
 				response: wisp.not_found()
 					|> wisp.set_header("content-type", "text/html")
 			)
 
-			not_found.view(context)
+			route(context)
 		}
 	}
 

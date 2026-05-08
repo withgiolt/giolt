@@ -25,7 +25,6 @@ mist = ">= 6.0.3 and < 7.0.0"
 wisp = ">= 2.2.2 and < 3.0.0"
 mist_reload = { git = "https://github.com/withgiolt/mist_reload", ref = "0e3f429" }
 gleam_erlang = ">= 1.3.0 and < 2.0.0"
-filespy = ">= 0.7.0 and < 1.0.0"
 
 [dev_dependencies]
 lucide_lustre = ">= 2.0.1 and < 3.0.0"
