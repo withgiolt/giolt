@@ -28,8 +28,8 @@ pub type Server {
 
 pub type User {
 	User(
-		id: String, 
-		billing_status: UserBillingStatus, 
+		id: String,
+		billing_status: UserBillingStatus,
 		billing_date: Int,
 		cli_token: String
 	)
@@ -48,8 +48,6 @@ pub fn execute(statement: String) {
 	|> httplibsql.with_url(url)
 	|> httplibsql.with_token(token)
 
-  echo "break"
-
 	let req = base_request
 	|> httplibsql.with_statement(httplibsql.ExecuteStatement(
 		query: statement,
@@ -59,16 +57,8 @@ pub fn execute(statement: String) {
 	|> httplibsql.build
 	let assert Ok(req) = req
 
-  echo req
-
 	use res <- result.try(httpc.send(req) |> result.replace_error("Couldn't reach database"))
-
-  echo res
-
 	use decoded_res <- result.try(httplibsql.decode_response(res.body) |> result.replace_error("Failed to decode response"))
-	
-  echo "break"
-
 
 	case decoded_res.results {
 		[res, ..] -> {
@@ -93,17 +83,17 @@ pub fn as_server(
   list.map(rows, fn(row) {
     let assert httplibsql.Integer(id) =
       row
-      |> dict.get(httplibsql.Column("integer", "id"))
+      |> dict.get(httplibsql.Column("id", "INTEGER"))
       |> result.unwrap(httplibsql.Integer(0))
 
     let assert httplibsql.Text(region) =
       row
-      |> dict.get(httplibsql.Column("text", "region"))
+      |> dict.get(httplibsql.Column("region", "TEXT"))
       |> result.unwrap(httplibsql.Text("0"))
 
     let assert httplibsql.Integer(capacity) =
       row
-      |> dict.get(httplibsql.Column("integer", "capacity"))
+      |> dict.get(httplibsql.Column("capacity", "INTEGER"))
       |> result.unwrap(httplibsql.Integer(0))
 
     Server(
@@ -121,12 +111,12 @@ pub fn as_user(
   list.map(rows, fn(row) {
     let assert httplibsql.Text(id) =
       row
-      |> dict.get(httplibsql.Column("text", "id"))
+      |> dict.get(httplibsql.Column("id", "TEXT"))
       |> result.unwrap(httplibsql.Text("0"))
 
     let assert httplibsql.Text(billing_status_raw) =
       row
-      |> dict.get(httplibsql.Column("text", "billing_status"))
+      |> dict.get(httplibsql.Column("billing_status", "TEXT"))
       |> result.unwrap(httplibsql.Text("inactive"))
 
     let billing_status = case billing_status_raw {
@@ -137,12 +127,13 @@ pub fn as_user(
 
     let assert httplibsql.Integer(billing_date) =
       row
-      |> dict.get(httplibsql.Column("integer", "billing_date"))
+      |> dict.get(httplibsql.Column("billing_date", "INTEGER"))
       |> result.unwrap(httplibsql.Integer(0))
+
 
     let assert httplibsql.Text(cli_token) =
       row
-      |> dict.get(httplibsql.Column("text", "cli_token"))
+      |> dict.get(httplibsql.Column("cli_token", "TEXT"))
       |> result.unwrap(httplibsql.Text("0"))
 
     User(
@@ -160,27 +151,27 @@ pub fn as_project(
   list.map(rows, fn(row) {
     let assert httplibsql.Text(id) =
       row
-      |> dict.get(httplibsql.Column("text", "id"))
+      |> dict.get(httplibsql.Column("id", "TEXT"))
       |> result.unwrap(httplibsql.Text("0"))
 
     let assert httplibsql.Text(slug) =
       row
-      |> dict.get(httplibsql.Column("text", "slug"))
+      |> dict.get(httplibsql.Column("slug", "TEXT"))
       |> result.unwrap(httplibsql.Text("0"))
 
     let assert httplibsql.Text(pull_zone_id) =
       row
-      |> dict.get(httplibsql.Column("text", "pull_zone_id"))
+      |> dict.get(httplibsql.Column("pull_zone_id", "TEXT"))
       |> result.unwrap(httplibsql.Text("0"))
 
     let assert httplibsql.Text(owner_id) =
       row
-      |> dict.get(httplibsql.Column("text", "owner_id"))
+      |> dict.get(httplibsql.Column("owner_id", "TEXT"))
       |> result.unwrap(httplibsql.Text("0"))
 
     let assert httplibsql.Text(type_raw) =
       row
-      |> dict.get(httplibsql.Column("text", "type"))
+      |> dict.get(httplibsql.Column("type", "TEXT"))
       |> result.unwrap(httplibsql.Text("static"))
 
     let type_ = case type_raw {
@@ -191,7 +182,7 @@ pub fn as_project(
 
     let assert httplibsql.Text(server_id) =
       row
-      |> dict.get(httplibsql.Column("text", "server_id"))
+      |> dict.get(httplibsql.Column("server_id", "TEXT"))
       |> result.unwrap(httplibsql.Text("0"))
 
     Project(

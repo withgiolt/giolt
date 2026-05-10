@@ -23,7 +23,7 @@ packages = [
   { name = "gramps", version = "6.0.1", build_tools = ["gleam"], requirements = ["gleam_crypto", "gleam_erlang", "gleam_http", "gleam_stdlib"], otp_app = "gramps", source = "hex", outer_checksum = "D55636072DEE173F6586A5679D3C02EC7A0DE3F8646B78C351B72908FF223DF7" },
   { name = "houdini", version = "1.2.1", build_tools = ["gleam"], requirements = [], otp_app = "houdini", source = "hex", outer_checksum = "6F8AC2F12974567FB744BEA66AC93CEB76AAEA19AD28564623F76CDA9BC26A85" },
   { name = "hpack_erl", version = "0.3.0", build_tools = ["rebar3"], requirements = [], otp_app = "hpack", source = "hex", outer_checksum = "D6137D7079169D8C485C6962DFE261AF5B9EF60FBC557344511C1E65E3D95FB0" },
-  { name = "httplibsql", version = "0.0.1", build_tools = ["gleam"], requirements = ["gleam_http", "gleam_javascript", "gleam_json", "gleam_stdlib"], source = "git", repo = "https://github.com/withgiolt/httplibsql", commit = "c54288f20bd7a9f1e89d510ce165620c26841685" },
+  { name = "httplibsql", version = "0.0.1", build_tools = ["gleam"], requirements = ["gleam_http", "gleam_javascript", "gleam_json", "gleam_stdlib"], source = "git", repo = "https://github.com/withgiolt/httplibsql", commit = "30a0eb9eaa41402915a4b068b685dc61e3956e0b" },
   { name = "logging", version = "1.5.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "logging", source = "hex", outer_checksum = "BC5F18CE5DD9686100229FE5409BDC3DD5C46D5A7DF2F804AD2D8F0DD6C5060E" },
   { name = "lustre", version = "5.7.0", build_tools = ["gleam"], requirements = ["gleam_erlang", "gleam_json", "gleam_otp", "gleam_stdlib", "houdini"], otp_app = "lustre", source = "hex", outer_checksum = "38C6FCBD7B7BACE994D5BF643202BB69B02576D44250B4C5DCE738387C0E8F87" },
   { name = "marceau", version = "1.3.0", build_tools = ["gleam"], requirements = [], otp_app = "marceau", source = "hex", outer_checksum = "2D1C27504BEF45005F5DFB18591F8610FB4BFA91744878210BDC464412EC44E9" },
@@ -45,7 +45,7 @@ gleam_json = { version = ">= 3.1.0 and < 4.0.0" }
 gleam_stdlib = { version = ">= 0.44.0 and < 2.0.0" }
 gleamyshell = { version = ">= 2.0.2 and < 3.0.0" }
 gleeunit = { version = ">= 1.0.0 and < 2.0.0" }
-httplibsql = { git = "https://github.com/withgiolt/httplibsql", ref = "c54288f" }
+httplibsql = { git = "https://github.com/withgiolt/httplibsql", ref = "30a0eb9" }
 lustre = { version = ">= 5.7.0 and < 6.0.0" }
 mist = { version = ">= 6.0.3 and < 7.0.0" }
 mist_reload = { git = "https://github.com/withgiolt/mist_reload", ref = "0e3f429" }

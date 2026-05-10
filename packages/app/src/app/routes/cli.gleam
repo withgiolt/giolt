@@ -9,14 +9,8 @@ import lustre/element/html as h
 
 pub fn view(ctx: makeshift.RouteContext) {
 	let assert auth.Authenticated(id) = ctx.session 
-	use result <- result.try(db.execute("SELECT * FROM users WHERE users.id == '" <> id <> "';"))
-
-	let user = result
-	|> db.as_user
-	|> list.first
-	let assert Ok(user) = user
-
-	echo user
+	use result <- result.try(db.execute("SELECT * FROM users WHERE users.id == '" <> id <> "';") |> result.replace_error("Couldn't fetch user data from database"))
+	use user <- result.try(list.first(result |> db.as_user) |> result.replace_error("Database did not return users"))
 
 	let el =
 	dashboard_layout.view(ctx, [], [
@@ -26,7 +20,7 @@ pub fn view(ctx: makeshift.RouteContext) {
 					a.readonly(True),
 					a.placeholder("CLI Token hidden"),
 					a.class("input w-full join-item"),
-					// a.value(user.cli_token)
+					a.value(user.cli_token)
 				]),
 				h.button([
 					a.class("btn btn-primary join-item"),

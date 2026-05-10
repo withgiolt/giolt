@@ -23,7 +23,7 @@ wisp = ">= 2.2.2 and < 3.0.0"
 mist = ">= 6.0.3 and < 7.0.0"
 envie = ">= 1.2.0 and < 2.0.0"
 mist_reload = { git = "https://github.com/withgiolt/mist_reload", ref = "0e3f429" }
-httplibsql = { git = "https://github.com/withgiolt/httplibsql", ref = "c54288f"}
+httplibsql = { git = "https://github.com/withgiolt/httplibsql", ref = "30a0eb9"}
 gleamyshell = ">= 2.0.2 and < 3.0.0"
 gleam_httpc = ">= 5.0.0 and < 6.0.0"
 gleam_json = ">= 3.1.0 and < 4.0.0"
