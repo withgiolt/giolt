@@ -2,10 +2,10 @@ import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
 	dialect: "turso",
-	schema: "./db/schema.ts",
-	out: "./db/drizzle",
+	schema: "./schema.ts",
+	out: "../drizzle",
 
 	dbCredentials: {
-		url: "file:local.db",
+		url: "file:../../../local.db",
 	},
 });
