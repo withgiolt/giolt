@@ -1,3 +1,3 @@
 pub type Args {
-	Welcome(help: Bool)
+  Welcome(help: Bool)
 }

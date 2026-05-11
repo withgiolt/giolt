@@ -2,8 +2,8 @@ import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
 	dialect: "turso",
-	schema: "./schema.ts",
-	out: "../drizzle",
+	schema: "./src/schema.ts",
+	out: "./drizzle",
 
 	dbCredentials: {
 		// biome-ignore lint/style/noNonNullAssertion: Database credentials always present
