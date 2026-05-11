@@ -1,11 +1,11 @@
 import app/views/routes/account
 import app/views/routes/cli
+import app/views/routes/error
 import app/views/routes/index
-import app/views/routes/onboard
 import app/views/routes/loading
 import app/views/routes/login
 import app/views/routes/not_found
-import app/views/routes/error
+import app/views/routes/onboard
 
 pub const index_page = index.view
 

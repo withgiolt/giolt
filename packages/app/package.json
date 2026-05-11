@@ -1,26 +1,26 @@
 {
-  "name": "app",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "build": "gleam run -m build",
-    "dev": "gleam dev",
-    "dev:compile:css": "tailwindcss --cwd ./src -i ./app/app.css -o ../priv/app.css --watch",
-    "dev:compile:client": "bun build ./src/client/* --target=browser --watch --no-clear-screen --outdir priv/js",
-    "compile:client": "bun build ./src/client/* --target=browser --production --outdir priv/js",
-    "compile:css": "tailwindcss --cwd ./src -i ./app/app.css -o ../priv/app.css --minify"
-  },
-  "devDependencies": {
-    "@tailwindcss/cli": "^4.2.4",
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "@tailwindcss/typography": "^0.5.19",
-    "@teamhanko/hanko-elements": "^2.6.0",
-    "daisyui": "^5.5.19",
-    "tailwindcss": "^4.2.4"
-  }
+	"name": "app",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"build": "gleam run -m build",
+		"dev": "gleam dev",
+		"dev:compile:css": "tailwindcss --cwd ./src -i ./app/app.css -o ../priv/app.css --watch",
+		"dev:compile:client": "bun build ./src/client/* --target=browser --watch --no-clear-screen --outdir priv/js",
+		"compile:client": "bun build ./src/client/* --target=browser --production --outdir priv/js",
+		"compile:css": "tailwindcss --cwd ./src -i ./app/app.css -o ../priv/app.css --minify"
+	},
+	"devDependencies": {
+		"@tailwindcss/cli": "^4.2.4",
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@tailwindcss/typography": "^0.5.19",
+		"@teamhanko/hanko-elements": "^2.6.0",
+		"daisyui": "^5.5.19",
+		"tailwindcss": "^4.2.4"
+	}
 }

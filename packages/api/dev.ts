@@ -29,9 +29,9 @@ if (Bun.env.DEV) {
 				console.warn("Change detected! Reloading");
 				if (stdout) console.log(stdout);
 				if (stderr) console.error(stderr);
-				
+
 				// TODO: Use normal kill after oven-sh/bun#20319 is fixed
-				kill(3001)
+				kill(3001);
 				createBunProcess();
 			});
 		},

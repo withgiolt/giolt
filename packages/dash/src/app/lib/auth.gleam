@@ -8,9 +8,7 @@ pub type User {
 }
 
 pub type UserData {
-	UserData(
-		cli_token: String
-	)
+	UserData(cli_token: String)
 	UserDataNotLoaded
 	UserDataNotOnboarded
 	UserDataNoUser

@@ -1,13 +1,13 @@
+import app
 import envie
 import gleam/erlang/process
-import mist/reload
 import gleamyshell
-import app
+import mist/reload
 
 pub fn main() {
 	let assert Ok(Nil) = envie.load()
-	process.spawn(fn () { compile_css(dev: True) } )
-	process.spawn(fn () { compile_client_javascript(dev: True) } )
+	process.spawn(fn() { compile_css(dev: True) })
+	process.spawn(fn() { compile_client_javascript(dev: True) })
 	let assert Ok(_) = app.start_server(reload.wrap)
 	process.sleep_forever()
 }

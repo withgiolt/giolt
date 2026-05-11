@@ -1,5 +1,5 @@
-import app/layouts/base_layout
 import app/components/nav
+import app/layouts/base_layout
 import app/lib/makeshift
 import gleam/list
 import lucide_lustre
@@ -40,9 +40,7 @@ pub fn view(
 				),
 				h.div(
 					[
-						a.class(
-							"flex min-h-full flex-col items-start bg-base-200 w-64",
-						),
+						a.class("flex min-h-full flex-col items-start bg-base-200 w-64"),
 					],
 					[
 						h.ul(
@@ -71,6 +69,6 @@ pub fn view(
 					],
 				),
 			]),
-		])
+		]),
 	])
 }

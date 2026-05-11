@@ -17,12 +17,12 @@ export function create_auth_listener(fun: (arg0: User$) => void) {
 				det.state.payload?.user.user_id &&
 				det.state.payload.claims.email?.address
 			) {
-				const token = hanko.getSessionToken()
+				const token = hanko.getSessionToken();
 				fun(
 					User$User(
 						det.state.payload?.user.user_id,
 						det.state.payload.claims.email.address,
-						token
+						token,
 					),
 				);
 			}
@@ -58,15 +58,14 @@ export function logout() {
 
 export function get_session_token(): Result<string, string> {
 	try {
-		const token = hanko.getSessionToken()
+		const token = hanko.getSessionToken();
 
 		if (token) {
-			return Result$Ok(token)
+			return Result$Ok(token);
 		} else {
-			return Result$Error("No session token")
+			return Result$Error("No session token");
 		}
-	} catch(_) {
-		return Result$Error("Failed to get session token")
+	} catch (_) {
+		return Result$Error("Failed to get session token");
 	}
-	
 }

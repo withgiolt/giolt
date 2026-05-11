@@ -1,9 +1,9 @@
-import gleam/erlang/process
+import app/lib/router
 import envie
+import gleam/erlang/process
 import mist
 import wisp
 import wisp/wisp_mist
-import app/lib/router
 
 pub fn main() {
 	let assert Ok(Nil) = envie.load()

@@ -61,10 +61,10 @@ pub fn server_decoder() -> decode.Decoder(Server) {
 
 pub type User {
 	User(
-		id: String, 
-		billing_status: UserBillingStatus, 
+		id: String,
+		billing_status: UserBillingStatus,
 		billing_date: Int,
-		cli_token: String
+		cli_token: String,
 	)
 }
 

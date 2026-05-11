@@ -8,8 +8,15 @@ export const users = sqliteTable("users", {
 		.text("billing_status", { enum: ["active", "inactive"] })
 		.notNull()
 		.default("inactive"),
-	cliToken: t.text("cli_token").unique().notNull().default(sql`(hex(randomblob(24)))`),
-	billingDate: t.int("billing_date", { mode: "timestamp" }).notNull().default(sql`CURRENT_TIMESTAMP`),
+	cliToken: t
+		.text("cli_token")
+		.unique()
+		.notNull()
+		.default(sql`(hex(randomblob(24)))`),
+	billingDate: t
+		.int("billing_date", { mode: "timestamp" })
+		.notNull()
+		.default(sql`CURRENT_TIMESTAMP`),
 });
 
 export const projects = sqliteTable("projects", {

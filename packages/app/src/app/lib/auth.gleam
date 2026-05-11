@@ -1,12 +1,12 @@
-import wisp
-import gleam/httpc
-import gleam/list
 import envie
 import gleam/dynamic/decode
 import gleam/http
 import gleam/http/request
+import gleam/httpc
 import gleam/json
+import gleam/list
 import gleam/result
+import wisp
 
 pub type SessionStatus {
 	SessionStatus(is_valid: Bool, claims: SessionStatusClaims)
@@ -17,9 +17,7 @@ pub type SessionStatusClaims {
 }
 
 pub type Session {
-	Authenticated(
-		id: String
-	)
+	Authenticated(id: String)
 	Unauthenticated
 }
 
@@ -34,13 +32,12 @@ fn session_status_decoder() -> decode.Decoder(SessionStatus) {
 
 pub fn get_session_token(req: wisp.Request) -> Result(String, String) {
 	let cookies = request.get_cookies(req)
-	
-	list.key_find(cookies, "hanko") |> result.replace_error("User does not have auth cookie")
+
+	list.key_find(cookies, "hanko")
+	|> result.replace_error("User does not have auth cookie")
 }
 
-pub fn get_session(
-	req: wisp.Request,
-) -> Result(Session, String) {
+pub fn get_session(req: wisp.Request) -> Result(Session, String) {
 	let session_token = get_session_token(req)
 
 	case session_token {
@@ -52,7 +49,8 @@ pub fn get_session(
 					#("session_token", json.string(session_token)),
 				])
 
-			let assert Ok(req) = request.to(api_url <> "/sessions/validate") as "AUTH_URL may not be valid"
+			let assert Ok(req) = request.to(api_url <> "/sessions/validate")
+				as "AUTH_URL may not be valid"
 
 			let req =
 				req
@@ -60,14 +58,17 @@ pub fn get_session(
 				|> request.set_header("Content-Type", "application/json")
 				|> request.set_body(json.to_string(req_body))
 
-			use res <- result.try(httpc.send(req) |> result.replace_error("Failed to fetch from auth API"))
+			use res <- result.try(
+				httpc.send(req) |> result.replace_error("Failed to fetch from auth API"),
+			)
 
-			let session_status = json.parse(res.body, session_status_decoder()) |> result.replace_error("Failed to decode")
+			let session_status =
+				json.parse(res.body, session_status_decoder())
+				|> result.replace_error("Failed to decode")
 
 			case session_status {
-				Ok(session_status) -> Ok(Authenticated(
-					id: session_status.claims.subject
-				))
+				Ok(session_status) ->
+					Ok(Authenticated(id: session_status.claims.subject))
 				Error(_) -> Ok(Unauthenticated)
 			}
 		}

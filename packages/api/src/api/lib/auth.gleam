@@ -1,5 +1,3 @@
-import gleam/list
-import glen
 import api/lib/utils
 import envie
 import gleam/dynamic/decode
@@ -8,7 +6,9 @@ import gleam/http
 import gleam/http/request
 import gleam/javascript/promise.{type Promise}
 import gleam/json
+import gleam/list
 import gleam/result
+import glen
 
 pub type SessionStatus {
 	SessionStatus(is_valid: Bool, claims: SessionStatusClaims)
@@ -28,9 +28,9 @@ fn session_status_decoder() -> decode.Decoder(SessionStatus) {
 }
 
 pub fn get_session_token(req: glen.Request) -> Result(String, String) {
-	let res = list.find(req.headers, fn (header) {
-		header.0 == "authorization"
-	}) |> result.replace_error("No Authorization header found")
+	let res =
+		list.find(req.headers, fn(header) { header.0 == "authorization" })
+		|> result.replace_error("No Authorization header found")
 
 	use res <- result.try(res)
 

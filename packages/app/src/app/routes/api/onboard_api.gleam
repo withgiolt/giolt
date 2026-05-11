@@ -1,6 +1,6 @@
-import wisp
-import gleam/http
 import app/lib/makeshift
+import gleam/http
+import wisp
 
 pub fn handler(ctx: makeshift.RouteContext) {
 	case ctx.request.method {

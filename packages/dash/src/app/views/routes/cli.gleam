@@ -15,14 +15,15 @@ pub fn view(model: Model) {
 					attribute.value(case model.user_data {
 						auth.UserData(cli_token) -> cli_token
 						_ -> "Loading CLI Token"
-					})
+					}),
 				]),
-				html.button([
-					attribute.class("btn btn-primary join-item"),
-				], [
-					html.text("Copy")
-				])
-			])
+				html.button(
+					[
+						attribute.class("btn btn-primary join-item"),
+					],
+					[html.text("Copy")],
+				),
+			]),
 		]),
 	])
 }
