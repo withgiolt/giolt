@@ -5,10 +5,10 @@
 	"scripts": {
 		"build": "gleam run -m build",
 		"dev": "gleam dev",
-		"dev:compile:css": "tailwindcss --cwd ./src -i ./app/app.css -o ../priv/app.css --watch",
+		"dev:compile:css": "tailwindcss -i ./src/app/app.css -o ./priv/app.css --watch",
 		"dev:compile:client": "bun build ./src/client/* --target=browser --watch --no-clear-screen --outdir priv/js",
 		"compile:client": "bun build ./src/client/* --target=browser --production --outdir priv/js",
-		"compile:css": "tailwindcss --cwd ./src -i ./app/app.css -o ../priv/app.css --minify"
+		"compile:css": "tailwindcss -i ./src/app/app.css -o ./priv/app.css --minify"
 	},
 	"devDependencies": {
 		"@tailwindcss/cli": "^4.2.4",

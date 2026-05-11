@@ -3,8 +3,8 @@
     "private": true,
     "scripts": {
         "format": "bun landing:format && bun db:format && bun app:format && bun cli:format",
-        "app:dev:only": "bun run -F app dev",
-        "app:dev": "bun run --parallel app:dev:only db:dev",
+        "app:dev": "cd packages/app && bun run dev",
+        "dev:app": "bun run --parallel app:dev db:dev",
         "dash:api": "bun run --parallel dash:dev api:dev",
         "landing:dev": "bun run -F landing dev",
         "landing:build": "bun run -F landing build",

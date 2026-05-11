@@ -14,9 +14,15 @@ pub fn view(
 			h.link([a.href("/app.css"), a.rel("stylesheet")]),
 			h.link([a.rel("preconnect"), a.href("https://fonts.googleapis.com")]),
 			h.link([
+				a.rel("preload"),
+				a.href(
+					"https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=auto",
+				),
+			]),
+			h.link([
 				a.rel("stylesheet"),
 				a.href(
-					"https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap",
+					"https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=auto",
 				),
 			]),
 			h.script([a.src("/js/hanko.js"), a.type_("module")], ""),

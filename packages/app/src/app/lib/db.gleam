@@ -61,6 +61,7 @@ pub fn execute(statement: String) {
 	use res <- result.try(
 		httpc.send(req) |> result.replace_error("Couldn't reach database"),
 	)
+
 	use decoded_res <- result.try(
 		httplibsql.decode_response(res.body)
 		|> result.replace_error("Failed to decode response"),

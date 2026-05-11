@@ -1,3 +1,4 @@
+import gleam/dict
 import app/lib/auth
 import gleam/http/response
 import lustre/attribute
@@ -25,6 +26,8 @@ pub type RouteContext {
 		request: wisp.Request,
 		response: wisp.Response,
 		session: auth.Session,
+		params: dict.Dict(String, String),
+		overriden: Bool
 	)
 }
 
@@ -61,9 +64,10 @@ pub fn set_cookie(ctx: RouteContext, name: String, value: String) {
 }
 
 pub fn redirect_to(ctx: RouteContext, url: String) {
-	ctx
-	|> set_status(307)
-	|> set_header("location", url)
+	RouteContext(
+		..ctx |> set_status(307) |> set_header("location", url),
+		overriden: True
+	)
 }
 
 fn bulk_set_header(

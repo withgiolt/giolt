@@ -16,7 +16,7 @@ export const users = sqliteTable("users", {
 	billingDate: t
 		.int("billing_date", { mode: "timestamp" })
 		.notNull()
-		.default(sql`CURRENT_TIMESTAMP`),
+		.default(sql`(strftime('%s', 'now'))`),
 });
 
 export const projects = sqliteTable("projects", {
