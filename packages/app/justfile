@@ -1,7 +1,5 @@
-set working-directory := "."
-
 default:
-    @just --list app
+    @just --list
 
 dev:
     gleam dev
