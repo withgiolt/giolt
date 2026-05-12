@@ -1,6 +1,8 @@
 import app/lib/auth
 import gleam/dict
 import gleam/http/response
+import gleam/option
+import gleam/result
 import lustre/attribute
 import lustre/element
 import wisp
@@ -24,7 +26,7 @@ pub type Children =
   List(Element)
 
 pub type RouteResponse {
-  RouteResponse(el: Element, res: wisp.Response)
+  RouteResponse(el: option.Option(Element), res: wisp.Response)
 }
 
 pub type RouteContext {
@@ -34,7 +36,13 @@ pub type RouteContext {
     session: auth.Session,
     params: dict.Dict(String, String),
     overriden: Bool,
+    metadata: dict.Dict(String, String),
   )
+}
+
+pub fn replace_error(res: Result(a, b), error: RouteError) {
+  res
+  |> result.replace_error(error)
 }
 
 pub fn route_error_to_code(error: RouteError) {
@@ -46,7 +54,28 @@ pub fn route_error_to_code(error: RouteError) {
 }
 
 pub fn return(el: Element, ctx: RouteContext) {
-  Ok(RouteResponse(el, ctx.response))
+  Ok(RouteResponse(option.Some(el), ctx.response))
+}
+
+pub fn raw_wrapper(res: fn(RouteContext) -> wisp.Response) {
+  fn(ctx) { Ok(RouteResponse(el: option.None, res: res(ctx))) }
+}
+
+pub fn require_auth_result(
+  ctx: RouteContext,
+  next: fn(String) -> Result(a, RouteError),
+) {
+  case ctx.session {
+    auth.Authenticated(id) -> next(id)
+    auth.Unauthenticated -> Error(RouteErrorUnauthorized)
+  }
+}
+
+pub fn require_auth(ctx: RouteContext, next: fn(String) -> wisp.Response) {
+  case ctx.session {
+    auth.Authenticated(id) -> next(id)
+    auth.Unauthenticated -> wisp.html_response("Unauthorized", 401)
+  }
 }
 
 pub fn return_error(error: RouteError) {

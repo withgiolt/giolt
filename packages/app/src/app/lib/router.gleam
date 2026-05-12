@@ -2,11 +2,10 @@ import app/lib/auth
 import app/lib/db
 import app/lib/makeshift
 import app/lib/renderer
-import app/routes/api/rotate_cli_token
 import gleam/dict
+import gleam/http
 import gleam/option
 import gleam/string
-import lustre/element
 import wisp
 
 import app/routes/account
@@ -18,79 +17,51 @@ import app/routes/project/new as project_new
 import app/routes/project/project
 import app/routes/setting_up
 
+fn route_matcher(
+  req: wisp.Request,
+) -> fn(makeshift.RouteContext) ->
+  Result(makeshift.RouteResponse, makeshift.RouteError) {
+  case wisp.path_segments(req), req.method {
+    [], http.Get -> index.view
+    ["project", "new"], http.Get -> project_new.view
+    ["project", "new"], http.Post -> makeshift.raw_wrapper(project_new.post)
+    ["project", _], http.Get -> project.view
+    ["cli"], http.Get -> cli.view
+    ["cli"], http.Post -> makeshift.raw_wrapper(cli.post)
+    ["account"], http.Get -> account.view
+    ["login"], http.Get -> login.view
+    ["setting-up"], http.Get -> setting_up.view
+    _, _ -> not_found.view
+  }
+}
+
 pub fn handler(req: wisp.Request) {
   let assert Ok(priv) = wisp.priv_directory("app")
   use <- wisp.serve_static(req, "/", priv)
 
-  let api_route = api_route_handler(req)
-  case api_route {
-    Ok(api_route) -> {
-      case api_route {
-        Ok(api_route) -> api_route
-        Error(_) -> wisp.html_response("<h1>Very bad man</h1>", 500)
-      }
-    }
-    // Fallback to pages
-    Error(_) -> {
-      let route = route_handler(req)
-
-      case route {
-        Ok(route) -> route.res |> wisp.html_body(renderer.render(route.el))
-        Error(e) ->
-          wisp.html_response(
-            "<h1>Very bad man" <> string.inspect(e) <> " </h1>",
-            500,
-          )
-      }
-    }
-  }
-}
-
-fn api_route_handler(req: wisp.Request) {
-  let session = auth.get_session(req)
-
-  let route = case wisp.path_segments(req) {
-    ["api", "rotate-cli-token"] -> option.Some(rotate_cli_token.handler)
-    _ -> option.None
-  }
+  let route = route_handler(req)
 
   case route {
-    option.Some(handler) -> {
-      let context =
-        makeshift.RouteContext(
-          overriden: False,
-          params: dict.from_list(wisp.get_query(req)),
-          session: case session {
-            Ok(session) -> session
-            Error(_) -> auth.Unauthenticated
-          },
-          request: req,
-          response: wisp.ok()
-            |> wisp.set_header("content-type", "text/html"),
-        )
-
-      Ok(handler(context))
-    }
-    option.None -> Error("No API Route")
+    Ok(route) ->
+      case route.el {
+        option.Some(el) ->
+          route.res
+          |> wisp.html_body(renderer.render(el))
+        option.None -> route.res
+      }
+    Error(e) ->
+      wisp.html_response(
+        "<h1>Very bad man" <> string.inspect(e) <> " </h1>",
+        500,
+      )
   }
 }
 
 fn route_handler(req: wisp.Request) {
   let session = auth.get_session(req)
 
-  let route: fn(makeshift.RouteContext) ->
-    Result(makeshift.RouteResponse, makeshift.RouteError) = case
-    wisp.path_segments(req)
-  {
-    [] -> index.view
-    ["project", "new"] -> project_new.view
-    ["project", _] -> project.view
-    ["cli"] -> cli.view
-    ["account"] -> account.view
-    ["login"] -> login.view
-    ["setting-up"] -> setting_up.view
-    _ -> not_found.view
-  }
+  let route = route_matcher(req)
+
   let context =
     makeshift.RouteContext(
       overriden: False,
@@ -99,6 +70,7 @@ fn route_handler(req: wisp.Request) {
         Ok(session) -> session
         Error(_) -> auth.Unauthenticated
       },
+      metadata: dict.from_list([]),
       request: req,
       response: wisp.ok()
         |> wisp.set_header("content-type", "text/html"),
@@ -106,8 +78,7 @@ fn route_handler(req: wisp.Request) {
     |> route_guard
 
   case context.overriden {
-    True ->
-      Ok(makeshift.RouteResponse(el: element.none(), res: context.response))
+    True -> Ok(makeshift.RouteResponse(el: option.None, res: context.response))
     False -> route(context)
   }
 }

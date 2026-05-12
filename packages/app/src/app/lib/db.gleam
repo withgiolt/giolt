@@ -4,6 +4,7 @@ import gleam/httpc
 import gleam/list
 import gleam/option
 import gleam/result
+import gleam/string
 import httplibsql
 
 pub type Project {
@@ -61,6 +62,11 @@ pub fn execute(statement: String) {
   use res <- result.try(
     httpc.send(req) |> result.replace_error("Couldn't reach database"),
   )
+
+  use _ <- result.try(case string.contains(res.body, "\"type\":\"error\"") {
+    True -> Error("Result returned error")
+    False -> Ok(Nil)
+  })
 
   use decoded_res <- result.try(
     httplibsql.decode_response(res.body)

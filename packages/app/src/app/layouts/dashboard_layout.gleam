@@ -13,11 +13,12 @@ pub fn view(
   attributes: makeshift.Attributes,
   children: makeshift.Children,
 ) -> makeshift.Element {
-  // Icon; Item name; List of paths to highlight, first takes priority
+  // Icon; Item name; List of paths to highlight, first has to be the path to highlight,
+  // others are other patterns to match the first subpath to
   let menu_items = [
     #(lucide_lustre.grid_2x2, "Projects", ["/", "project"]),
-    #(lucide_lustre.square_terminal, "CLI", ["cli"]),
-    #(lucide_lustre.circle_user, "Account", ["account"]),
+    #(lucide_lustre.square_terminal, "CLI", ["/cli", "cli"]),
+    #(lucide_lustre.circle_user, "Account", ["/account", "account"]),
   ]
 
   base_layout.view(Nil, [], [

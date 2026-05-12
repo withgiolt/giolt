@@ -3,10 +3,12 @@ import app/lib/auth
 import app/lib/db
 import app/lib/makeshift
 import gleam/dict
+import gleam/http
 import gleam/list
 import gleam/result
 import lustre/attribute as a
 import lustre/element/html as h
+import wisp
 
 pub fn view(ctx: makeshift.RouteContext) {
   let show_token_param = dict.get(ctx.params, "show")
@@ -69,7 +71,6 @@ pub fn view(ctx: makeshift.RouteContext) {
             [
               a.class("join-item"),
               a.method("post"),
-              a.action("/api/rotate-cli-token"),
             ],
             [
               h.button(
@@ -92,4 +93,21 @@ pub fn view(ctx: makeshift.RouteContext) {
     ])
 
   makeshift.return(el, ctx)
+}
+
+pub fn post(ctx: makeshift.RouteContext) {
+  use <- wisp.require_method(ctx.request, http.Post)
+  use id <- makeshift.require_auth(ctx)
+
+  let res =
+    db.execute(
+      "UPDATE users SET cli_token = hex(randomblob(24)) WHERE id = '"
+      <> id
+      <> "';",
+    )
+
+  case res {
+    Ok(_) -> wisp.redirect("/cli")
+    Error(_) -> wisp.internal_server_error()
+  }
 }
