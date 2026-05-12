@@ -16,13 +16,16 @@ pub fn main() {
 pub fn compile_css(dev dev: Bool) {
   let _ = case dev {
     True ->
-      tailwind.run([
+      tailwind.install_and_run([
         "--input=./src/app/app.css",
         "--output=./priv/app.css",
         "--watch",
       ])
     False ->
-      tailwind.run(["--input=./src/app/app.css", "--output=./priv/app.css"])
+      tailwind.install_and_run([
+        "--input=./src/app/app.css",
+        "--output=./priv/app.css",
+      ])
   }
 
   process.sleep_forever()
@@ -30,8 +33,8 @@ pub fn compile_css(dev dev: Bool) {
 
 pub fn compile_client_javascript(dev dev: Bool) {
   let _ = case dev {
-    True -> gleamyshell.execute("bun", ".", ["dev:compile:client"])
-    False -> gleamyshell.execute("bun", ".", ["compile:client"])
+    True -> gleamyshell.execute("deno", ".", ["run", "dev:compile:client"])
+    False -> gleamyshell.execute("deno", ".", ["run", "compile:client"])
   }
 
   process.sleep_forever()

@@ -14,9 +14,6 @@ version = "1.0.0"
 
 target = "erlang"
 
-[tools.tailwind]
-path = "./node_modules/.bin/tailwindcss"
-
 [dependencies]
 gleam_stdlib = ">= 0.44.0 and < 2.0.0"
 lustre = ">= 5.7.0 and < 6.0.0"

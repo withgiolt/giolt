@@ -5,6 +5,12 @@ import lustre/attribute
 import lustre/element
 import wisp
 
+pub type RouteError {
+  RouteErrorServer
+  RouteErrorUnauthorized
+  RouteErrorBadRequest
+}
+
 pub type Element =
   element.Element(Nil)
 
@@ -31,8 +37,20 @@ pub type RouteContext {
   )
 }
 
+pub fn route_error_to_code(error: RouteError) {
+  case error {
+    RouteErrorServer -> 500
+    RouteErrorBadRequest -> 400
+    RouteErrorUnauthorized -> 401
+  }
+}
+
 pub fn return(el: Element, ctx: RouteContext) {
   Ok(RouteResponse(el, ctx.response))
+}
+
+pub fn return_error(error: RouteError) {
+  Error(error)
 }
 
 pub fn set_status(ctx: RouteContext, status: Int) {

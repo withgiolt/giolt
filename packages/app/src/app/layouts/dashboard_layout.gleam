@@ -2,19 +2,22 @@ import app/components/nav
 import app/layouts/base_layout
 import app/lib/makeshift
 import gleam/list
+import gleam/result
 import lucide_lustre
 import lustre/attribute as a
 import lustre/element/html as h
+import wisp
 
 pub fn view(
   ctx: makeshift.RouteContext,
   attributes: makeshift.Attributes,
   children: makeshift.Children,
 ) -> makeshift.Element {
+  // Icon; Item name; List of paths to highlight, first takes priority
   let menu_items = [
-    #(lucide_lustre.grid_2x2, "Projects", "/"),
-    #(lucide_lustre.square_terminal, "CLI", "/cli"),
-    #(lucide_lustre.circle_user, "Account", "/account"),
+    #(lucide_lustre.grid_2x2, "Projects", ["/", "project"]),
+    #(lucide_lustre.square_terminal, "CLI", ["cli"]),
+    #(lucide_lustre.circle_user, "Account", ["account"]),
   ]
 
   base_layout.view(Nil, [], [
@@ -49,12 +52,17 @@ pub fn view(
                 h.li([], [
                   h.a(
                     [
-                      a.href(item.2),
+                      a.href(result.unwrap(list.first(item.2), "/")),
                       a.attribute(
                         "onclick",
                         "document.getElementById(\"main-drawer\").checked = false",
                       ),
-                      a.classes([#("menu-active", ctx.request.path == item.2)]),
+                      a.classes([
+                        #("menu-active", case wisp.path_segments(ctx.request) {
+                          [] -> list.contains(item.2, "/")
+                          [path, ..] -> list.contains(item.2, path)
+                        }),
+                      ]),
                     ],
                     [
                       item.0([a.class("inline-block size-4")]),

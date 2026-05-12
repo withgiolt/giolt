@@ -7,6 +7,7 @@ dev:
     gleam dev
 
 build:
-	gleam build
-	gleam run -m build
-	gleam export erlang-shipment
+    deno run compile:css
+    deno run compile:client
+    gleam build
+    gleam export erlang-shipment

@@ -11,6 +11,10 @@ pub fn view(
     h.head([], [
       h.title([], "Giolt"),
       h.link([a.rel("icon"), a.href("/favicon.svg"), a.type_("image/svg+xml")]),
+      h.meta([
+        a.name("viewport"),
+        a.content("width=device-width, initial-scale=1.0"),
+      ]),
       h.link([a.href("/app.css"), a.rel("stylesheet")]),
       h.link([a.rel("preconnect"), a.href("https://fonts.googleapis.com")]),
       h.link([

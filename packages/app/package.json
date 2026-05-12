@@ -3,19 +3,8 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"build": "gleam run -m build",
-		"dev": "gleam dev",
-		"dev:compile:css": "tailwindcss -i ./src/app/app.css -o ./priv/app.css --watch",
-		"dev:compile:client": "bun build ./src/client/* --target=browser --watch --no-clear-screen --outdir priv/js",
-		"compile:client": "bun build ./src/client/* --target=browser --production --outdir priv/js",
-		"compile:css": "tailwindcss -i ./src/app/app.css -o ./priv/app.css --minify"
-	},
-	"devDependencies": {
-		"@tailwindcss/cli": "^4.2.4",
-		"@types/bun": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "^5"
+		"dev:compile:client": "deno bundle ./src/client/* --platform=browser --watch --outdir priv/js",
+		"compile:client": "deno bundle ./src/client/* --platform=browser --minify --outdir priv/js"
 	},
 	"dependencies": {
 		"@tailwindcss/typography": "^0.5.19",

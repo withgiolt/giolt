@@ -5,6 +5,7 @@ import app/lib/renderer
 import app/routes/api/rotate_cli_token
 import gleam/dict
 import gleam/option
+import gleam/string
 import lustre/element
 import wisp
 
@@ -13,6 +14,8 @@ import app/routes/cli
 import app/routes/index
 import app/routes/login
 import app/routes/not_found
+import app/routes/project/new as project_new
+import app/routes/project/project
 import app/routes/setting_up
 
 pub fn handler(req: wisp.Request) {
@@ -33,7 +36,11 @@ pub fn handler(req: wisp.Request) {
 
       case route {
         Ok(route) -> route.res |> wisp.html_body(renderer.render(route.el))
-        Error(e) -> wisp.html_response("<h1>Very bad man" <> e <> " </h1>", 500)
+        Error(e) ->
+          wisp.html_response(
+            "<h1>Very bad man" <> string.inspect(e) <> " </h1>",
+            500,
+          )
       }
     }
   }
@@ -71,8 +78,13 @@ fn api_route_handler(req: wisp.Request) {
 fn route_handler(req: wisp.Request) {
   let session = auth.get_session(req)
 
-  let route = case wisp.path_segments(req) {
+  let route: fn(makeshift.RouteContext) ->
+    Result(makeshift.RouteResponse, makeshift.RouteError) = case
+    wisp.path_segments(req)
+  {
     [] -> index.view
+    ["project", "new"] -> project_new.view
+    ["project", _] -> project.view
     ["cli"] -> cli.view
     ["account"] -> account.view
     ["login"] -> login.view
