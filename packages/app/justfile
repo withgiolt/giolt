@@ -1,0 +1,12 @@
+set working-directory := "."
+
+default:
+    @just --list app
+
+dev:
+    gleam dev
+
+build:
+	gleam build
+	gleam run -m build
+	gleam export erlang-shipment

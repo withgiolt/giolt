@@ -5,20 +5,16 @@
       "path": "../packages/app"
     },
     {
-      "name": "Dash",
-      "path": "../packages/dash"
-    },
-    {
       "name": "Landing",
       "path": "../packages/landing"
     },
     {
-      "name": "API",
-      "path": "../packages/api"
-    },
-    {
       "name": "CLI",
       "path": "../packages/cli"
+    },
+    {
+      "name": "Database",
+      "path": "../packages/db"
     },
     {
       "name": "Root",

@@ -1,4 +1,4 @@
-set working-directory := "./packages/db"
+set working-directory := "."
 
 default:
     @just --list db
