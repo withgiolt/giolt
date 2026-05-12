@@ -1,8 +1,10 @@
+set working-directory := "."
+
 default:
     @just --list
 
 dev:
-    turso dev --db-file ../local.db -p 3100
+    turso dev --db-file ../../local.db -p 3100
 
 migrate-local:
     npm run migrate:local

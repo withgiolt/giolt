@@ -112,17 +112,19 @@ fn route_guard(ctx: makeshift.RouteContext) -> makeshift.RouteContext {
           case res {
             Ok(res) ->
               case res, path {
+                // No user and on setting up page
                 [], ["setting-up"] -> ctx
-                // No user and on onboard page
+                // Has user and on setting up page
                 [_, ..], ["setting-up"] -> ctx |> makeshift.redirect_to("/")
-                // Has user and on onboard page
-                [], _ -> ctx |> makeshift.redirect_to("/setting-up")
                 // No user and is anywhere
-                [_, ..], _ -> ctx
+                [], _ -> ctx |> makeshift.redirect_to("/setting-up")
                 // Has user and is anywhere
+                [_, ..], _ -> ctx
               }
-            Error(_) if path != ["error"] ->
+            Error(e) if path != ["error"] -> {
+              echo e
               ctx |> makeshift.redirect_to("/error")
+            }
             Error(_) -> ctx
           }
         }
