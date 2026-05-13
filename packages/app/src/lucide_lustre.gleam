@@ -113,3 +113,23 @@ pub fn square_terminal(attributes: List(Attribute(a))) {
     ],
   )
 }
+
+pub fn plus(attributes: List(Attribute(a))) {
+  svg.svg(
+    [
+      attribute("stroke-linejoin", "round"),
+      attribute("stroke-linecap", "round"),
+      attribute("stroke-width", "2"),
+      attribute("stroke", "currentColor"),
+      attribute("fill", "none"),
+      attribute("viewBox", "0 0 24 24"),
+      attribute("height", "24"),
+      attribute("width", "24"),
+      ..attributes
+    ],
+    [
+      svg.path([attribute("d", "M5 12h14")]),
+      svg.path([attribute("d", "M12 5v14")]),
+    ],
+  )
+}

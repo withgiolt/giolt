@@ -16,6 +16,7 @@ pub fn view(
   // Icon; Item name; List of paths to highlight, first has to be the path to highlight,
   // others are other patterns to match the first subpath to
   let menu_items = [
+    #(lucide_lustre.plus, "Create project", ["/project/new", "new"]),
     #(lucide_lustre.grid_2x2, "Projects", ["/", "project"]),
     #(lucide_lustre.square_terminal, "CLI", ["/cli", "cli"]),
     #(lucide_lustre.circle_user, "Account", ["/account", "account"]),

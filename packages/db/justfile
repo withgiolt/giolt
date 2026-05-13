@@ -7,10 +7,10 @@ dev:
     turso dev --db-file ../../local.db -p 3100
 
 migrate-local:
-    npm run migrate:local
+    deno run migrate:local
 
 migrate-remote:
-    npm run migrate:remote
+    deno run migrate:remote
 
 studio:
-    npm run studio
+    deno run studio

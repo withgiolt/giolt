@@ -1,3 +1,4 @@
+import app/routes/error
 import app/lib/auth
 import app/lib/db
 import app/lib/makeshift
@@ -31,6 +32,7 @@ fn route_matcher(
     ["account"], http.Get -> account.view
     ["login"], http.Get -> login.view
     ["setting-up"], http.Get -> setting_up.view
+    ["error"], http.Get -> error.view
     _, _ -> not_found.view
   }
 }

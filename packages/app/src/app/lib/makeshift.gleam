@@ -1,3 +1,4 @@
+import gleam/uri
 import app/lib/auth
 import gleam/dict
 import gleam/http/response
@@ -78,8 +79,13 @@ pub fn require_auth(ctx: RouteContext, next: fn(String) -> wisp.Response) {
   }
 }
 
-pub fn return_error(error: RouteError) {
-  Error(error)
+pub fn redirect_error(reason: String, path: String) -> wisp.Response {
+  let params = uri.query_to_string([
+    #("reason", reason),
+    #("return", path)
+  ])
+  
+  wisp.redirect("/error?" <> params)
 }
 
 pub fn set_status(ctx: RouteContext, status: Int) {

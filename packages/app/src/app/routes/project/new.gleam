@@ -57,13 +57,12 @@ pub fn post(ctx: makeshift.RouteContext) {
         )
 
       case res {
-        Ok(_) -> wisp.ok()
+        Ok(_) -> wisp.redirect("/")
         Error(e) -> {
-          echo e
-          wisp.internal_server_error()
+          makeshift.redirect_error(e, "/project/new")
         }
       }
     }
-    _ -> wisp.bad_request("Need to provide name")
+    _ -> makeshift.redirect_error("Need to provide name", "/project/new")
   }
 }
