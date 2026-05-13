@@ -1,8 +1,10 @@
 import app/layouts/dashboard_layout
+import app/lib/cdn
 import app/lib/db
 import app/lib/makeshift
-import gleam/dict
 import gleam/http
+import gleam/int
+import gleam/list
 import gleam/result
 import gleam/string
 import lustre/attribute as a
@@ -10,7 +12,7 @@ import lustre/element/html as h
 import wisp
 
 pub fn view(ctx: makeshift.RouteContext) {
-  let error_reason = dict.get(ctx.metadata, "error_reason")
+  let error_reason = list.key_find(ctx.metadata, "error_reason")
 
   let el =
     dashboard_layout.view(ctx, [], [
@@ -79,30 +81,39 @@ pub fn post(ctx: makeshift.RouteContext) {
 
   case form_data.values {
     [#("name", name), #("type", _)] -> {
-      let res =
-        db.execute(
-          "INSERT INTO projects (slug, pull_zone_id, owner_id, type, server_id) VALUES ('"
-          <> string.lowercase(name)
-          <> "', '"
-          <> "what"
-          <> "', '"
-          <> user_id
-          <> "', '"
-          <> "static"
-          <> "', "
-          <> "0"
-          <> ");",
-        )
-        |> result.replace_error("Couldn't create new project")
+      let pull_zone_id = cdn.create_static_pull_zone(name)
 
-      case res {
-        Ok(_) -> wisp.redirect("/")
+      case pull_zone_id {
+        Ok(pull_zone_id) -> {
+          let res =
+            db.execute(
+              "INSERT INTO projects (slug, pull_zone_id, owner_id, type, server_id) VALUES ('"
+              <> string.lowercase(name)
+              <> "', "
+              <> int.to_string(pull_zone_id)
+              <> ", '"
+              <> user_id
+              <> "', '"
+              <> "static"
+              <> "', "
+              <> "0"
+              <> ");",
+            )
+            |> result.replace_error("Couldn't create new project")
+
+          case res {
+            Ok(_) -> wisp.redirect("/")
+            Error(e) -> {
+              makeshift.route_to_response(
+                ctx
+                  |> makeshift.set_metadata("error_reason", e),
+                view,
+              )
+            }
+          }
+        }
         Error(e) -> {
-          makeshift.route_to_response(
-            ctx
-              |> makeshift.set_metadata("error_reason", e),
-            view,
-          )
+          wisp.html_response(e, 500)
         }
       }
     }

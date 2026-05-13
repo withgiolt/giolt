@@ -1,7 +1,7 @@
 import app/lib/auth
 import app/lib/renderer
-import gleam/dict
 import gleam/http/response
+import gleam/list
 import gleam/option
 import gleam/result
 import gleam/uri
@@ -36,9 +36,9 @@ pub type RouteContext {
     request: wisp.Request,
     response: wisp.Response,
     session: auth.Session,
-    params: dict.Dict(String, String),
+    query_params: List(#(String, String)),
     overriden: Bool,
-    metadata: dict.Dict(String, String),
+    metadata: List(#(String, String)),
   )
 }
 
@@ -59,8 +59,16 @@ pub fn return(el: Element, ctx: RouteContext) {
   Ok(RouteResponse(option.Some(el), ctx.response))
 }
 
-pub fn raw_wrapper(res: fn(RouteContext) -> wisp.Response) {
-  fn(ctx) { Ok(RouteResponse(el: option.None, res: res(ctx))) }
+pub fn raw_wrapper(
+  route: fn(RouteContext) -> wisp.Response,
+  params: List(#(String, String)),
+) {
+  fn(ctx) {
+    let ctx =
+      ctx
+      |> bulk_set_metadata(params)
+    Ok(RouteResponse(el: option.None, res: route(ctx)))
+  }
 }
 
 pub fn require_auth_result(
@@ -115,7 +123,7 @@ pub fn set_header(ctx: RouteContext, key: String, value: String) {
 }
 
 pub fn set_metadata(ctx: RouteContext, key: String, value: String) {
-  let metadata = dict.insert(ctx.metadata, key, value)
+  let metadata = list.append(ctx.metadata, [#(key, value)])
   RouteContext(..ctx, metadata:)
 }
 
@@ -150,5 +158,16 @@ fn bulk_set_header(
     [] -> res
     [#(key, value), ..rest] ->
       bulk_set_header(response.set_header(res, key, value), rest)
+  }
+}
+
+fn bulk_set_metadata(
+  ctx: RouteContext,
+  metadata: List(#(String, String)),
+) -> RouteContext {
+  case metadata {
+    [] -> ctx
+    [#(key, value), ..rest] ->
+      bulk_set_metadata(set_metadata(ctx, key, value), rest)
   }
 }

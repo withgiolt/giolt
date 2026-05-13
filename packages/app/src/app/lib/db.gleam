@@ -9,12 +9,12 @@ import httplibsql
 
 pub type Project {
   Project(
-    id: String,
+    id: Int,
     slug: String,
-    pull_zone_id: String,
+    pull_zone_id: Int,
     owner_id: String,
     type_: ProjectType,
-    server_id: String,
+    server_id: Int,
   )
 }
 
@@ -151,19 +151,19 @@ pub fn as_project(
   rows: List(dict.Dict(httplibsql.Column, httplibsql.Value)),
 ) -> List(Project) {
   list.map(rows, fn(row) {
-    let assert httplibsql.Text(id) =
+    let assert httplibsql.Integer(id) =
       row
-      |> dict.get(httplibsql.Column("id", "TEXT"))
-      |> result.unwrap(httplibsql.Text("0"))
+      |> dict.get(httplibsql.Column("id", "INTEGER"))
+      |> result.unwrap(httplibsql.Integer(0))
 
     let assert httplibsql.Text(slug) =
       row
       |> dict.get(httplibsql.Column("slug", "TEXT"))
       |> result.unwrap(httplibsql.Text("0"))
 
-    let assert httplibsql.Text(pull_zone_id) =
+    let assert httplibsql.Integer(pull_zone_id) =
       row
-      |> dict.get(httplibsql.Column("pull_zone_id", "TEXT"))
+      |> dict.get(httplibsql.Column("pull_zone_id", "INTEGER"))
       |> result.unwrap(httplibsql.Text("0"))
 
     let assert httplibsql.Text(owner_id) =
@@ -182,10 +182,10 @@ pub fn as_project(
       _ -> panic as "Invalid project type"
     }
 
-    let assert httplibsql.Text(server_id) =
+    let assert httplibsql.Integer(server_id) =
       row
-      |> dict.get(httplibsql.Column("server_id", "TEXT"))
-      |> result.unwrap(httplibsql.Text("0"))
+      |> dict.get(httplibsql.Column("server_id", "INTEGER"))
+      |> result.unwrap(httplibsql.Integer(0))
 
     Project(id:, slug:, pull_zone_id:, owner_id:, type_:, server_id:)
   })

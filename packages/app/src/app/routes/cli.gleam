@@ -2,7 +2,6 @@ import app/layouts/dashboard_layout
 import app/lib/auth
 import app/lib/db
 import app/lib/makeshift
-import gleam/dict
 import gleam/http
 import gleam/list
 import gleam/result
@@ -11,7 +10,7 @@ import lustre/element/html as h
 import wisp
 
 pub fn view(ctx: makeshift.RouteContext) {
-  let show_token_param = dict.get(ctx.params, "show")
+  let show_token_param = list.key_find(ctx.query_params, "show")
 
   let cli_token = case show_token_param {
     Ok(_) -> {

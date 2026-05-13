@@ -1,8 +1,0 @@
-env = true
-telemetry = false
-
-[bun]
-run = true
-
-[loader]
-".env" = "toml"

@@ -22,7 +22,7 @@ export const users = sqliteTable("users", {
 export const projects = sqliteTable("projects", {
 	id: t.int("id").primaryKey({ autoIncrement: true }).unique(),
 	slug: t.text("slug").notNull().unique(),
-	pullZoneId: t.text("pull_zone_id").notNull().unique(),
+	pullZoneId: t.int("pull_zone_id").notNull().unique(),
 	ownerId: t.text("owner_id").references(() => users.id),
 	type: t
 		.text("type", { enum: ["static", "service"] })

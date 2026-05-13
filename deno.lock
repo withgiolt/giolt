@@ -16,6 +16,7 @@
     "npm:drizzle-kit@0.30": "0.30.6",
     "npm:drizzle-kit@~0.31.10": "0.31.10",
     "npm:drizzle-orm@~0.45.2": "0.45.2_@libsql+client@0.17.3",
+    "npm:drizzle-seed@~0.3.1": "0.3.1_drizzle-orm@0.45.2__@libsql+client@0.17.3",
     "npm:serve-handler@^6.1.7": "6.1.7",
     "npm:tailwindcss@^4.2.3": "4.3.0",
     "npm:tailwindcss@^4.2.4": "4.3.0"
@@ -1084,6 +1085,16 @@
         "@libsql/client"
       ]
     },
+    "drizzle-seed@0.3.1_drizzle-orm@0.45.2__@libsql+client@0.17.3": {
+      "integrity": "sha512-F/0lgvfOAsqlYoHM/QAGut4xXIOXoE5VoAdv2FIl7DpGYVXlAzKuJO+IphkKUFK3Dz+rFlOsQLnMNrvoQ0cx7g==",
+      "dependencies": [
+        "drizzle-orm",
+        "pure-rand"
+      ],
+      "optionalPeers": [
+        "drizzle-orm"
+      ]
+    },
     "enhanced-resolve@5.21.3": {
       "integrity": "sha512-QyL119InA+XXEkNLNTPCXPugSvOfhwv0JOlGNzvxs0hZaiHLNvXSpudUWsOlsXGWJh8G6ckCScEkVHfX3kw/2Q==",
       "dependencies": [
@@ -1420,6 +1431,9 @@
     "promise-limit@2.7.0": {
       "integrity": "sha512-7nJ6v5lnJsXwGprnGXga4wx6d1POjvi5Qmf1ivTRxTjH4Z/9Czja/UCMLVmB9N93GeWOU93XaFaEt6jbuoagNw=="
     },
+    "pure-rand@6.1.0": {
+      "integrity": "sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA=="
+    },
     "range-parser@1.2.0": {
       "integrity": "sha512-kA5WQoNVo4t9lNx2kQNFCxKeBl5IbbSNBl1M/tLkw9WCn+hxNBAW5Qh8gdhs63CJnhjJ2zQWFoqPJP2sK1AV5A=="
     },
@@ -1564,7 +1578,8 @@
             "npm:@libsql/client@~0.17.3",
             "npm:@types/bun@latest",
             "npm:drizzle-kit@~0.31.10",
-            "npm:drizzle-orm@~0.45.2"
+            "npm:drizzle-orm@~0.45.2",
+            "npm:drizzle-seed@~0.3.1"
           ]
         }
       },

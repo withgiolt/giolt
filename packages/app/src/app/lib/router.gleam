@@ -1,9 +1,8 @@
-import app/routes/error
 import app/lib/auth
 import app/lib/db
 import app/lib/makeshift
 import app/lib/renderer
-import gleam/dict
+import app/routes/error
 import gleam/http
 import gleam/option
 import gleam/string
@@ -25,10 +24,12 @@ fn route_matcher(
   case wisp.path_segments(req), req.method {
     [], http.Get -> index.view
     ["project", "new"], http.Get -> project_new.view
-    ["project", "new"], http.Post -> makeshift.raw_wrapper(project_new.post)
+    ["project", "new"], http.Post -> makeshift.raw_wrapper(project_new.post, [])
     ["project", _], http.Get -> project.view
+    ["project", slug], http.Post ->
+      makeshift.raw_wrapper(project.post, [#("slug", slug)])
     ["cli"], http.Get -> cli.view
-    ["cli"], http.Post -> makeshift.raw_wrapper(cli.post)
+    ["cli"], http.Post -> makeshift.raw_wrapper(cli.post, [])
     ["account"], http.Get -> account.view
     ["login"], http.Get -> login.view
     ["setting-up"], http.Get -> setting_up.view
@@ -67,12 +68,12 @@ fn route_handler(req: wisp.Request) {
   let context =
     makeshift.RouteContext(
       overriden: False,
-      params: dict.from_list(wisp.get_query(req)),
+      query_params: wisp.get_query(req),
       session: case session {
         Ok(session) -> session
         Error(_) -> auth.Unauthenticated
       },
-      metadata: dict.from_list([]),
+      metadata: [],
       request: req,
       response: wisp.ok()
         |> wisp.set_header("content-type", "text/html"),

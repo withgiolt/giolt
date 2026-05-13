@@ -7,10 +7,13 @@ dev:
     turso dev --db-file ../../local.db -p 3100
 
 migrate-local:
-    deno run migrate:local
+    deno run migrate-local
+
+seed: migrate-local
+    deno run seed
 
 migrate-remote:
-    deno run migrate:remote
+    deno run migrate-remote
 
 studio:
     deno run studio
