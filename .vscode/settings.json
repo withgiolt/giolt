@@ -8,5 +8,5 @@
     "**/*.code-search": true,
     "**/dist/**": true,
     "**/build/**": true
-  }
+  },
 }

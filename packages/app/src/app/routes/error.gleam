@@ -16,7 +16,7 @@ pub fn view(ctx: makeshift.RouteContext) {
           h.div(
             [
               a.class(
-                "container text-center h-svh flex flex-col justify-center items-center",
+                "container text-center h-svh flex flex-col justify-center items-center ",
               ),
             ],
             [

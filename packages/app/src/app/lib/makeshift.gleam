@@ -1,9 +1,10 @@
-import gleam/uri
 import app/lib/auth
+import app/lib/renderer
 import gleam/dict
 import gleam/http/response
 import gleam/option
 import gleam/result
+import gleam/uri
 import lustre/attribute
 import lustre/element
 import wisp
@@ -80,12 +81,23 @@ pub fn require_auth(ctx: RouteContext, next: fn(String) -> wisp.Response) {
 }
 
 pub fn redirect_error(reason: String, path: String) -> wisp.Response {
-  let params = uri.query_to_string([
-    #("reason", reason),
-    #("return", path)
-  ])
-  
+  let params = uri.query_to_string([#("reason", reason), #("return", path)])
+
   wisp.redirect("/error?" <> params)
+}
+
+pub fn route_to_response(
+  ctx: RouteContext,
+  route: fn(RouteContext) -> Result(RouteResponse, RouteError),
+) {
+  case route(ctx) {
+    Ok(res) ->
+      case res.el {
+        option.Some(el) -> res.res |> wisp.html_body(renderer.render(el))
+        option.None -> res.res
+      }
+    Error(_) -> redirect_error("Unknown error", ctx.request.path)
+  }
 }
 
 pub fn set_status(ctx: RouteContext, status: Int) {
@@ -100,6 +112,11 @@ pub fn set_status(ctx: RouteContext, status: Int) {
 pub fn set_header(ctx: RouteContext, key: String, value: String) {
   let new_res = wisp.set_header(ctx.response, key, value)
   RouteContext(..ctx, response: new_res)
+}
+
+pub fn set_metadata(ctx: RouteContext, key: String, value: String) {
+  let metadata = dict.insert(ctx.metadata, key, value)
+  RouteContext(..ctx, metadata:)
 }
 
 pub fn set_cookie(ctx: RouteContext, name: String, value: String) {

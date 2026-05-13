@@ -25,7 +25,7 @@ pub fn view(ctx: makeshift.RouteContext) {
           ),
         ],
         list.map(projects, fn(project) {
-          h.div([a.class("card glass")], [
+          h.a([a.class("card glass"), a.href("/project/" <> project.slug)], [
             h.div([a.class("card-body")], [
               h.h3([a.class("card-title")], [h.text(project.slug)]),
             ]),

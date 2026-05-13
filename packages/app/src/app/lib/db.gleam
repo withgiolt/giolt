@@ -64,7 +64,7 @@ pub fn execute(statement: String) {
   )
 
   use _ <- result.try(case string.contains(res.body, "\"type\":\"error\"") {
-    True -> Error("Result returned error")
+    True -> Error("Database returned error: " <> res.body)
     False -> Ok(Nil)
   })
 
