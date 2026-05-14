@@ -7,6 +7,7 @@ import tailwind
 
 pub fn main() {
   let assert Ok(Nil) = envie.load()
+  envie.set("DEV", "true")
   process.spawn(fn() { compile_css(dev: True) })
   process.spawn(fn() { compile_client_javascript(dev: True) })
   let assert Ok(_) = app.start_server(reload.wrap)

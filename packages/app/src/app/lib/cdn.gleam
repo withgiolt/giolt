@@ -1,3 +1,4 @@
+import app/lib/utils
 import envie
 import gleam/dynamic/decode
 import gleam/http
@@ -9,6 +10,7 @@ import gleam/result
 import wisp
 
 pub fn create_static_pull_zone(name: String) {
+  let bunny_api_url = envie.get_string("BUNNY_API_URL", "https://api.bunny.net")
   let assert Ok(bunny_api_key) = envie.get("BUNNY_API_KEY")
     as "BUNNY_API_KEY is required"
   let assert Ok(bunny_storage_zone_id) = envie.get("BUNNY_STORAGE_ZONE_ID")
@@ -16,10 +18,15 @@ pub fn create_static_pull_zone(name: String) {
   let assert Ok(bunny_storage_zone_id) = bunny_storage_zone_id |> int.parse
     as "BUNNY_STORAGE_ZONE_ID is not an integer"
 
+  let suffix = case utils.is_dev() {
+    True -> "-giolt-dev-"
+    False -> "-giolt-"
+  }
+
   let body =
     json.to_string(
       json.object([
-        #("Name", json.string(name <> "-giolt-" <> wisp.random_string(5))),
+        #("Name", json.string(name <> suffix <> wisp.random_string(5))),
         #("OriginUrl", json.null()),
         #("OriginType", json.int(2)),
         #("Type", json.int(1)),
@@ -28,7 +35,7 @@ pub fn create_static_pull_zone(name: String) {
       ]),
     )
 
-  let assert Ok(req) = request.to("https://api.bunny.net/pullzone")
+  let assert Ok(req) = request.to(bunny_api_url <> "/pullzone")
   let req =
     req
     |> request.set_method(http.Post)
@@ -55,11 +62,12 @@ pub fn create_static_pull_zone(name: String) {
 }
 
 pub fn delete_static_pull_zone(id: Int) {
+  let bunny_api_url = envie.get_string("BUNNY_API_URL", "https://api.bunny.net")
   let assert Ok(bunny_api_key) = envie.get("BUNNY_API_KEY")
     as "BUNNY_API_KEY is required"
 
   let assert Ok(req) =
-    request.to("https://api.bunny.net/pullzone/" <> int.to_string(id))
+    request.to(bunny_api_url <> "/pullzone/" <> int.to_string(id))
   let req =
     req
     |> request.set_method(http.Delete)

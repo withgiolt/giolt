@@ -26,7 +26,7 @@
 			"extensions": [
 				"skellock.just",
 				"gleam.gleam",
-				"biomejs.biome"
+				"denoland.vscode-deno"
 			]
 		}
 	}

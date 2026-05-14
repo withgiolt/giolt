@@ -2,7 +2,8 @@
   "recommendations": [
     "gleam.gleam",
     "biomejs.biome",
-    "skellock.just"
+    "skellock.just",
+    "denoland.vscode-deno"
   ],
   "unwantedRecommendations": []
 }

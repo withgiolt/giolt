@@ -6,13 +6,13 @@
     "migrate-local": "drizzle-kit generate --config=./drizzle.local.config.ts && drizzle-kit migrate --config=./drizzle.local.config.ts",
     "migrate-remote": "drizzle-kit generate --config=./drizzle.remote.config.ts && drizzle-kit migrate --config=./drizzle.remote.config.ts",
     "studio": "drizzle-kit studio --config=./drizzle.local.config.ts",
-    "seed": "deno run -E --allow-ffi src/seed.ts"
+    "seed": "deno run -S=cpus,networkInterfaces,hostname -E=LIBSQL_JS_DEV --allow-ffi -R src/seed.ts"
   },
   "dependencies": {
     "drizzle-seed": "^0.3.1"
   },
   "devDependencies": {
-  	"@biomejs/biome": "^2.4.15",
+    "@biomejs/biome": "^2.4.15",
     "@libsql/client": "^0.17.3",
     "@types/bun": "latest",
     "drizzle-kit": "^0.31.10",
