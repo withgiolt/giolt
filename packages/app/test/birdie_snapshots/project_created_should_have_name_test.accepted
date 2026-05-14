@@ -1,0 +1,7 @@
+---
+version: 2.0.0
+title: project created should have name test
+file: ./test/app_test/b_project_test.gleam
+test_name: create_project_test
+---
+test

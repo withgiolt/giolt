@@ -1,0 +1,7 @@
+---
+version: 2.0.0
+title: project test should be deleted and query should return empty list
+file: ./test/app_test/b_project_test.gleam
+test_name: delete_project_test
+---
+[]

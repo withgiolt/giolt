@@ -79,6 +79,6 @@ pub fn delete_static_pull_zone(id: Int) {
 
   case res.status {
     204 -> Ok(Nil)
-    _ -> Error("Failed to create pull zone")
+    _ -> Error("Failed to delete pull zone")
   }
 }

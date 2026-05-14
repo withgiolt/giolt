@@ -1,7 +1,7 @@
 ---
 version: 2.0.0
 title: requesting setting-up authenticated should be ok
-file: ./test/app_test/routing_test.gleam
+file: ./test/app_test/a_routing_test.gleam
 test_name: second_authenticated_test
 ---
 200

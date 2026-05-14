@@ -1,7 +1,7 @@
 ---
 version: 2.0.0
 title: subsequent authenticated requests with user created should be ok
-file: ./test/app_test/routing_test.gleam
+file: ./test/app_test/a_routing_test.gleam
 test_name: third_authenticated_test
 ---
 200
