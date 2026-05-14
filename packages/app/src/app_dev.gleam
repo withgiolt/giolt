@@ -34,8 +34,8 @@ pub fn compile_css(dev dev: Bool) {
 
 pub fn compile_client_javascript(dev dev: Bool) {
   let _ = case dev {
-    True -> gleamyshell.execute("deno", ".", ["run", "dev:compile:client"])
-    False -> gleamyshell.execute("deno", ".", ["run", "compile:client"])
+    True -> gleamyshell.execute("pnpm", ".", ["run", "dev-compile-client"])
+    False -> gleamyshell.execute("pnpm", ".", ["run", "compile-client"])
   }
 
   process.sleep_forever()

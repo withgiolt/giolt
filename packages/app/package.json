@@ -3,13 +3,14 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"dev:compile:client": "deno bundle ./src/client/* --platform=browser --watch --outdir priv/js",
-		"compile:client": "deno bundle ./src/client/* --platform=browser --minify --outdir priv/js"
+		"dev-compile-client": "esbuild --bundle ./src/client/* --platform=browser --format=esm --watch --outdir=priv/js",
+		"compile-client": "esbuild --bundle ./src/client/* --platform=browser --format=esm --minify --outdir=priv/js"
 	},
-	"dependencies": {
+	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.19",
 		"@teamhanko/hanko-elements": "^2.6.0",
 		"daisyui": "^5.5.19",
+		"esbuild": "^0.28.0",
 		"tailwindcss": "^4.2.4"
 	}
 }

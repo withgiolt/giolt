@@ -8,5 +8,7 @@ default:
 format:
     gleam format
 
+test: app::test
+
 [parallel]
 app-dev: db::dev app::dev
