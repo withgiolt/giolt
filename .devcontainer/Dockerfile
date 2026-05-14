@@ -4,9 +4,9 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 RUN apt-get update && apt-get install -y software-properties-common
 RUN add-apt-repository ppa:rabbitmq/rabbitmq-erlang && apt update
 RUN apt-get install -y erlang-dev rebar3 inotify-tools
-# Node, Just, Deno
+# Node, Just, pnpm
 RUN apt-get install -y npm
-RUN npm i -g n rust-just deno
+RUN npm i -g n rust-just pnpm
 RUN n lts
 
 USER vscode
