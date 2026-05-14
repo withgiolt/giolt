@@ -6,6 +6,10 @@ default:
 dev:
     gleam dev
 
+test:
+    just ../db/seed
+    gleam test
+
 build:
     deno run compile:css
     deno run compile:client

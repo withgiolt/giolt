@@ -42,11 +42,11 @@ pub type UserBillingStatus {
 }
 
 pub fn execute(statement: String) {
-  let url = envie.get_string("DB_URL", "http://localhost:3100/v2/pipeline")
-  let token = envie.get_string("DB_TOKEN", "")
+  let url = envie.get_string("DATABASE_URL", "http://localhost:3100")
+  let token = envie.get_string("DATABASE_TOKEN", "")
   let base_request =
     httplibsql.new_request()
-    |> httplibsql.with_url(url)
+    |> httplibsql.with_url(url <> "/v2/pipeline")
     |> httplibsql.with_token(token)
 
   let req =

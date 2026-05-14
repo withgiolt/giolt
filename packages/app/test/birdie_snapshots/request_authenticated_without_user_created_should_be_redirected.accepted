@@ -1,0 +1,7 @@
+---
+version: 2.0.0
+title: request authenticated without user created should be redirected
+file: ./test/app_test/routing_test.gleam
+test_name: authenticated_test
+---
+307
