@@ -1,4 +1,4 @@
-name: test
+name: Test
 
 on:
     push:
@@ -26,7 +26,7 @@ jobs:
             - name: Setup pnpm
               uses: pnpm/action-setup@v6
             - name: Setup Turso
-              run: TURSO_INSTALL_SKIP_SIGNUP=true curl -sSfL https://get.tur.so/install.sh | bash && source /home/runner/.bashrc
+              run: TURSO_INSTALL_SKIP_SIGNUP=true curl -sSfL https://get.tur.so/install.sh | bash && echo "$HOME/.turso" >> $GITHUB_PATH
             - name: Install JavaScript dependencies
               run: pnpm i
             - name: Run tests
