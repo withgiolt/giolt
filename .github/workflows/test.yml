@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+    branches:
+      - next
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Erlang and Gleam
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: "28"
+          gleam-version: "1.15.4"
+          rebar3-version: "3"
+      - name: Setup Just
+        uses: extractions/setup-just@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+      - name: Setup Turso
+        run: curl -sSfL https://get.tur.so/install.sh | bash
+      - name: Run tests
+        run: just test
