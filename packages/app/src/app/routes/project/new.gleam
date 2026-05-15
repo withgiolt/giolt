@@ -102,7 +102,7 @@ pub fn post(ctx: makeshift.RouteContext) {
             |> result.replace_error("Couldn't create new project")
 
           case res {
-            Ok(_) -> wisp.redirect("/")
+            Ok(_) -> wisp.redirect("/project/" <> name)
             Error(e) -> {
               makeshift.route_to_response(
                 ctx
